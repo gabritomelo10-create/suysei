@@ -25,7 +25,7 @@ function koiGeometry(d) {
 function makeMaterials(ink) {
   const common = { bumpMap: ink, bumpScale: 2.2 };
   return {
-    laca: new THREE.MeshPhysicalMaterial({ ...common, color: RED, roughness: .32, metalness: .05, clearcoat: 1, clearcoatRoughness: .08, sheen: .12, sheenColor: new THREE.Color('#ff6670') }),
+    laca: new THREE.MeshPhysicalMaterial({ ...common, color: new THREE.Color('#a30e18'), roughness: .32, metalness: .05, clearcoat: 1, clearcoatRoughness: .08, sheen: .12, sheenColor: new THREE.Color('#ff6670') }),
     ouro: new THREE.MeshPhysicalMaterial({ ...common, color: new THREE.Color('#d8b46a'), roughness: .24, metalness: 1, clearcoat: .4 }),
     nanquim: new THREE.MeshPhysicalMaterial({ ...common, color: new THREE.Color('#0b0b0b'), roughness: .78, metalness: 0, clearcoat: .2, clearcoatRoughness: .6, envMapIntensity: .35, sheen: .5, sheenColor: new THREE.Color('#5a1015') }),
     cristal: new THREE.MeshPhysicalMaterial({ color: new THREE.Color('#ffdfe2'), roughness: .06, metalness: 0, transmission: 1, thickness: 1.2, ior: 1.5, attenuationColor: new THREE.Color('#ff3040'), attenuationDistance: 1.4, clearcoat: 1 }),
