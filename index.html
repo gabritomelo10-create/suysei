@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Suysei — Apresentação da Marca</title>
+  <meta name="description" content="Apresentação interativa da marca Suysei — Casa de Refeição Japonesa. A força que cruza o universo. A perseverança que vence as correntezas.">
+  <meta name="theme-color" content="#0d0d0d">
+  <link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Kalnia:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./assets/vendor/three.module.min.js",
+        "three/addons/": "./assets/vendor/jsm/"
+      }
+    }
+  </script>
+</head>
+<body class="is-loading">
+
+  <!-- ============ LOADER ============ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__koi"></div>
+    <div class="loader__count"><span id="loader-num">0</span><small>%</small></div>
+    <div class="loader__caption">彗星 · Suysei significa cometa</div>
+  </div>
+
+  <!-- ============ CURSOR / FX ============ -->
+  <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__ring"><span class="cursor__label"></span></div></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#hero" class="nav__brand" data-magnetic aria-label="Suysei — início">
+      <span class="nav__seal" aria-hidden="true"><i class="koi-mask"></i></span>
+      <span class="nav__word" data-wordmark></span>
+    </a>
+    <nav class="nav__links" aria-label="Seções">
+      <a href="#manifesto" data-magnetic>Manifesto</a>
+      <a href="#historia" data-magnetic>História</a>
+      <a href="#conceito" data-magnetic>Conceito</a>
+      <a href="#construcao" data-magnetic>Logotipo</a>
+      <a href="#cores" data-magnetic>Cores</a>
+      <a href="#aplicacoes" data-magnetic>Aplicações</a>
+    </nav>
+    <span class="nav__meta">Guia de Marca — 2026</span>
+  </header>
+
+  <main id="smooth">
+
+    <!-- ============ 1. HERO 3D ============ -->
+    <section class="hero" id="hero">
+      <div class="hero__sticky">
+        <canvas class="hero__gl" id="hero-gl" data-cursor="Arraste"></canvas>
+        <div class="hero__vignette" aria-hidden="true"></div>
+
+        <div class="hero__top">
+          <span class="eyebrow">01 — Apresentação da marca</span>
+          <span class="eyebrow">日本料理店</span>
+        </div>
+
+        <div class="hero__title">
+          <p class="hero__casa" data-casa></p>
+          <h1 class="hero__word" aria-label="Suysei"><span data-wordmark data-split-letters></span></h1>
+          <p class="hero__kanji" data-kanji-spaced></p>
+        </div>
+
+        <div class="hero__materials" role="group" aria-label="Material do símbolo 3D">
+          <span class="hero__materials-label">Símbolo em 3D</span>
+          <button class="chip is-active" data-material="laca" data-magnetic><i style="--c:#bc1621"></i>Laca</button>
+          <button class="chip" data-material="ouro" data-magnetic><i style="--c:#c9a45c"></i>Ouro</button>
+          <button class="chip" data-material="nanquim" data-magnetic><i style="--c:#1a1a1a"></i>Nanquim</button>
+          <button class="chip" data-material="cristal" data-magnetic><i style="--c:#f2d7d9"></i>Cristal</button>
+        </div>
+
+        <div class="hero__bottom">
+          <p class="hero__claim">A força que cruza o universo.<br>A perseverança que vence as correntezas.</p>
+          <div class="scroll-hint" aria-hidden="true"><span></span>Role para descobrir</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. FRASE ============ -->
+    <section class="quote" id="intro">
+      <div class="quote__light" aria-hidden="true"></div>
+      <figure class="quote__photo" data-tilt>
+        <div class="quote__photo-inner" data-parallax="-12"><img src="assets/img/story/tetsuo-hero.webp" alt="Tetsuo Takeno, sorrindo de braços cruzados no salão do Suysei" loading="lazy"></div>
+        <figcaption>Tetsuo Takeno</figcaption>
+      </figure>
+      <h2 class="quote__text" data-word-reveal>
+        <span class="r">Algumas</span> histórias <span class="r">parecem</span> <span class="r">ter sido</span> escritas <span class="r">muito antes de acontecerem.</span>
+      </h2>
+    </section>
+
+    <!-- ============ 3. MANIFESTO ============ -->
+    <section class="manifesto" id="manifesto">
+      <div class="manifesto__bg" aria-hidden="true">
+        <div class="manifesto__koi koi-mask" data-rotate-scroll></div>
+      </div>
+      <div class="manifesto__head">
+        <span class="eyebrow">02 — Manifesto</span>
+        <h2 class="display display--xl" data-split-chars>Manifesto</h2>
+      </div>
+      <div class="manifesto__cols">
+        <div class="manifesto__col">
+          <p class="lead" data-reveal>Há histórias que parecem ter sido escritas muito antes de acontecerem.</p>
+          <p data-reveal>A de Suysei começa numa feira, em São Paulo, em 1974, muito antes de existir um restaurante, uma placa dourada ou um cardápio. Começa com duas mãos que cozinhavam em casa, e que aos poucos, prato a prato, foram transformando um hábito familiar em um destino.</p>
+          <p data-reveal>O nome que herdamos dessa história (<b>Suysei, cometa</b>) não é um adorno. É uma declaração. Um cometa não pede licença para atravessar o céu: ele cruza o escuro com uma trajetória própria, e onde pousa, deixa luz. Foi assim que uma família saiu do Japão e chegou ao Brasil: sem mapa pronto, mas com a certeza de que valia a pena percorrer a distância.</p>
+        </div>
+        <div class="manifesto__col">
+          <p data-reveal>E toda travessia difícil exige a mesma coragem de outra criatura sagrada da cultura japonesa: a <b>carpa</b> que nada contra a correnteza, sobe a cachoeira mais alta e, só então, se torna dragão. Suysei é o encontro dessas duas forças (o cometa que atravessa e a carpa que resiste) reunidas numa única marca, num único traço.</p>
+          <p data-reveal>Este guia não existe para engessar essa história. Existe para que ela nunca se perca, em cada aplicação, em cada peça, em cada prato que sai da cozinha.</p>
+          <figure class="manifesto__portrait" data-tilt>
+            <div data-parallax="-10"><img src="assets/img/story/tetsuo-bw.webp" alt="Tetsuo Takeno preparando um prato, em preto e branco" loading="lazy"></div>
+            <figcaption>Uma história que atravessou gerações.<br>Uma marca preparada para atravessar o tempo.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. HISTÓRIA (horizontal) ============ -->
+    <section class="history" id="historia">
+      <div class="history__pin">
+        <div class="history__head">
+          <span class="eyebrow">03 — Essência da marca</span>
+          <h2 class="display">A travessia</h2>
+          <p class="history__intro">Toda marca forte carrega uma origem que a justifica. A da Suysei não nasceu de uma estratégia de mercado, mas de uma travessia real: a de uma família que atravessou o mundo e, aos poucos, transformou um hábito de casa em um legado.</p>
+        </div>
+        <div class="history__track">
+          <div class="history__line" aria-hidden="true"><span></span><i class="history__comet"></i></div>
+          <article class="tcard" data-tilt>
+            <span class="tcard__year">1974</span>
+            <div class="tcard__img"><img src="assets/img/story/h-1974.webp" alt="Feira livre em São Paulo, em 1974" loading="lazy"></div>
+            <h3>São Paulo</h3>
+            <p>Tudo começa longe de um restaurante: numa feira, com um casal que cozinha em casa. É comida brasileira, feita com as próprias mãos, para a própria família.</p>
+          </article>
+          <article class="tcard" data-tilt>
+            <span class="tcard__year">Os primeiros passos</span>
+            <div class="tcard__img"><img src="assets/img/story/h-primeiros.webp" alt="O casal fundador vestido com quimonos, sob cerejeiras" loading="lazy"></div>
+            <h3>A virada para o japonês</h3>
+            <p>A cozinha da família encontra suas raízes: a culinária japonesa, feita com a disciplina e o cuidado de quem a aprendeu em casa.</p>
+          </article>
+          <article class="tcard" data-tilt>
+            <span class="tcard__year">Take away</span>
+            <div class="tcard__img"><img src="assets/img/story/h-takeaway.webp" alt="Balcão de sushi para viagem com a placa “Sushi de qualidade para todos! 1974”" loading="lazy"></div>
+            <h3>O nascimento do take away</h3>
+            <p>Para popularizar o sushi, a mãe cria o hábito do “take away” — comida japonesa que sai de casa para chegar a mais gente. A procura cresce, e o que era um hábito familiar vira um negócio: nasce o Suysei.</p>
+          </article>
+          <article class="tcard" data-tilt>
+            <span class="tcard__year">O nome</span>
+            <div class="tcard__img"><img src="assets/img/story/h-nome.webp" alt="Duas crianças da família em foto antiga em sépia" loading="lazy"></div>
+            <h3>Suysei, o cometa</h3>
+            <p>O pai escolhe o nome. Suysei significa cometa — uma homenagem à própria travessia da família, que veio do Japão ao Brasil com a força de um cometa: direção, luz e determinação.</p>
+          </article>
+          <article class="tcard tcard--today" data-tilt>
+            <span class="tcard__year">Hoje</span>
+            <div class="tcard__img"><img src="assets/img/story/h-hoje.webp" alt="Tetsuo segurando bandejas de sushi e sashimi no salão do Suysei" loading="lazy"></div>
+            <h3>Original, não gourmet</h3>
+            <p>O pescado é o carro-chefe da casa, servido em ampla variedade. A cozinha não busca ser contemporânea ou “gourmet” — busca ser original, feita por um japonês de verdade, com história e raízes na tradição.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. CONCEITO (paralaxe) ============ -->
+    <section class="concept" id="conceito">
+      <div class="concept__sticky" data-cursor="">
+        <div class="concept__layer concept__sky" data-depth="0.15"><canvas id="stars"></canvas></div>
+        <div class="concept__layer concept__moon" data-depth="0.25" aria-hidden="true"></div>
+        <div class="concept__comet" aria-hidden="true"><span class="concept__comet-tail"></span><span class="concept__comet-head"></span></div>
+        <div class="concept__layer concept__fuji" data-depth="0.35" aria-hidden="true"></div>
+        <div class="concept__layer concept__land" data-depth="0.55" aria-hidden="true"></div>
+        <div class="concept__layer concept__fg" data-depth="1.1" aria-hidden="true"><i class="koi-mask"></i></div>
+        <div class="concept__frame">
+          <span class="eyebrow">04 — Conceito central</span>
+          <p class="concept__line concept__line--a">A força que cruza o universo.</p>
+          <p class="concept__line concept__line--b">A perseverança que vence as correntezas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept-text">
+      <div class="concept-text__grid">
+        <div>
+          <span class="eyebrow">O cometa que encontrou seu lugar</span>
+          <h2 class="display" data-split-chars>Conceito</h2>
+        </div>
+        <div class="concept-text__cols">
+          <p data-reveal>O nome Suysei carrega a força e a luz de um cometa, e essa não é uma escolha decorativa, é a metáfora exata da história desta família. Ao deixar o Japão, eles iniciaram uma travessia que rompeu fronteiras, cruzando o mundo como um cometa que atravessa o céu escuro em busca de um novo destino.</p>
+          <p data-reveal>Mas chegar a um novo mundo exige coragem. E é aqui que o cometa Suysei se funde a um dos símbolos mais sagrados da cultura japonesa: a lenda da carpa dourada. Conta a lenda que apenas as carpas mais destemidas conseguem nadar contra as correntezas mais fortes — e a que sobe a mais alta cachoeira se transforma em um imponente e celestial dragão.</p>
+          <p data-reveal class="lead">Por isso, o coração da marca é formado por duas carpas em movimento contínuo, cujas formas fluidas desenham, juntas, a cauda luminosa do próprio cometa.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. AS DUAS CARPAS ============ -->
+    <section class="koi" id="carpas">
+      <div class="koi__stage" data-cursor="Explore">
+        <div class="koi__glow" aria-hidden="true"></div>
+        <div class="koi__fish koi__fish--desce" data-fish="desce"><i></i></div>
+        <div class="koi__fish koi__fish--sobe" data-fish="sobe"><i></i></div>
+        <div class="koi__ring" aria-hidden="true"></div>
+      </div>
+      <div class="koi__side koi__side--left" data-fish-trigger="desce">
+        <span class="eyebrow">O legado e as raízes</span>
+        <h3>A carpa que desce</h3>
+        <p>Representa a essência do cometa, o núcleo de onde tudo se originou. Volta-se para baixo não como recuo, mas como lembrete eterno de honra e gratidão. Ancora o sucesso no respeito aos antepassados, às origens deixadas no Japão e à família — lembrando que a árvore só cresce forte em direção ao céu porque tem raízes profundas na terra.</p>
+      </div>
+      <div class="koi__side koi__side--right" data-fish-trigger="sobe">
+        <span class="eyebrow">A perseverança e a prosperidade</span>
+        <h3>A carpa que sobe</h3>
+        <p>Representa o calor e a força do cometa: o trabalho duro, as dificuldades vencidas no Brasil, a coragem de nunca desistir. É a carpa subindo a cachoeira em direção ao sucesso absoluto, prestes a se transformar em dragão. Ela diz que todo o esforço valeu a pena, e que o futuro é de vitórias.</p>
+      </div>
+      <p class="koi__summary" data-reveal><b>O Suysei é isso:</b> energia vital de um cometa que encontrou seu lugar e a persistência de carpas que viraram dragões. Cada prato servido, cada sorriso no atendimento e cada detalhe deste espaço carrega essa poeira de estrelas e essa herança de superação.</p>
+    </section>
+
+    <!-- ============ 7. CONSTRUÇÃO DA MARCA ============ -->
+    <section class="build" id="construcao">
+      <div class="build__pin">
+        <div class="build__bg" aria-hidden="true"></div>
+        <div class="build__steps">
+          <span class="eyebrow">05 — Logotipo</span>
+          <h2 class="display">A marca em construção</h2>
+          <ol class="build__list">
+            <li data-step="0"><b>00</b><span><strong>O círculo do cometa</strong>A trajetória que atravessa o céu escuro e, onde pousa, deixa luz.</span></li>
+            <li data-step="1"><b>01</b><span><strong>O símbolo das carpas</strong>A ilustração central, em traço sumi-ê, formando o círculo do cometa. É a travessia representada em movimento.</span></li>
+            <li data-step="2"><b>02</b><span><strong>O wordmark “Suysei”</strong>Tipografia sólida, em caixa alta, com peso forte e cortes retos que transmitem disciplina e presença. É a assinatura da família.</span></li>
+            <li data-step="3"><b>03</b><span><strong>A assinatura bilíngue</strong>“Casa de Refeição Japonesa” acompanhada dos caracteres 日本料理店, reforçando a autenticidade e a origem da casa. É a raiz que nunca se traduz por completo.</span></li>
+          </ol>
+        </div>
+        <div class="build__stage">
+          <svg class="build__circle" viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="41" pathLength="1"/>
+            <circle class="build__circle-dot" cx="50" cy="9" r="0.9"/>
+          </svg>
+          <div class="build__koi build__koi--l"></div>
+          <div class="build__koi build__koi--r"></div>
+          <div class="build__word" data-wordmark data-split-letters></div>
+          <div class="build__kanji" data-kanji-chars></div>
+          <div class="build__casa" data-casa></div>
+          <div class="build__ink" aria-hidden="true"></div>
+        </div>
+        <div class="build__counter" aria-hidden="true"><span id="build-num">00</span>/03</div>
+      </div>
+    </section>
+
+    <!-- ============ 8. VERSÕES ============ -->
+    <section class="versions" id="versoes">
+      <div class="versions__head">
+        <div>
+          <span class="eyebrow">06 — Versões</span>
+          <h2 class="display" data-split-chars>Variações</h2>
+        </div>
+        <p data-reveal>A Suysei possui quatro construções de logotipo, pensadas para situações diferentes de espaço, suporte e leitura. Todas compartilham os mesmos três elementos — símbolo, wordmark e assinatura bilíngue — apenas reorganizados. E todas existem em duas cores de fundo: positiva e negativa.</p>
+      </div>
+      <div class="versions__ui">
+        <div class="tabs" role="tablist" aria-label="Versões do logotipo">
+          <button role="tab" class="tab is-active" data-version="selo" data-magnetic>Selo</button>
+          <button role="tab" class="tab" data-version="centralizada" data-magnetic>Centralizada</button>
+          <button role="tab" class="tab" data-version="estendida" data-magnetic>Estendida</button>
+          <button role="tab" class="tab" data-version="tipografica" data-magnetic>Tipográfica</button>
+        </div>
+        <button class="toggle" id="mode-toggle" aria-pressed="false" data-magnetic><span class="toggle__knob"></span><span class="toggle__a">Positiva</span><span class="toggle__b">Negativa</span></button>
+      </div>
+      <div class="versions__board">
+        <div class="versions__canvas" id="version-canvas" data-tilt="soft">
+          <div class="logo logo--selo is-active" data-logo="selo">
+            <div class="logo__seal"><i class="koi-mask"></i></div>
+            <div class="logo__word" data-wordmark></div>
+            <div class="logo__line"><span data-casa></span><em>•</em><span data-kanji></span></div>
+          </div>
+          <div class="logo logo--centralizada" data-logo="centralizada">
+            <div class="logo__koi koi-mask"></div>
+            <div class="logo__word" data-wordmark></div>
+            <div class="logo__kanji" data-kanji-spaced></div>
+            <div class="logo__casa" data-casa></div>
+          </div>
+          <div class="logo logo--estendida" data-logo="estendida">
+            <div class="logo__vk" data-kanji-vertical></div>
+            <div class="logo__stack"><div data-wordmark-part="0"></div><div data-wordmark-part="1"></div></div>
+            <div class="logo__koi koi-mask"></div>
+            <div class="logo__casa" data-casa></div>
+          </div>
+          <div class="logo logo--tipografica" data-logo="tipografica">
+            <div class="logo__casa" data-casa></div>
+            <div class="logo__word" data-wordmark></div>
+            <div class="logo__kanji" data-kanji-spaced></div>
+          </div>
+        </div>
+        <div class="versions__info" aria-live="polite">
+          <span class="badge">Quando usar</span>
+          <h3 id="version-title">Selo</h3>
+          <p id="version-desc"></p>
+          <p id="version-use" class="versions__use"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 9. USO CORRETO ============ -->
+    <section class="usage" id="uso">
+      <div class="usage__head">
+        <span class="eyebrow">07 — Uso correto × incorreto</span>
+        <h2 class="display">Respeite o traço</h2>
+        <p class="usage__hint">Passe o mouse (ou toque) para ver o que <b>não</b> fazer.</p>
+      </div>
+      <div class="usage__grid">
+        <article class="ucard" tabindex="0">
+          <div class="ucard__inner">
+            <div class="ucard__face ucard__face--ok"><div class="ucard__art ucard__art--solid"><div class="mini-centralizada on-red"></div></div><p><i>✓</i>Aplicar o logotipo em cor sólida e chapada, exatamente como no arquivo oficial.</p></div>
+            <div class="ucard__face ucard__face--no"><div class="ucard__art ucard__art--fx"><div class="mini-centralizada fx"></div></div><p><i>✕</i>Adicionar sombra, contorno, brilho, gradiente ou qualquer efeito de profundidade ao símbolo ou ao wordmark.</p></div>
+          </div>
+        </article>
+        <article class="ucard" tabindex="0">
+          <div class="ucard__inner">
+            <div class="ucard__face ucard__face--ok"><div class="ucard__art"><div class="mini-selo"></div></div><p><i>✓</i>Usar apenas as cores da paleta oficial (vermelho Suysei, preto, off-white, dourado).</p></div>
+            <div class="ucard__face ucard__face--no"><div class="ucard__art"><div class="mini-selo green"></div></div><p><i>✕</i>Recolorir o logotipo com cores fora da paleta, incluindo tons “aproximados” feitos no olho.</p></div>
+          </div>
+        </article>
+        <article class="ucard" tabindex="0">
+          <div class="ucard__inner">
+            <div class="ucard__face ucard__face--ok"><div class="ucard__art ucard__art--light"><div class="mini-centralizada"></div></div><p><i>✓</i>Usar a versão positiva (preta/vermelha) sobre fundos claros e a negativa (branca) sobre fundos escuros.</p></div>
+            <div class="ucard__face ucard__face--no"><div class="ucard__art ucard__art--grey"><div class="mini-centralizada low"></div></div><p><i>✕</i>Aplicar a versão positiva sobre fundo escuro (ou a negativa sobre fundo claro), perdendo contraste e legibilidade.</p></div>
+          </div>
+        </article>
+        <article class="ucard" tabindex="0">
+          <div class="ucard__inner">
+            <div class="ucard__face ucard__face--ok"><div class="ucard__art ucard__art--light"><div class="mini-centralizada"></div></div><p><i>✓</i>Manter as proporções originais, redimensionando sempre a partir dos cantos (proporção travada).</p></div>
+            <div class="ucard__face ucard__face--no"><div class="ucard__art ucard__art--light"><div class="mini-centralizada squash"></div></div><p><i>✕</i>Esticar, achatar, inclinar ou distorcer o símbolo e o wordmark para “encaixar” num espaço.</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 10. CORES ============ -->
+    <section class="colors" id="cores">
+      <div class="colors__head">
+        <span class="eyebrow">08 — Paleta oficial</span>
+        <h2 class="display" data-split-chars>Cores</h2>
+        <p data-reveal>Quatro cores, nenhuma aproximação. Clique em uma cor para copiar o código.</p>
+      </div>
+      <div class="colors__row">
+        <button class="swatch swatch--red" data-hex="#BC1621" data-magnetic>
+          <span class="swatch__koi koi-mask"></span>
+          <span class="swatch__name">Vermelho Suysei</span>
+          <span class="swatch__codes">HEX #BC1621<br>RGB 188 22 33</span>
+          <span class="swatch__desc">O calor e a força do cometa.</span>
+        </button>
+        <button class="swatch swatch--black" data-hex="#0D0D0D" data-magnetic>
+          <span class="swatch__koi koi-mask"></span>
+          <span class="swatch__name">Preto Nanquim</span>
+          <span class="swatch__codes">HEX #0D0D0D<br>RGB 13 13 13</span>
+          <span class="swatch__desc">O céu escuro que o cometa atravessa.</span>
+        </button>
+        <button class="swatch swatch--off" data-hex="#E9E9E9" data-magnetic>
+          <span class="swatch__koi koi-mask"></span>
+          <span class="swatch__name">Off-white</span>
+          <span class="swatch__codes">HEX #E9E9E9<br>RGB 233 233 233</span>
+          <span class="swatch__desc">O papel, o vazio e o respiro.</span>
+        </button>
+        <button class="swatch swatch--gold" data-hex="#C9A45C" data-magnetic>
+          <span class="swatch__koi koi-mask"></span>
+          <span class="swatch__name">Dourado</span>
+          <span class="swatch__codes">HEX #C9A45C<br>RGB 201 164 92</span>
+          <span class="swatch__desc">A carpa dourada que vira dragão.</span>
+        </button>
+      </div>
+      <div class="toast" id="toast" role="status"></div>
+    </section>
+
+    <!-- ============ 11. PERSONALIDADE ============ -->
+    <section class="persona" id="personalidade">
+      <div class="persona__brush" aria-hidden="true" data-parallax="20"></div>
+      <div class="persona__intro">
+        <span class="eyebrow">09 — Atmosfera e personalidade</span>
+        <h2 class="display display--xl" data-split-chars>Personalidade</h2>
+        <h3 class="persona__claim" data-reveal>Tradição, disciplina e hospitalidade.</h3>
+        <p data-reveal>A marca não busca ser contemporânea por moda, busca ser atemporal por história. É a união entre a força imparável de um cometa e a estabilidade de uma mesa farta em família. Não há pressa em ser a última tendência; há orgulho em ser a mesma verdade, servida geração após geração.</p>
+      </div>
+      <div class="voice">
+        <div class="voice__text">
+          <h3>Tom de voz</h3>
+          <p data-reveal>A comunicação da Suysei fala como Tetsuo fala do próprio negócio: com simplicidade, orgulho e sem exageros. Frases diretas, curtas, que soam como quem domina o ofício e não precisa provar nada; porque a tradição já fala por si.</p>
+        </div>
+        <div class="voice__cols">
+          <div class="voice__box voice__box--no" data-reveal><b>Evitar</b><span>Linguagem “gourmet”</span><span>Termos rebuscados</span><span>Promessas vazias</span><span>Urgência publicitária</span></div>
+          <div class="voice__box voice__box--yes" data-reveal><b>Buscar</b><span>Afirmações de bastidor</span><span>Verdade</span><span>Herança</span><em>“Isso é tradição. Isso é Suysei.”</em></div>
+        </div>
+      </div>
+      <div class="pillars">
+        <h3 class="pillars__title">Território da <b>marca</b></h3>
+        <div class="pillars__grid">
+          <article class="pillar" data-tilt><span class="pillar__n">01</span><h4>Autenticidade sem artifícios</h4><p>Culinária “de verdade”, feita por mãos japonesas. O design foge de acabamentos industriais em favor de traços manuais e da estética sumi-ê. Nada aqui finge ser o que não é.</p></article>
+          <article class="pillar" data-tilt><span class="pillar__n">02</span><h4>Minimalismo e precisão</h4><p>Inspirada na disciplina do manuseio do pescado, a marca usa espaço negativo e alto contraste, sem meios-tons, com a mesma clareza e sobriedade que Tetsuo mantém à frente da casa.</p></article>
+          <article class="pillar" data-tilt><span class="pillar__n">03</span><h4>Acolhimento familiar</h4><p>O rigor da técnica convive com o calor do ambiente. Traços feitos à mão evocam o cuidado de quem coloca a mão na massa para servir encontros entre gerações.</p></article>
+          <article class="pillar" data-tilt><span class="pillar__n">04</span><h4>Respeito à matéria-prima</h4><p>A sazonalidade e a variedade dos peixes são tratadas com a mesma reverência da caligrafia artesanal que compõe o universo da marca.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 12. APLICAÇÕES 3D ============ -->
+    <section class="studio" id="aplicacoes">
+      <div class="studio__head">
+        <span class="eyebrow">10 — Aplicações</span>
+        <h2 class="display" data-split-chars>Mockups</h2>
+        <p data-reveal>As peças da marca recriadas em 3D. Arraste para girar, clique no objeto para interagir.</p>
+      </div>
+      <div class="studio__wrap">
+        <div class="studio__stage">
+          <canvas id="studio-gl" data-cursor="Arraste"></canvas>
+          <div class="studio__floor" aria-hidden="true"></div>
+          <p class="studio__tip" id="studio-tip">Clique na caixa para abrir a tampa</p>
+        </div>
+        <div class="studio__menu" role="tablist" aria-label="Mockups 3D">
+          <button class="smenu is-active" data-object="caixa" data-magnetic><b>01</b><span>Caixa presente<small>Gift box · 2 andares</small></span></button>
+          <button class="smenu" data-object="sacola" data-magnetic><b>02</b><span>Sacola<small>Take away · papel kraft preto</small></span></button>
+          <button class="smenu" data-object="carta" data-magnetic><b>03</b><span>Carta de drinks<small>Frente e verso</small></span></button>
+          <button class="smenu" data-object="bowl" data-magnetic><b>04</b><span>Bowl<small>Yakisoba · poke</small></span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 13. GALERIA ============ -->
+    <section class="gallery" id="galeria">
+      <div class="gallery__head">
+        <span class="eyebrow">11 — Pontos de contato</span>
+        <h2 class="display">A marca no dia a dia</h2>
+      </div>
+      <div class="gallery__grid">
+        <figure class="gitem gitem--wide" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/caixas-andares.webp" alt="Caixas presente Suysei pretas, de um e dois andares, sobre mármore" loading="lazy"></div><figcaption><b>Gift box</b>Embalagens · 1 e 2 andares</figcaption></figure>
+        <figure class="gitem gitem--tall" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/avental.webp" alt="Avental cinza-grafite com a assinatura tipográfica Suysei e ondas na barra" loading="lazy"></div><figcaption><b>Avental</b>Uniforme · cozinha</figcaption></figure>
+        <figure class="gitem" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/uniforme-black.webp" alt="Garçom com camiseta e avental pretos Suysei, com carpa branca estampada" loading="lazy"></div><figcaption><b>Uniforme black</b>Garçons e atendentes</figcaption></figure>
+        <figure class="gitem" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/sushiman.webp" alt="Sushiman com dólmã branco de botões vermelhos e assinatura Suysei" loading="lazy"></div><figcaption><b>Dólmã</b>Sushiman</figcaption></figure>
+        <figure class="gitem gitem--wide" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/uniforme-cozinha.webp" alt="Cozinheiro cortando salmão usando avental Suysei" loading="lazy"></div><figcaption><b>Cozinha</b>Uniforme · avental</figcaption></figure>
+        <figure class="gitem gitem--tall" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/drinks-1.webp" alt="Carta de drinks Suysei, fundo preto com moldura vermelha" loading="lazy"></div><figcaption><b>Carta de drinks</b>Cardápios</figcaption></figure>
+        <figure class="gitem gitem--wide" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/menu-buffet.webp" alt="Cardápio do buffet Suysei com porções, acompanhamentos e bebidas" loading="lazy"></div><figcaption><b>Menu buffet</b>Cardápios</figcaption></figure>
+        <figure class="gitem" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/sushiman-2.webp" alt="Sushiman com dólmã branco e assinatura Suysei no peito" loading="lazy"></div><figcaption><b>Dólmã</b>Cozinha quente</figcaption></figure>
+        <figure class="gitem" data-lightbox><div class="gitem__img gitem__img--contain" data-parallax="-4"><img src="assets/img/mockups/camiseta.webp" alt="Camiseta preta com assinatura Suysei, frente e costas" loading="lazy"></div><figcaption><b>Camiseta</b>Garçons e atendentes</figcaption></figure>
+        <figure class="gitem gitem--wide" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/tampa.webp" alt="Arte da tampa da caixa: assinatura centralizada sobre preto" loading="lazy"></div><figcaption><b>Tampa</b>Arte da embalagem</figcaption></figure>
+        <figure class="gitem" data-lightbox><div class="gitem__img" data-parallax="-6"><img src="assets/img/mockups/ilustracoes-carpas.webp" alt="Ilustrações das carpas em quatro combinações de cor" loading="lazy"></div><figcaption><b>Ilustrações</b>Carpas em degradê</figcaption></figure>
+        <figure class="gitem" data-lightbox><div class="gitem__img gitem__img--contain" data-parallax="-4"><img src="assets/img/mockups/caixa-2.webp" alt="Planificação da caixa Suysei" loading="lazy"></div><figcaption><b>Planificação</b>Caixa</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- ============ 14. FIM ============ -->
+    <section class="outro" id="fim">
+      <div class="outro__glow" aria-hidden="true"></div>
+      <div class="outro__seal" data-tilt><div class="logo logo--selo is-active neg"><div class="logo__seal"><i class="koi-mask"></i></div><div class="logo__word" data-wordmark></div><div class="logo__line"><span data-casa></span><em>•</em><span data-kanji></span></div></div></div>
+      <h2 class="outro__line"><span>Isso é tradição.</span><span>Isso é <b>Suysei.</b></span></h2>
+      <footer class="footer">
+        <span>Suysei — Casa de Refeição Japonesa · 日本料理店</span>
+        <span>Guia de Marca 2026</span>
+        <a href="#hero" data-magnetic>Voltar ao topo ↑</a>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" aria-label="Fechar">✕</button>
+    <img alt="">
+    <p class="lightbox__cap"></p>
+  </div>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
