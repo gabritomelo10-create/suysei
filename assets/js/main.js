@@ -70,14 +70,11 @@ const loads = critical.map((src) => new Promise((r) => { const i = new Image(); 
 loads.push((document.fonts ? document.fonts.ready : Promise.resolve()).then(bump));
 const minTime = new Promise((r) => setTimeout(r, 1400));
 
-let hero = null;
-import('./hero3d.js').then(({ initHero }) => {
-  try { hero = initHero($('#hero-gl')); } catch (err) { console.warn('WebGL indisponível', err); }
-  $$('[data-material]').forEach((b) => b.addEventListener('click', () => {
-    $$('[data-material]').forEach((x) => x.classList.toggle('is-active', x === b));
-    hero?.setMaterial(b.dataset.material);
-  }));
+// atmosfera (WebGL) e a pintura do símbolo (canvas 2D)
+import('./hero-atmosphere.js').then(({ initAtmosphere }) => {
+  try { initAtmosphere($('#hero-gl')); } catch (err) { console.warn('WebGL indisponível', err); }
 }).catch((e) => console.warn(e));
+const paintReady = import('./hero-paint.js').then(({ initPaint }) => initPaint($('#hero-paint'))).catch((e) => { console.warn(e); return null; });
 
 Promise.all([...loads, minTime]).then(() => {
   gsap.to(counter, { v: 100, duration: .4, onUpdate: () => { loaderNum.textContent = Math.round(counter.v); } });
@@ -90,12 +87,13 @@ Promise.all([...loads, minTime]).then(() => {
   }, 450);
 });
 
+// a marca é pintada primeiro; o wordmark e a assinatura entram quando as carpas estão prontas
 function introHero() {
-  hero?.playIntro();
+  paintReady.then((p) => { if (!p) return; reduced ? p.finish() : p.play(); });
   const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-  tl.from('.hero__word .letter', { yPercent: 120, opacity: 0, duration: 1.6, stagger: .08, delay: .5 })
-    .from('.hero__casa, .hero__kanji', { opacity: 0, y: 20, duration: 1.2, stagger: .15 }, '-=1.1')
-    .from('.hero__top, .hero__materials, .hero__bottom, .nav', { opacity: 0, y: 20, duration: 1.2, stagger: .08 }, '-=1');
+  tl.from('.nav, .hero__top, .credit, .hero__bottom', { opacity: 0, y: 20, duration: 1.2, stagger: .08, delay: .3 })
+    .from('.hero__word .letter', { yPercent: 120, opacity: 0, duration: 1.6, stagger: .08 }, reduced ? 0 : 3.4)
+    .from('.hero__casa, .hero__kanji', { opacity: 0, y: 20, duration: 1.2, stagger: .15 }, '-=1.1');
 }
 
 /* ---------------- Cursor ---------------- */
@@ -160,9 +158,9 @@ $$('[data-parallax]').forEach((el) => {
 });
 
 /* ---------------- Hero scroll ---------------- */
-ScrollTrigger.create({ trigger: '.hero', start: 'top top', end: 'bottom bottom', scrub: true, onUpdate: (s) => hero?.setProgress(s.progress) });
+gsap.to('.hero__paint', { scale: .82, opacity: .25, ease: 'none', scrollTrigger: { trigger: '.hero', start: '25% top', end: 'bottom bottom', scrub: true } });
 gsap.to('.hero__title', { yPercent: -40, opacity: 0, scale: .92, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: '45% top', scrub: true } });
-gsap.to('.hero__materials, .hero__bottom, .hero__top', { opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: '20% top', end: '50% top', scrub: true } });
+gsap.to('.credit, .hero__bottom, .hero__top', { opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: '20% top', end: '50% top', scrub: true } });
 
 /* ---------------- Manifesto ---------------- */
 gsap.fromTo('[data-rotate-scroll]', { rotate: -40, scale: .85 }, { rotate: 80, scale: 1.15, ease: 'none', scrollTrigger: { trigger: '.manifesto', start: 'top bottom', end: 'bottom top', scrub: true } });

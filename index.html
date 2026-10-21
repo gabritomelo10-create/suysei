@@ -56,8 +56,9 @@
     <!-- ============ 1. HERO 3D ============ -->
     <section class="hero" id="hero">
       <div class="hero__sticky">
-        <canvas class="hero__gl" id="hero-gl" data-cursor="Arraste"></canvas>
+        <canvas class="hero__gl" id="hero-gl" aria-hidden="true"></canvas>
         <div class="hero__vignette" aria-hidden="true"></div>
+        <canvas class="hero__paint" id="hero-paint" role="img" aria-label="O símbolo das duas carpas sendo pintado em traço sumi-ê"></canvas>
 
         <div class="hero__top">
           <span class="eyebrow">01 — Apresentação da marca</span>
@@ -70,13 +71,11 @@
           <p class="hero__kanji" data-kanji-spaced></p>
         </div>
 
-        <div class="hero__materials" role="group" aria-label="Material do símbolo 3D">
-          <span class="hero__materials-label">Símbolo em 3D</span>
-          <button class="chip is-active" data-material="laca" data-magnetic><i style="--c:#bc1621"></i>Laca</button>
-          <button class="chip" data-material="ouro" data-magnetic><i style="--c:#c9a45c"></i>Ouro</button>
-          <button class="chip" data-material="nanquim" data-magnetic><i style="--c:#1a1a1a"></i>Nanquim</button>
-          <button class="chip" data-material="cristal" data-magnetic><i style="--c:#f2d7d9"></i>Cristal</button>
-        </div>
+        <a class="credit" href="#britto" data-magnetic>
+          <span class="credit__label">Desenvolvido por</span>
+          <span class="credit__name">BRITTO<i>*</i> GROUP</span>
+          <span class="credit__desc">Identidade visual, guia de marca e apresentação interativa</span>
+        </a>
 
         <div class="hero__bottom">
           <p class="hero__claim">A força que cruza o universo.<br>A perseverança que vence as correntezas.</p>
@@ -432,17 +431,10 @@
       </div>
       <div class="gallery__grid">
         <figure class="gitem gitem--wide" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/caixas-andares.webp" alt="Caixas presente Suysei pretas, de um e dois andares, sobre mármore" loading="lazy"></div><figcaption><b>Gift box</b>Embalagens · 1 e 2 andares</figcaption></figure>
-        <figure class="gitem gitem--tall" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/avental.webp" alt="Avental cinza-grafite com a assinatura tipográfica Suysei e ondas na barra" loading="lazy"></div><figcaption><b>Avental</b>Uniforme · cozinha</figcaption></figure>
-        <figure class="gitem" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/uniforme-black.webp" alt="Garçom com camiseta e avental pretos Suysei, com carpa branca estampada" loading="lazy"></div><figcaption><b>Uniforme black</b>Garçons e atendentes</figcaption></figure>
-        <figure class="gitem" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/sushiman.webp" alt="Sushiman com dólmã branco de botões vermelhos e assinatura Suysei" loading="lazy"></div><figcaption><b>Dólmã</b>Sushiman</figcaption></figure>
-        <figure class="gitem gitem--wide" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/uniforme-cozinha.webp" alt="Cozinheiro cortando salmão usando avental Suysei" loading="lazy"></div><figcaption><b>Cozinha</b>Uniforme · avental</figcaption></figure>
         <figure class="gitem gitem--tall" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/drinks-1.webp" alt="Carta de drinks Suysei, fundo preto com moldura vermelha" loading="lazy"></div><figcaption><b>Carta de drinks</b>Cardápios</figcaption></figure>
-        <figure class="gitem gitem--wide" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/menu-buffet.webp" alt="Cardápio do buffet Suysei com porções, acompanhamentos e bebidas" loading="lazy"></div><figcaption><b>Menu buffet</b>Cardápios</figcaption></figure>
-        <figure class="gitem" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/sushiman-2.webp" alt="Sushiman com dólmã branco e assinatura Suysei no peito" loading="lazy"></div><figcaption><b>Dólmã</b>Cozinha quente</figcaption></figure>
+        <figure class="gitem" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/uniforme-black.webp" alt="Garçom com camiseta e avental pretos Suysei, com carpa branca estampada" loading="lazy"></div><figcaption><b>Uniforme black</b>Garçons e atendentes</figcaption></figure>
+        <figure class="gitem gitem--wide" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/uniforme-cozinha.webp" alt="Cozinheiro cortando salmão usando avental Suysei" loading="lazy"></div><figcaption><b>Cozinha</b>Uniforme · avental</figcaption></figure>
         <figure class="gitem" data-lightbox><div class="gitem__img gitem__img--contain" data-parallax="-4"><img src="assets/img/mockups/camiseta.webp" alt="Camiseta preta com assinatura Suysei, frente e costas" loading="lazy"></div><figcaption><b>Camiseta</b>Garçons e atendentes</figcaption></figure>
-        <figure class="gitem gitem--wide" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/tampa.webp" alt="Arte da tampa da caixa: assinatura centralizada sobre preto" loading="lazy"></div><figcaption><b>Tampa</b>Arte da embalagem</figcaption></figure>
-        <figure class="gitem" data-lightbox><div class="gitem__img" data-parallax="-6"><img src="assets/img/mockups/ilustracoes-carpas.webp" alt="Ilustrações das carpas em quatro combinações de cor" loading="lazy"></div><figcaption><b>Ilustrações</b>Carpas em degradê</figcaption></figure>
-        <figure class="gitem gitem--wide" data-lightbox><div class="gitem__img gitem__img--contain" data-parallax="-4"><img src="assets/img/mockups/caixa-2.webp" alt="Planificação da caixa Suysei" loading="lazy"></div><figcaption><b>Planificação</b>Caixa</figcaption></figure>
       </div>
     </section>
 
@@ -451,9 +443,21 @@
       <div class="outro__glow" aria-hidden="true"></div>
       <div class="outro__seal" data-tilt><div class="logo logo--selo is-active neg"><div class="logo__seal"><i class="koi-mask"></i></div><div class="logo__word" data-wordmark></div><div class="logo__line"><span data-casa></span><em>•</em><span data-kanji></span></div></div></div>
       <h2 class="outro__line"><span>Isso é tradição.</span><span>Isso é <b>Suysei.</b></span></h2>
+    </section>
+
+    <!-- ============ 15. CRÉDITOS ============ -->
+    <section class="britto" id="britto">
+      <div class="britto__glow" aria-hidden="true"></div>
+      <p class="britto__eyebrow">Projeto desenvolvido por</p>
+      <h2 class="britto__name" aria-label="BRITTO* GROUP"><span>BRITTO</span><i class="britto__star" aria-hidden="true">*</i><span>GROUP</span></h2>
+      <ul class="britto__list">
+        <li>Identidade visual</li>
+        <li>Guia de marca</li>
+        <li>Apresentação interativa</li>
+      </ul>
       <footer class="footer">
+        <span>© 2026 BRITTO* GROUP</span>
         <span>Suysei — Casa de Refeição Japonesa · 日本料理店</span>
-        <span>Guia de Marca 2026</span>
         <a href="#hero" data-magnetic>Voltar ao topo ↑</a>
       </footer>
     </section>

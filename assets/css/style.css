@@ -182,20 +182,24 @@ p { margin: 0 0 1.1em; }
 .hero__word { width: 100%; margin: 0; color: #fff; filter: drop-shadow(0 10px 40px rgba(0, 0, 0, .45)); }
 .hero__word svg, .hero__casa svg { width: 100%; height: auto; display: block; overflow: visible; }
 .hero__kanji { width: min(60vw, 560px); margin: 0; color: #fff; opacity: .9; }
-.hero__materials {
-  position: absolute; left: var(--gutter); bottom: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; z-index: 2;
+.hero__paint {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  width: min(84vh, 88vw); aspect-ratio: 1; max-width: 100%; pointer-events: none;
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, .45));
 }
-.hero__materials-label { width: 100%; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--grey); margin-bottom: 4px; }
-.chip {
-  display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px 8px 10px;
-  border: 1px solid rgba(255, 255, 255, .18); border-radius: 99px;
-  font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-  background: rgba(20, 20, 20, .45); backdrop-filter: blur(10px);
-  transition: border-color .3s, background-color .3s, color .3s;
+.credit {
+  position: absolute; left: var(--gutter); bottom: calc(36px + env(safe-area-inset-bottom, 0px)); z-index: 2;
+  display: grid; gap: 4px; max-width: 300px; padding: 16px 20px 16px 18px;
+  border-radius: 6px; background: rgba(16, 12, 13, .55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 20px 50px rgba(0, 0, 0, .35);
+  border-left: 3px solid var(--red-glow);
+  transition: background-color .5s, box-shadow .5s;
 }
-.chip i { width: 14px; height: 14px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25), 0 0 10px var(--c); }
-.chip:hover { border-color: rgba(255, 255, 255, .5); }
-.chip.is-active { background: rgba(188, 22, 33, .9); border-color: transparent; color: #fff; }
+.credit:hover { background: rgba(188, 22, 33, .35); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2), 0 24px 60px rgba(188, 22, 33, .35); }
+.credit__label { font-size: 10px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--grey); }
+.credit__name { font-weight: 700; font-size: 20px; letter-spacing: .16em; color: #fff; line-height: 1.2; }
+.credit__name i { font-style: normal; color: var(--red-glow); margin-left: 1px; }
+.credit__desc { font-size: 12px; font-weight: 500; letter-spacing: .04em; color: rgba(233, 233, 233, .72); line-height: 1.45; }
 .hero__bottom { position: absolute; right: var(--gutter); bottom: 40px; text-align: right; pointer-events: none; }
 .hero__claim { font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; line-height: 1.9; color: rgba(233, 233, 233, .82); margin: 0 0 18px; }
 .scroll-hint { display: inline-flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--grey); }
@@ -204,7 +208,9 @@ p { margin: 0 0 1.1em; }
 @keyframes drip { to { top: 110%; } }
 @media (max-width: 760px) {
   .hero__bottom { left: var(--gutter); right: auto; bottom: 150px; text-align: left; }
-  .hero__materials { bottom: 28px; right: var(--gutter); }
+  .credit { bottom: calc(24px + env(safe-area-inset-bottom, 0px)); right: var(--gutter); max-width: none; }
+  .hero__bottom { bottom: 170px; }
+  .hero__paint { width: min(92vw, 62vh); }
   .hero__top { top: 74px; }
 }
 
@@ -665,7 +671,7 @@ p { margin: 0 0 1.1em; }
 /* =========================================================
    OUTRO
    ========================================================= */
-.outro { position: relative; min-height: 100vh; padding: 18vh var(--gutter) 40px; display: grid; justify-items: center; align-content: center; gap: 6vh; background: var(--red); overflow: hidden; color: #fff; }
+.outro { position: relative; min-height: 100vh; padding: 18vh var(--gutter); display: grid; justify-items: center; align-content: center; gap: 6vh; background: var(--red); overflow: hidden; color: #fff; }
 .outro__glow { position: absolute; inset: 0; background: radial-gradient(50% 50% at var(--mx) var(--my), rgba(255, 110, 120, .55), transparent 70%), radial-gradient(80% 60% at 50% 120%, rgba(60, 0, 6, .7), transparent 70%); pointer-events: none; }
 .outro__seal { position: relative; width: clamp(160px, 22vw, 280px); aspect-ratio: .78; transform-style: preserve-3d; }
 .outro__seal .logo { position: absolute; inset: 0; }
@@ -675,6 +681,25 @@ p { margin: 0 0 1.1em; }
 .outro__line { position: relative; margin: 0; display: grid; text-align: center; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: clamp(26px, 4.4vw, 72px); line-height: 1.1; }
 .outro__line b { font-family: var(--ff-display); letter-spacing: .02em; }
 .footer { position: relative; width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; margin-top: 6vh; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .3); font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+
+/* =========================================================
+   CRÉDITOS — BRITTO* GROUP
+   ========================================================= */
+.britto {
+  position: relative; overflow: hidden; display: grid; justify-items: center; align-content: center; gap: 4vh;
+  min-height: 92vh; padding: 16vh var(--gutter) calc(32px + env(safe-area-inset-bottom, 0px));
+  background: var(--black); color: #fff; text-align: center;
+}
+.britto__glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(45% 55% at 50% 45%, rgba(188, 22, 33, .32), transparent 70%); }
+.britto__eyebrow { position: relative; margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; color: var(--grey); }
+.britto__name {
+  position: relative; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; column-gap: .22em;
+  font-family: var(--ff-body); font-weight: 700; font-size: clamp(48px, 11vw, 190px); line-height: .9; letter-spacing: .04em;
+}
+.britto__star { font-style: normal; color: var(--red-glow); font-size: .62em; line-height: 1; margin: -.02em -.12em 0 -.18em; display: inline-block; text-shadow: 0 0 40px rgba(255, 42, 55, .55); }
+.britto__list { position: relative; list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.britto__list li { padding: 8px 16px; border-radius: 99px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16); font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(233, 233, 233, .82); }
+.britto .footer { margin-top: 10vh; border-top-color: rgba(255, 255, 255, .14); color: rgba(233, 233, 233, .7); }
 
 /* =========================================================
    LIGHTBOX

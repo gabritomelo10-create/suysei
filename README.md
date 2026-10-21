@@ -3,7 +3,7 @@
 Site estático (HTML + CSS + JS) que apresenta a marca Suysei — Casa de Refeição Japonesa, a partir do Guia de Marca 2026.
 
 ## Seções
-1. **Hero 3D** — símbolo das carpas extrudado em 3D (Three.js), com luzes, bloom, bokeh com profundidade de campo e o cometa em órbita. Arraste para girar; troque o material (Laca, Ouro, Nanquim, Cristal). As carpas chegam de lados opostos e se encaixam no círculo.
+1. **Abertura** — o símbolo das carpas surge como uma pintura sumi-ê sendo feita (canvas 2D): o pincel traça o círculo do cometa, pinta cada carpa e o cometa passa a orbitar. Ao fundo, luz que segue o mouse e bokeh em WebGL. Box de destaque com o crédito da BRITTO* GROUP.
 2. **Frase / Manifesto / História** — revelação palavra a palavra, paralaxe e linha do tempo horizontal (1974 → hoje).
 3. **Conceito** — cena em paralaxe com céu estrelado, cometa cruzando o céu no scroll, paisagem e camada desfocada em primeiro plano.
 4. **As duas carpas** — a que sobe e a que desce, com hover interativo.
@@ -11,6 +11,7 @@ Site estático (HTML + CSS + JS) que apresenta a marca Suysei — Casa de Refei�
 6. **Versões, uso correto, cores, personalidade, território** — interativos (positivo/negativo, cards que viram, copiar HEX).
 7. **Mockups 3D** — caixa presente (tampa abre), sacola, carta de drinks (vira) e bowl (tampa abre).
 8. **Galeria** com os mockups originais do Drive + lightbox.
+9. **Créditos** — seção final da BRITTO* GROUP.
 
 ## Rodar localmente
 Os módulos ES precisam de um servidor HTTP:
