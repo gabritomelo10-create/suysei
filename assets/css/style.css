@@ -84,6 +84,7 @@ p { margin: 0 0 1.1em; }
 
 /* split text */
 .char, .word { display: inline-block; will-change: transform; }
+.word-nb { display: inline-block; white-space: nowrap; }
 .line-mask { display: block; overflow: hidden; }
 
 /* ---------- Loader ---------- */
@@ -174,7 +175,7 @@ p { margin: 0 0 1.1em; }
 .hero__top { position: absolute; top: 86px; left: var(--gutter); right: var(--gutter); display: flex; justify-content: space-between; pointer-events: none; }
 .hero__title {
   position: absolute; left: 50%; top: 50%; translate: -50% -50%;
-  width: min(88vw, 1100px); text-align: center; pointer-events: none;
+  width: min(72vw, 860px); text-align: center; pointer-events: none;
   display: grid; justify-items: center; gap: clamp(8px, 1.4vw, 18px);
 }
 .hero__casa { width: min(54vw, 470px); margin: 0; color: #fff; opacity: .85; }
@@ -269,11 +270,11 @@ p { margin: 0 0 1.1em; }
 .history__pin { position: relative; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
 .history__head { position: absolute; top: 12vh; left: var(--gutter); width: min(480px, 40vw); z-index: 2; }
 .history__head .eyebrow { color: #6b6b6b; }
-.history__head .display { color: var(--red); font-size: clamp(44px, 6vw, 96px); }
+.history__head .display { color: var(--red); font-size: clamp(40px, 4.6vw, 76px); }
 .history__intro { font-weight: 600; letter-spacing: .03em; color: #3a3a3a; }
 .history__track {
   position: relative; display: flex; align-items: center; gap: 4vw;
-  padding: 0 var(--gutter) 0 calc(var(--gutter) + min(520px, 44vw));
+  padding: 0 var(--gutter) 0 calc(var(--gutter) + min(620px, 48vw));
   height: 100%; width: max-content; will-change: transform;
 }
 .history__line { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(0, 0, 0, .15); }
@@ -338,7 +339,7 @@ p { margin: 0 0 1.1em; }
 .concept__land {
   inset: auto -6% -4% -6%; height: 62vh;
   background: url(../img/story/landscape.webp) center bottom / cover no-repeat;
-  mix-blend-mode: multiply; opacity: .95;
+  opacity: .9; filter: saturate(1.1) contrast(1.15);
   -webkit-mask: linear-gradient(transparent, #000 22%);
           mask: linear-gradient(transparent, #000 22%);
 }
@@ -352,13 +353,15 @@ p { margin: 0 0 1.1em; }
 }
 .concept__frame .eyebrow { position: absolute; top: -32px; left: 50%; translate: -50% 0; white-space: nowrap; color: #fff; }
 .concept__line { margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; line-height: 1.15; }
-.concept__line--a { font-size: clamp(22px, 3.6vw, 54px); }
+.concept__line--a { font-size: clamp(20px, 3vw, 48px); }
 .concept__line--b { font-size: clamp(13px, 1.9vw, 28px); letter-spacing: .14em; margin-top: 4px; }
 
 .concept-text { position: relative; padding: 18vh var(--gutter); background: linear-gradient(180deg, #b0202b, var(--red-page) 30%, #9f1b25); color: #fff; overflow: hidden; }
 .concept-text::before { content: ""; position: absolute; width: 80vmax; height: 80vmax; right: -30vmax; top: -20vmax; background: radial-gradient(circle, rgba(255, 90, 100, .35), transparent 60%); }
 .concept-text__grid { position: relative; display: grid; grid-template-columns: 1fr 1.4fr; gap: 6vw; align-items: start; }
 .concept-text .eyebrow { color: #fff; }
+.concept-text .display, .versions .display, .studio .display, .colors .display { font-size: clamp(40px, 6.4vw, 104px); }
+.gallery .display { font-size: clamp(36px, 5.4vw, 88px); }
 .concept-text__cols p { font-weight: 600; letter-spacing: .04em; }
 @media (max-width: 860px) { .concept-text__grid { grid-template-columns: 1fr; } }
 
@@ -503,8 +506,8 @@ p { margin: 0 0 1.1em; }
 .logo--centralizada { width: 100%; height: 100%; }
 .logo--centralizada .logo__koi { position: absolute; left: 50%; top: 45%; width: 44%; aspect-ratio: 1; translate: -50% -50%; color: var(--red-on); }
 .logo--centralizada .logo__word { position: relative; width: 50%; margin-top: -4%; }
-.logo--centralizada .logo__kanji { position: relative; width: 30%; margin-top: 7%; }
-.logo--centralizada .logo__casa { position: relative; width: 27%; margin-top: 4%; }
+.logo--centralizada .logo__kanji { position: relative; width: 34%; margin-top: 7%; }
+.logo--centralizada .logo__casa { position: relative; width: 31%; margin-top: 4%; }
 .logo--estendida { grid-template-columns: auto auto auto; grid-template-rows: auto auto; place-content: center; align-items: center; column-gap: 2%; width: 100%; height: 100%; }
 .logo--estendida .logo__vk { grid-row: 1; display: grid; gap: 10px; justify-items: center; }
 .logo--estendida .logo__vk svg { width: clamp(10px, 1.3vw, 18px); height: auto; }
