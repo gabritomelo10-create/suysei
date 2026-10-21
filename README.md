@@ -26,3 +26,6 @@ Todas as bibliotecas (three.js 0.160, GSAP 3.12 + ScrollTrigger, Lenis) estão e
 - `assets/js/brand-paths.js` — wordmark, assinatura, kanji e carpas vetorizados a partir do guia.
 - `assets/img/brand/` — carpas em nanquim (máscaras com transparência).
 - `assets/img/story/`, `assets/img/mockups/` — fotos e mockups do Drive, otimizados em WebP.
+
+## Publicação
+A versão publicada no claude.ai é gerada com `python3 tools/build-artifact.py <saida.html>`, que remove o esqueleto HTML e troca as bibliotecas de `assets/vendor/` pelas mesmas versões em CDN (cdnjs / jsDelivr).

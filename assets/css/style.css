@@ -18,7 +18,7 @@
   --ff-display: "Kalnia", "Times New Roman", serif;
   --ff-body: "Barlow", "Helvetica Neue", Arial, sans-serif;
 
-  --gutter: clamp(16px, 4vw, 72px);
+  --gutter: max(clamp(16px, 4vw, 72px), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
   --ease: cubic-bezier(.22, 1, .36, 1);
   --mx: 50%;
   --my: 50%;
@@ -142,7 +142,7 @@ p { margin: 0 0 1.1em; }
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 60;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
-  padding: 18px var(--gutter);
+  padding: calc(18px + env(safe-area-inset-top, 0px)) var(--gutter) 18px;
   mix-blend-mode: difference;
   transition: transform .6s var(--ease);
 }
