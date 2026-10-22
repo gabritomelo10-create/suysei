@@ -1,0 +1,23 @@
+import { geoNaturalEarth1, geoPath, geoInterpolate } from 'd3-geo';
+import { feature } from 'topojson-client';
+import fs from 'fs';
+const S = process.argv[2];
+const topo = JSON.parse(fs.readFileSync(S + '/npm/node_modules/world-atlas/countries-110m.json'));
+const topo50 = JSON.parse(fs.readFileSync(S + '/npm/node_modules/world-atlas/countries-50m.json'));
+const countries = feature(topo50, topo50.objects.countries);
+const land = feature(topo, topo.objects.land);
+const W = 1600, H = 820;
+// Pacífico no centro: Japão à esquerda, Brasil à direita
+const proj = geoNaturalEarth1().rotate([170, 0]);
+const frame = { type: 'MultiPoint', coordinates: [[118, 52], [-28, 52], [118, -40], [-28, -40], [180, -40], [180, 52]] };
+proj.fitExtent([[0, 0], [W, H]], frame).clipExtent([[-20, -20], [W + 20, H + 20]]);
+const path = geoPath(proj);
+const r0 = (d) => d.replace(/(\d+)\.\d+/g, '$1');
+const r = (d) => d.replace(/(\d+\.\d)\d+/g, '$1');
+const jp = countries.features.find((f) => f.properties.name === 'Japan');
+const br = countries.features.find((f) => f.properties.name === 'Brazil');
+const tokyo = proj([139.69, 35.69]), sp = proj([-46.63, -23.55]);
+const eq = proj([-170, 0])[1], tr = eq - proj([-170, 23.44])[1];
+const out = { w: W, h: H, equator: Math.round(eq), tropic: Math.round(tr), land: r0(path(land)), japan: r(path(jp)), brazil: r(path(br)), tokyo: tokyo.map(Math.round), sp: sp.map(Math.round) };
+fs.writeFileSync(process.argv[3], '// Mapa (Natural Earth 1:110m; Japão e Brasil em 1:50m, centrado no Pacífico) gerado por tools/ — Japão à esquerda, Brasil à direita\nexport default ' + JSON.stringify(out) + ';\n');
+console.log('size', fs.statSync(process.argv[3]).size, out.tokyo, out.sp);

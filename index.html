@@ -46,6 +46,7 @@
       <a href="#conceito" data-magnetic>Conceito</a>
       <a href="#construcao" data-magnetic>Logotipo</a>
       <a href="#cores" data-magnetic>Cores</a>
+      <a href="#padronagem" data-magnetic>Pattern</a>
       <a href="#aplicacoes" data-magnetic>Aplicações</a>
     </nav>
     <span class="nav__meta">Guia de Marca — 2026</span>
@@ -53,23 +54,21 @@
 
   <main id="smooth">
 
-    <!-- ============ 1. HERO 3D ============ -->
+    <!-- ============ 1. ABERTURA — pintura sumi-ê ============ -->
     <section class="hero" id="hero">
       <div class="hero__sticky">
-        <canvas class="hero__gl" id="hero-gl" aria-hidden="true"></canvas>
-        <div class="hero__vignette" aria-hidden="true"></div>
-        <canvas class="hero__paint" id="hero-paint" role="img" aria-label="O símbolo das duas carpas sendo pintado em traço sumi-ê"></canvas>
-
+        <canvas class="hero__ink" id="hero-ink" aria-hidden="true"></canvas>
         <div class="hero__top">
           <span class="eyebrow">01 — Apresentação da marca</span>
-          <span class="eyebrow">日本料理店</span>
+          <span class="eyebrow">彗星 · Suysei significa cometa</span>
         </div>
 
-        <div class="hero__title">
-          <p class="hero__casa" data-casa></p>
-          <h1 class="hero__word" aria-label="Suysei"><span data-wordmark data-split-letters></span></h1>
-          <p class="hero__kanji" data-kanji-spaced></p>
-        </div>
+        <h1 class="hero__logo lc" id="hero-logo" aria-label="Suysei — Casa de Refeição Japonesa, 日本料理店">
+          <canvas class="lc__koi" id="hero-koi" aria-hidden="true"></canvas>
+          <span class="lc__word" data-wordmark data-split-letters></span>
+          <span class="lc__kanji" data-kanji-chars></span>
+          <span class="lc__casa" data-casa></span>
+        </h1>
 
         <a class="credit" href="#britto" data-magnetic>
           <span class="credit__label">Desenvolvido por</span>
@@ -78,107 +77,118 @@
         </a>
 
         <div class="hero__bottom">
-          <p class="hero__claim">A força que cruza o universo.<br>A perseverança que vence as correntezas.</p>
+          <button class="hero__replay" id="hero-replay" data-magnetic><span aria-hidden="true">筆</span>Pintar de novo</button>
+          <p class="hero__hint">Mova o cursor para pintar · clique para respingar tinta</p>
           <div class="scroll-hint" aria-hidden="true"><span></span>Role para descobrir</div>
         </div>
+        <div class="hero__flood" aria-hidden="true"></div>
       </div>
     </section>
 
     <!-- ============ 2. FRASE ============ -->
     <section class="quote" id="intro">
-      <div class="quote__light" aria-hidden="true"></div>
-      <figure class="quote__photo" data-tilt>
-        <div class="quote__photo-inner" data-parallax="-12"><img src="assets/img/story/tetsuo-hero.webp" alt="Tetsuo Takeno, sorrindo de braços cruzados no salão do Suysei" loading="lazy"></div>
-        <figcaption>Tetsuo Takeno</figcaption>
-      </figure>
+      <div class="quote__pattern pattern-bg" aria-hidden="true"></div>
       <h2 class="quote__text" data-word-reveal>
         <span class="r">Algumas</span> histórias <span class="r">parecem</span> <span class="r">ter sido</span> escritas <span class="r">muito antes de acontecerem.</span>
       </h2>
+      <p class="quote__sign">— Manifesto Suysei</p>
     </section>
 
     <!-- ============ 3. MANIFESTO ============ -->
     <section class="manifesto" id="manifesto">
-      <div class="manifesto__bg" aria-hidden="true">
-        <div class="manifesto__koi koi-mask" data-rotate-scroll></div>
-      </div>
-      <div class="manifesto__head">
+      <div class="manifesto__pattern pattern-bg" aria-hidden="true"></div>
+      <figure class="manifesto__hero">
+        <div class="manifesto__hero-img" data-parallax="-8"><img src="assets/img/story/tetsuo-retrato.webp" alt="Tetsuo Takeno de dólmã branco, braços cruzados e sorrindo no salão do Suysei" width="1300" height="1823"></div>
+        <figcaption><b>Tetsuo Takeno</b>À frente da casa</figcaption>
+      </figure>
+      <div class="manifesto__body">
         <span class="eyebrow">02 — Manifesto</span>
-        <h2 class="display display--xl" data-split-chars>Manifesto</h2>
-      </div>
-      <div class="manifesto__cols">
-        <div class="manifesto__col">
-          <p class="lead" data-reveal>Há histórias que parecem ter sido escritas muito antes de acontecerem.</p>
+        <h2 class="manifesto__title" data-split-chars>Manifesto</h2>
+        <p class="manifesto__lead" data-reveal>Há histórias que parecem ter sido escritas muito antes de acontecerem.</p>
+        <div class="manifesto__cols">
           <p data-reveal>A de Suysei começa numa feira, em São Paulo, em 1974, muito antes de existir um restaurante, uma placa dourada ou um cardápio. Começa com duas mãos que cozinhavam em casa, e que aos poucos, prato a prato, foram transformando um hábito familiar em um destino.</p>
-          <p data-reveal>O nome que herdamos dessa história (<b>Suysei, cometa</b>) não é um adorno. É uma declaração. Um cometa não pede licença para atravessar o céu: ele cruza o escuro com uma trajetória própria, e onde pousa, deixa luz. Foi assim que uma família saiu do Japão e chegou ao Brasil: sem mapa pronto, mas com a certeza de que valia a pena percorrer a distância.</p>
-        </div>
-        <div class="manifesto__col">
-          <p data-reveal>E toda travessia difícil exige a mesma coragem de outra criatura sagrada da cultura japonesa: a <b>carpa</b> que nada contra a correnteza, sobe a cachoeira mais alta e, só então, se torna dragão. Suysei é o encontro dessas duas forças (o cometa que atravessa e a carpa que resiste) reunidas numa única marca, num único traço.</p>
+          <p data-reveal>O nome que herdamos dessa história (<b>Suysei, cometa</b>) não é um adorno. É uma declaração. Foi assim que uma família saiu do Japão e chegou ao Brasil: sem mapa pronto, mas com a certeza de que valia a pena percorrer a distância.</p>
+          <p data-reveal>E toda travessia difícil exige a mesma coragem de outra criatura sagrada da cultura japonesa: a <b>carpa</b> que nada contra a correnteza, sobe a cachoeira mais alta e, só então, se torna dragão. Suysei é o encontro dessas duas forças, reunidas numa única marca, num único traço.</p>
           <p data-reveal>Este guia não existe para engessar essa história. Existe para que ela nunca se perca, em cada aplicação, em cada peça, em cada prato que sai da cozinha.</p>
-          <figure class="manifesto__portrait" data-tilt>
-            <div data-parallax="-10"><img src="assets/img/story/tetsuo-bw.webp" alt="Tetsuo Takeno preparando um prato, em preto e branco" loading="lazy"></div>
-            <figcaption>Uma história que atravessou gerações.<br>Uma marca preparada para atravessar o tempo.</figcaption>
-          </figure>
         </div>
+        <blockquote class="manifesto__quote" data-reveal>Um cometa não pede licença para atravessar o céu: ele cruza o escuro com uma trajetória própria, e onde pousa, deixa luz.</blockquote>
+      </div>
+      <div class="manifesto__strip">
+        <figure class="manifesto__photo manifesto__photo--bw" data-tilt><div data-parallax="-6"><img src="assets/img/story/tetsuo-bw.webp" alt="Tetsuo Takeno finalizando um prato, em preto e branco" loading="lazy"></div><figcaption>O ofício</figcaption></figure>
+        <figure class="manifesto__photo" data-tilt><div data-parallax="-6"><img src="assets/img/story/salmao.webp" alt="Fatias de salmão empilhadas em uma travessa escura" loading="lazy"></div><figcaption>O pescado, carro-chefe da casa</figcaption></figure>
+        <p class="manifesto__sign" data-reveal>Uma história que atravessou gerações.<br>Uma marca preparada para atravessar o tempo.</p>
       </div>
     </section>
 
-    <!-- ============ 4. HISTÓRIA (horizontal) ============ -->
-    <section class="history" id="historia">
-      <div class="history__pin">
-        <div class="history__head">
+    <!-- ============ 4. HISTÓRIA — o cometa do Japão ao Brasil ============ -->
+    <section class="journey" id="historia">
+      <div class="journey__pin">
+        <div class="journey__map" id="journey-map" aria-hidden="true"></div>
+        <canvas class="journey__trail" id="journey-trail" aria-hidden="true"></canvas>
+        <div class="journey__head">
           <span class="eyebrow">03 — Essência da marca</span>
-          <h2 class="display">A travessia</h2>
-          <p class="history__intro">Toda marca forte carrega uma origem que a justifica. A da Suysei não nasceu de uma estratégia de mercado, mas de uma travessia real: a de uma família que atravessou o mundo e, aos poucos, transformou um hábito de casa em um legado.</p>
+          <h2 class="journey__title">A travessia</h2>
         </div>
-        <div class="history__track">
-          <div class="history__line" aria-hidden="true"><span></span><i class="history__comet"></i></div>
-          <article class="tcard" data-tilt>
-            <span class="tcard__year">1974</span>
-            <div class="tcard__img"><img src="assets/img/story/h-1974.webp" alt="Feira livre em São Paulo, em 1974" loading="lazy"></div>
-            <h3>São Paulo</h3>
-            <p>Tudo começa longe de um restaurante: numa feira, com um casal que cozinha em casa. É comida brasileira, feita com as próprias mãos, para a própria família.</p>
-          </article>
-          <article class="tcard" data-tilt>
-            <span class="tcard__year">Os primeiros passos</span>
-            <div class="tcard__img"><img src="assets/img/story/h-primeiros.webp" alt="O casal fundador vestido com quimonos, sob cerejeiras" loading="lazy"></div>
+        <ol class="journey__steps" id="journey-steps">
+          <li class="jstep is-active" data-at="0">
+            <span class="jstep__k">日本 · Japão</span>
+            <h3>A origem</h3>
+            <p>Toda marca forte carrega uma origem que a justifica. A da Suysei não nasceu de uma estratégia de mercado, mas de uma travessia real: a de uma família que atravessou o mundo.</p>
+          </li>
+          <li class="jstep" data-at=".14">
+            <span class="jstep__k">O Pacífico</span>
+            <h3>A travessia</h3>
+            <p>Ao deixar o Japão, a família iniciou uma travessia que rompeu fronteiras, cruzando o mundo como um cometa que atravessa o céu escuro em busca de um novo destino.</p>
+          </li>
+          <li class="jstep" data-at=".4">
+            <span class="jstep__k">Brasil · São Paulo</span>
+            <h3>Onde pousa, deixa luz</h3>
+            <p>A chegada a um novo mundo exige coragem. É aqui que o cometa encontra seu lugar.</p>
+          </li>
+          <li class="jstep jstep--photo" data-at=".52">
+            <span class="jstep__k">1974</span>
+            <img src="assets/img/story/h-1974.webp" alt="Feira livre em São Paulo, em 1974" loading="lazy">
+            <h3>Uma feira em São Paulo</h3>
+            <p>Tudo começa longe de um restaurante: numa feira, com um casal que cozinha em casa, com as próprias mãos, para a própria família.</p>
+          </li>
+          <li class="jstep jstep--photo" data-at=".62">
+            <span class="jstep__k">Os primeiros passos</span>
+            <img src="assets/img/story/h-primeiros.webp" alt="O casal fundador vestido com quimonos, sob cerejeiras" loading="lazy">
             <h3>A virada para o japonês</h3>
             <p>A cozinha da família encontra suas raízes: a culinária japonesa, feita com a disciplina e o cuidado de quem a aprendeu em casa.</p>
-          </article>
-          <article class="tcard" data-tilt>
-            <span class="tcard__year">Take away</span>
-            <div class="tcard__img"><img src="assets/img/story/h-takeaway.webp" alt="Balcão de sushi para viagem com a placa “Sushi de qualidade para todos! 1974”" loading="lazy"></div>
+          </li>
+          <li class="jstep jstep--photo" data-at=".72">
+            <span class="jstep__k">Take away</span>
+            <img src="assets/img/story/h-takeaway.webp" alt="Balcão de sushi para viagem com a placa “Sushi de qualidade para todos! 1974”" loading="lazy">
             <h3>O nascimento do take away</h3>
-            <p>Para popularizar o sushi, a mãe cria o hábito do “take away” — comida japonesa que sai de casa para chegar a mais gente. A procura cresce, e o que era um hábito familiar vira um negócio: nasce o Suysei.</p>
-          </article>
-          <article class="tcard" data-tilt>
-            <span class="tcard__year">O nome</span>
-            <div class="tcard__img"><img src="assets/img/story/h-nome.webp" alt="Duas crianças da família em foto antiga em sépia" loading="lazy"></div>
+            <p>Para popularizar o sushi, a mãe cria o hábito do take away. A procura cresce, e o que era um hábito familiar vira um negócio.</p>
+          </li>
+          <li class="jstep jstep--photo" data-at=".82">
+            <span class="jstep__k">O nome</span>
+            <img src="assets/img/story/h-nome.webp" alt="Duas crianças da família em foto antiga em sépia" loading="lazy">
             <h3>Suysei, o cometa</h3>
-            <p>O pai escolhe o nome. Suysei significa cometa — uma homenagem à própria travessia da família, que veio do Japão ao Brasil com a força de um cometa: direção, luz e determinação.</p>
-          </article>
-          <article class="tcard tcard--today" data-tilt>
-            <span class="tcard__year">Hoje</span>
-            <div class="tcard__img"><img src="assets/img/story/h-hoje.webp" alt="Tetsuo segurando bandejas de sushi e sashimi no salão do Suysei" loading="lazy"></div>
+            <p>O pai escolhe o nome. Suysei significa cometa: uma homenagem à própria travessia da família, com direção, luz e determinação.</p>
+          </li>
+          <li class="jstep jstep--photo" data-at=".91">
+            <span class="jstep__k">Hoje</span>
+            <img src="assets/img/story/h-hoje.webp" alt="Tetsuo segurando bandejas de sushi e sashimi no salão do Suysei" loading="lazy">
             <h3>Original, não gourmet</h3>
-            <p>O pescado é o carro-chefe da casa, servido em ampla variedade. A cozinha não busca ser contemporânea ou “gourmet” — busca ser original, feita por um japonês de verdade, com história e raízes na tradição.</p>
-          </article>
-        </div>
+            <p>O pescado é o carro-chefe da casa. A cozinha não busca ser gourmet: busca ser original, feita por um japonês de verdade, com raízes na tradição.</p>
+          </li>
+        </ol>
+        <div class="journey__progress" aria-hidden="true"><span class="journey__from">Tóquio</span><i><b id="journey-bar"></b></i><span class="journey__to">São Paulo</span></div>
       </div>
     </section>
 
-    <!-- ============ 5. CONCEITO (paralaxe) ============ -->
+    <!-- ============ 5. CONCEITO — paisagem sumi-ê em paralaxe ============ -->
     <section class="concept" id="conceito">
-      <div class="concept__sticky" data-cursor="">
-        <div class="concept__layer concept__sky" data-depth="0.15"><canvas id="stars"></canvas></div>
-        <div class="concept__layer concept__moon" data-depth="0.25" aria-hidden="true"></div>
-        <div class="concept__comet" aria-hidden="true"><span class="concept__comet-tail"></span><span class="concept__comet-head"></span></div>
-        <div class="concept__layer concept__fuji" data-depth="0.35" aria-hidden="true"></div>
-        <div class="concept__layer concept__land" data-depth="0.55" aria-hidden="true"></div>
-        <div class="concept__layer concept__fg" data-depth="1.1" aria-hidden="true"><i class="koi-mask"></i></div>
-        <div class="concept__frame">
+      <div class="concept__sticky">
+        <div class="concept__scene" id="concept-scene" aria-hidden="true"></div>
+        <div class="concept__copy">
           <span class="eyebrow">04 — Conceito central</span>
-          <p class="concept__line concept__line--a">A força que cruza o universo.</p>
-          <p class="concept__line concept__line--b">A perseverança que vence as correntezas.</p>
+          <p class="concept__line" data-at="0">A força que cruza o universo.</p>
+          <p class="concept__line" data-at="1">A perseverança que vence as correntezas.</p>
+          <p class="concept__line concept__line--end" data-at="2">O cometa que encontrou seu lugar.</p>
         </div>
       </div>
     </section>
@@ -226,23 +236,20 @@
           <span class="eyebrow">05 — Logotipo</span>
           <h2 class="display">A marca em construção</h2>
           <ol class="build__list">
-            <li data-step="0"><b>00</b><span><strong>O círculo do cometa</strong>A trajetória que atravessa o céu escuro e, onde pousa, deixa luz.</span></li>
+            <li data-step="0"><b>00</b><span><strong>O círculo do cometa</strong>A trajetória, traçada num único gesto de pincel. É o espaço que as carpas vão ocupar.</span></li>
             <li data-step="1"><b>01</b><span><strong>O símbolo das carpas</strong>A ilustração central, em traço sumi-ê, formando o círculo do cometa. É a travessia representada em movimento.</span></li>
             <li data-step="2"><b>02</b><span><strong>O wordmark “Suysei”</strong>Tipografia sólida, em caixa alta, com peso forte e cortes retos que transmitem disciplina e presença. É a assinatura da família.</span></li>
-            <li data-step="3"><b>03</b><span><strong>A assinatura bilíngue</strong>“Casa de Refeição Japonesa” acompanhada dos caracteres 日本料理店, reforçando a autenticidade e a origem da casa. É a raiz que nunca se traduz por completo.</span></li>
+            <li data-step="3"><b>03</b><span><strong>A assinatura bilíngue</strong>“Casa de Refeição Japonesa” acompanhada dos caracteres 日本料理店, reforçando a autenticidade e a origem da casa.</span></li>
           </ol>
         </div>
         <div class="build__stage">
-          <svg class="build__circle" viewBox="0 0 100 100" aria-hidden="true">
-            <circle cx="50" cy="50" r="41" pathLength="1"/>
-            <circle class="build__circle-dot" cx="50" cy="9" r="0.9"/>
-          </svg>
-          <div class="build__koi build__koi--l"></div>
-          <div class="build__koi build__koi--r"></div>
-          <div class="build__word" data-wordmark data-split-letters></div>
-          <div class="build__kanji" data-kanji-chars></div>
-          <div class="build__casa" data-casa></div>
-          <div class="build__ink" aria-hidden="true"></div>
+          <canvas class="build__enso" id="build-enso" aria-hidden="true"></canvas>
+          <div class="build__logo lc" aria-label="Assinatura centralizada Suysei">
+            <canvas class="lc__koi" id="build-koi" aria-hidden="true"></canvas>
+            <span class="lc__word" data-wordmark data-split-letters></span>
+            <span class="lc__kanji" data-kanji-chars></span>
+            <span class="lc__casa" data-casa></span>
+          </div>
         </div>
         <div class="build__counter" aria-hidden="true"><span id="build-num">00</span>/03</div>
       </div>
@@ -274,16 +281,21 @@
             <div class="logo__line"><span data-casa></span><em>•</em><span data-kanji></span></div>
           </div>
           <div class="logo logo--centralizada" data-logo="centralizada">
-            <div class="logo__koi koi-mask"></div>
-            <div class="logo__word" data-wordmark></div>
-            <div class="logo__kanji" data-kanji-spaced></div>
-            <div class="logo__casa" data-casa></div>
+            <div class="lc">
+              <span class="lc__koi koi-mask"></span>
+              <span class="lc__word" data-wordmark></span>
+              <span class="lc__kanji" data-kanji-spaced></span>
+              <span class="lc__casa" data-casa></span>
+            </div>
           </div>
           <div class="logo logo--estendida" data-logo="estendida">
-            <div class="logo__vk" data-kanji-vertical></div>
-            <div class="logo__stack"><div data-wordmark-part="0"></div><div data-wordmark-part="1"></div></div>
-            <div class="logo__koi koi-mask"></div>
-            <div class="logo__casa" data-casa></div>
+            <div class="le">
+              <span class="le__vk" data-kanji-vertical></span>
+              <span class="le__koi koi-mask"></span>
+              <span class="le__suy" data-wordmark-part="0"></span>
+              <span class="le__sei" data-wordmark-part="1"></span>
+              <span class="le__casa" data-casa></span>
+            </div>
           </div>
           <div class="logo logo--tipografica" data-logo="tipografica">
             <div class="logo__casa" data-casa></div>
@@ -310,8 +322,8 @@
       <div class="usage__grid">
         <article class="ucard" tabindex="0">
           <div class="ucard__inner">
-            <div class="ucard__face ucard__face--ok"><div class="ucard__art ucard__art--solid"><div class="mini-centralizada on-red"></div></div><p><i>✓</i>Aplicar o logotipo em cor sólida e chapada, exatamente como no arquivo oficial.</p></div>
-            <div class="ucard__face ucard__face--no"><div class="ucard__art ucard__art--fx"><div class="mini-centralizada fx"></div></div><p><i>✕</i>Adicionar sombra, contorno, brilho, gradiente ou qualquer efeito de profundidade ao símbolo ou ao wordmark.</p></div>
+            <div class="ucard__face ucard__face--ok"><div class="ucard__art ucard__art--solid"><div class="lc lc--mini on-red"><span class="lc__koi koi-mask"></span><span class="lc__word" data-wordmark></span><span class="lc__kanji" data-kanji-spaced></span><span class="lc__casa" data-casa></span></div></div><p><i>✓</i>Aplicar o logotipo em cor sólida e chapada, exatamente como no arquivo oficial.</p></div>
+            <div class="ucard__face ucard__face--no"><div class="ucard__art ucard__art--fx"><div class="lc lc--mini fx"><span class="lc__koi koi-mask"></span><span class="lc__word" data-wordmark></span><span class="lc__kanji" data-kanji-spaced></span><span class="lc__casa" data-casa></span></div></div><p><i>✕</i>Adicionar sombra, contorno, brilho, gradiente ou qualquer efeito de profundidade ao símbolo ou ao wordmark.</p></div>
           </div>
         </article>
         <article class="ucard" tabindex="0">
@@ -322,14 +334,14 @@
         </article>
         <article class="ucard" tabindex="0">
           <div class="ucard__inner">
-            <div class="ucard__face ucard__face--ok"><div class="ucard__art ucard__art--light"><div class="mini-centralizada"></div></div><p><i>✓</i>Usar a versão positiva (preta/vermelha) sobre fundos claros e a negativa (branca) sobre fundos escuros.</p></div>
-            <div class="ucard__face ucard__face--no"><div class="ucard__art ucard__art--grey"><div class="mini-centralizada low"></div></div><p><i>✕</i>Aplicar a versão positiva sobre fundo escuro (ou a negativa sobre fundo claro), perdendo contraste e legibilidade.</p></div>
+            <div class="ucard__face ucard__face--ok"><div class="ucard__art ucard__art--light"><div class="lc lc--mini"><span class="lc__koi koi-mask"></span><span class="lc__word" data-wordmark></span><span class="lc__kanji" data-kanji-spaced></span><span class="lc__casa" data-casa></span></div></div><p><i>✓</i>Usar a versão positiva (preta/vermelha) sobre fundos claros e a negativa (branca) sobre fundos escuros.</p></div>
+            <div class="ucard__face ucard__face--no"><div class="ucard__art ucard__art--grey"><div class="lc lc--mini low"><span class="lc__koi koi-mask"></span><span class="lc__word" data-wordmark></span><span class="lc__kanji" data-kanji-spaced></span><span class="lc__casa" data-casa></span></div></div><p><i>✕</i>Aplicar a versão positiva sobre fundo escuro (ou a negativa sobre fundo claro), perdendo contraste e legibilidade.</p></div>
           </div>
         </article>
         <article class="ucard" tabindex="0">
           <div class="ucard__inner">
-            <div class="ucard__face ucard__face--ok"><div class="ucard__art ucard__art--light"><div class="mini-centralizada"></div></div><p><i>✓</i>Manter as proporções originais, redimensionando sempre a partir dos cantos (proporção travada).</p></div>
-            <div class="ucard__face ucard__face--no"><div class="ucard__art ucard__art--light"><div class="mini-centralizada squash"></div></div><p><i>✕</i>Esticar, achatar, inclinar ou distorcer o símbolo e o wordmark para “encaixar” num espaço.</p></div>
+            <div class="ucard__face ucard__face--ok"><div class="ucard__art ucard__art--light"><div class="lc lc--mini"><span class="lc__koi koi-mask"></span><span class="lc__word" data-wordmark></span><span class="lc__kanji" data-kanji-spaced></span><span class="lc__casa" data-casa></span></div></div><p><i>✓</i>Manter as proporções originais, redimensionando sempre a partir dos cantos (proporção travada).</p></div>
+            <div class="ucard__face ucard__face--no"><div class="ucard__art ucard__art--light"><div class="lc lc--mini squash"><span class="lc__koi koi-mask"></span><span class="lc__word" data-wordmark></span><span class="lc__kanji" data-kanji-spaced></span><span class="lc__casa" data-casa></span></div></div><p><i>✕</i>Esticar, achatar, inclinar ou distorcer o símbolo e o wordmark para “encaixar” num espaço.</p></div>
           </div>
         </article>
       </div>
@@ -371,11 +383,52 @@
       <div class="toast" id="toast" role="status"></div>
     </section>
 
+    <!-- ============ 10b. PADRONAGEM ============ -->
+    <section class="patternsec" id="padronagem">
+      <div class="patternsec__head">
+        <div>
+          <span class="eyebrow">09 — Padronagem</span>
+          <h2 class="display" data-split-chars>Pattern</h2>
+        </div>
+        <div class="patternsec__text">
+          <p data-reveal>O pattern da Suysei nasce do mesmo pincel que desenha as carpas: pinceladas cheias no meio e secas nas pontas, girando em redemoinhos. É a correnteza que a carpa enfrenta, transformada em textura.</p>
+          <p data-reveal>Funciona como pano de fundo, nunca como protagonista. Aparece tom sobre tom em uniformes, embalagens e superfícies, e em vermelho sobre off-white nas peças de destaque.</p>
+        </div>
+      </div>
+      <div class="patternlab">
+        <div class="patternlab__stage" id="pattern-stage" data-cursor="Ilumine">
+          <div class="patternlab__layer patternlab__layer--base"></div>
+          <div class="patternlab__layer patternlab__layer--lit"></div>
+          <div class="patternlab__seal lc" aria-hidden="true"><span class="lc__koi koi-mask"></span><span class="lc__word" data-wordmark></span><span class="lc__kanji" data-kanji-spaced></span><span class="lc__casa" data-casa></span></div>
+        </div>
+        <div class="patternlab__ui">
+          <p class="patternlab__label" id="pattern-label">Tom sobre tom · preto</p>
+          <div class="patternlab__swatches" role="group" aria-label="Combinações do pattern">
+            <button class="pswatch is-active" data-bg="#0d0d0d" data-fg="#3a3a3a" data-ink="#e9e9e9" data-koi="#bc1621" data-name="Tom sobre tom · preto" aria-pressed="true"><i style="--a:#0d0d0d;--b:#3a3a3a"></i>Preto</button>
+            <button class="pswatch" data-bg="#bc1621" data-fg="#9a0f19" data-ink="#ffffff" data-koi="#ffffff" data-name="Tom sobre tom · vermelho" aria-pressed="false"><i style="--a:#bc1621;--b:#8e0f18"></i>Vermelho</button>
+            <button class="pswatch" data-bg="#e9e6e0" data-fg="#bc1621" data-ink="#111111" data-koi="#bc1621" data-name="Destaque · vermelho sobre off-white" aria-pressed="false"><i style="--a:#e9e6e0;--b:#bc1621"></i>Off-white</button>
+            <button class="pswatch" data-bg="#e9e6e0" data-fg="#d2cdc4" data-ink="#111111" data-koi="#bc1621" data-name="Tom sobre tom · off-white" aria-pressed="false"><i style="--a:#e9e6e0;--b:#c9c3b8"></i>Papel</button>
+          </div>
+          <label class="patternlab__range" for="pattern-scale">Escala<input type="range" id="pattern-scale" min="160" max="640" value="340"></label>
+          <ul class="patternlab__rules">
+            <li>Sempre em uma cor sólida, sem degradê.</li>
+            <li>Nunca passa por cima do logotipo: o símbolo pede área livre.</li>
+            <li>Na dúvida, tom sobre tom.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="patternsec__apps">
+        <figure data-lightbox tabindex="0"><img src="assets/img/mockups/dolma-black.webp" alt="Dólmã preto com o pattern na manga e carpa vermelha" loading="lazy"><figcaption>Dólmã · tom sobre tom</figcaption></figure>
+        <figure data-lightbox tabindex="0"><img src="assets/img/mockups/avental-off-white.webp" alt="Avental off-white com bolso estampado com o pattern em vermelho" loading="lazy"><figcaption>Avental · bolso em vermelho</figcaption></figure>
+        <figure data-lightbox tabindex="0"><img src="assets/img/mockups/caixa-delivery.webp" alt="Caixa de delivery preta com o pattern tom sobre tom" loading="lazy"><figcaption>Embalagem · fundo</figcaption></figure>
+      </div>
+    </section>
+
     <!-- ============ 11. PERSONALIDADE ============ -->
     <section class="persona" id="personalidade">
       <div class="persona__brush" aria-hidden="true" data-parallax="20"></div>
       <div class="persona__intro">
-        <span class="eyebrow">09 — Atmosfera e personalidade</span>
+        <span class="eyebrow">10 — Atmosfera e personalidade</span>
         <h2 class="display display--xl" data-split-chars>Persona|lidade</h2>
         <h3 class="persona__claim" data-reveal>Tradição, disciplina e hospitalidade.</h3>
         <p data-reveal>A marca não busca ser contemporânea por moda, busca ser atemporal por história. É a união entre a força imparável de um cometa e a estabilidade de uma mesa farta em família. Não há pressa em ser a última tendência; há orgulho em ser a mesma verdade, servida geração após geração.</p>
@@ -404,7 +457,7 @@
     <!-- ============ 12. APLICAÇÕES 3D ============ -->
     <section class="studio" id="aplicacoes">
       <div class="studio__head">
-        <span class="eyebrow">10 — Aplicações</span>
+        <span class="eyebrow">11 — Aplicações</span>
         <h2 class="display" data-split-chars>Mockups</h2>
         <p data-reveal>As peças da marca recriadas em 3D. Arraste para girar, clique no objeto para interagir.</p>
       </div>
@@ -427,7 +480,7 @@
     <section class="gallery" id="galeria">
       <div class="gallery__head">
         <div>
-          <span class="eyebrow">11 — Pontos de contato</span>
+          <span class="eyebrow">12 — Pontos de contato</span>
           <h2 class="display">A marca no dia a dia</h2>
         </div>
         <p class="gallery__lead">24 aplicações, da fachada ao vale-presente. Filtre por categoria e clique em uma imagem para ampliar.</p>
@@ -464,7 +517,7 @@
         <figure class="gitem" data-cat="papelaria" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/vale-presente.webp" alt="Vale-presente off-white com envelope preto" loading="lazy" width="1536" height="1024"></div><figcaption><span>Papelaria</span><b>Vale-presente</b>Cartão e envelope</figcaption></figure>
         <figure class="gitem" data-cat="embalagens" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/caixas-andares.webp" alt="Caixas presente Suysei pretas, de um e dois andares, sobre mármore" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Gift box</b>1 e 2 andares</figcaption></figure>
         <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/uniforme-black.webp" alt="Garçom com camiseta e avental pretos Suysei, com carpa branca estampada" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Uniforme black</b>Garçons e atendentes</figcaption></figure>
-        <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/uniforme-cozinha.webp" alt="Cozinheiro cortando salmão usando avental Suysei" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Cozinha</b>Avental grafite</figcaption></figure>
+        <figure class="gitem gitem--pano" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/uniforme-cozinha.webp" alt="Cozinheiro cortando salmão usando avental Suysei" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Cozinha</b>Avental grafite</figcaption></figure>
       </div>
     </section>
 

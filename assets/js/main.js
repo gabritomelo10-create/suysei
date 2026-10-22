@@ -1,4 +1,9 @@
 import { mountBrand } from './brand.js';
+import { KoiPainter } from './koi-painter.js';
+import { initInk } from './hero-ink.js';
+import { initJourney } from './journey.js';
+import { initConcept } from './concept-scene.js';
+import { makeStroke, drawStroke, sample, taper } from './sumi.js';
 
 const { gsap, ScrollTrigger, Lenis } = window;
 gsap.registerPlugin(ScrollTrigger);
@@ -63,18 +68,40 @@ function splitWords(el) {
 
 /* ---------------- Loader ---------------- */
 const loaderNum = $('#loader-num');
-const critical = ['assets/img/brand/koi-ink.png', 'assets/img/brand/koi-mask.png', 'assets/img/brand/koi-left.png', 'assets/img/brand/koi-right.png', 'assets/img/story/tetsuo-hero.webp'];
+const critical = ['assets/img/brand/koi-ink.png', 'assets/img/brand/koi-mask.png', 'assets/img/brand/koi-right.png', 'assets/img/brand/pattern.webp'];
 let loaded = 0; const counter = { v: 0 };
 const bump = () => { loaded++; gsap.to(counter, { v: (loaded / (critical.length + 1)) * 100, duration: .6, onUpdate: () => { loaderNum.textContent = Math.round(counter.v); } }); };
 const loads = critical.map((src) => new Promise((r) => { const i = new Image(); i.onload = i.onerror = () => { bump(); r(); }; i.src = src; }));
 loads.push((document.fonts ? document.fonts.ready : Promise.resolve()).then(bump));
-const minTime = new Promise((r) => setTimeout(r, 1400));
+const minTime = new Promise((r) => setTimeout(r, 1200));
 
-// atmosfera (WebGL) e a pintura do símbolo (canvas 2D)
-import('./hero-atmosphere.js').then(({ initAtmosphere }) => {
-  try { initAtmosphere($('#hero-gl')); } catch (err) { console.warn('WebGL indisponível', err); }
-}).catch((e) => console.warn(e));
-const paintReady = import('./hero-paint.js').then(({ initPaint }) => initPaint($('#hero-paint'))).catch((e) => { console.warn(e); return null; });
+/* ---------------- Abertura: a marca pintada em sumi-ê ---------------- */
+const heroKoi = new KoiPainter($('#hero-koi'), { color: '#bc1621' });
+initInk($('#hero-ink'));
+const heroState = { p: 0 };
+const heroLetters = $('.hero__logo .lc__word'), heroKanji = $$('.hero__logo .lc__kanji svg');
+function paintHero() {
+  const tl = gsap.timeline();
+  gsap.set(heroLetters, { clipPath: 'inset(0 100% 0 0)', opacity: 1 });
+  gsap.set(heroKanji, { opacity: 0, filter: 'blur(6px)', scale: 1.15 });
+  gsap.set('.hero__logo .lc__casa', { opacity: 0, letterSpacing: '.4em' });
+  heroState.p = 0; heroKoi.render(0, true);
+  tl.to(heroState, { p: 1, duration: reduced ? .01 : 3.4, ease: 'none', onUpdate: () => heroKoi.render(heroState.p) })
+    // o wordmark entra como uma pincelada da esquerda para a direita, letra a letra
+    .to(heroLetters, { clipPath: 'inset(0 0% 0 0)', duration: 1, ease: 'power2.inOut' }, reduced ? 0 : 2.5)
+    // os kanji assentam como tinta no papel
+    .to(heroKanji, { opacity: 1, filter: 'blur(0px)', scale: 1, duration: .7, stagger: .12, ease: 'power2.out' }, reduced ? 0 : 3.1)
+    .to('.hero__logo .lc__casa', { opacity: 1, duration: 1, ease: 'power2.out' }, reduced ? 0 : 3.5);
+  return tl;
+}
+$('#hero-replay').addEventListener('click', () => paintHero());
+// o símbolo acompanha o cursor, como papel inclinado à luz
+if (finePointer) {
+  const logo = $('#hero-logo');
+  const rx = gsap.quickTo(logo, 'rotationX', { duration: 1.2, ease: 'power3.out' }), ry = gsap.quickTo(logo, 'rotationY', { duration: 1.2, ease: 'power3.out' });
+  gsap.set(logo, { transformPerspective: 1200 });
+  $('.hero__sticky').addEventListener('pointermove', (e) => { ry((e.clientX / innerWidth - .5) * 8); rx(-(e.clientY / innerHeight - .5) * 6); });
+}
 
 Promise.all([...loads, minTime]).then(() => {
   gsap.to(counter, { v: 100, duration: .4, onUpdate: () => { loaderNum.textContent = Math.round(counter.v); } });
@@ -82,19 +109,11 @@ Promise.all([...loads, minTime]).then(() => {
     $('#loader').classList.add('is-done');
     document.body.classList.remove('is-loading');
     lenis?.start();
-    introHero();
+    heroKoi.ready.then(() => paintHero());
+    gsap.from('.nav, .hero__top, .credit, .hero__bottom', { opacity: 0, y: 20, duration: 1.2, stagger: .08, delay: .3, ease: 'expo.out' });
     ScrollTrigger.refresh();
   }, 450);
 });
-
-// a marca é pintada primeiro; o wordmark e a assinatura entram quando as carpas estão prontas
-function introHero() {
-  paintReady.then((p) => { if (!p) return; reduced ? p.finish() : p.play(); });
-  const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-  tl.from('.nav, .hero__top, .credit, .hero__bottom', { opacity: 0, y: 20, duration: 1.2, stagger: .08, delay: .3 })
-    .from('.hero__word .letter', { yPercent: 120, opacity: 0, duration: 1.6, stagger: .08 }, reduced ? 0 : 3.4)
-    .from('.hero__casa, .hero__kanji', { opacity: 0, y: 20, duration: 1.2, stagger: .15 }, '-=1.1');
-}
 
 /* ---------------- Cursor ---------------- */
 if (finePointer) {
@@ -157,72 +176,37 @@ $$('[data-parallax]').forEach((el) => {
   gsap.fromTo(el, { yPercent: -v }, { yPercent: v, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
 });
 
-/* ---------------- Hero scroll ---------------- */
-gsap.to('.hero__paint', { scale: .82, opacity: .25, ease: 'none', scrollTrigger: { trigger: '.hero', start: '25% top', end: 'bottom bottom', scrub: true } });
-gsap.to('.hero__title', { yPercent: -40, opacity: 0, scale: .92, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: '45% top', scrub: true } });
-gsap.to('.credit, .hero__bottom, .hero__top', { opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: '20% top', end: '50% top', scrub: true } });
+/* ---------------- Abertura no scroll: a tinta toma o papel ---------------- */
+gsap.to('#hero-logo', { scale: .78, yPercent: -6, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom bottom', scrub: true } });
+gsap.to('.credit, .hero__bottom, .hero__top', { opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: '15% top', end: '40% top', scrub: true } });
+gsap.fromTo('.hero__flood', { yPercent: 100 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: '30% top', end: 'bottom bottom', scrub: true } });
 
 /* ---------------- Manifesto ---------------- */
-gsap.fromTo('[data-rotate-scroll]', { rotate: -40, scale: .85 }, { rotate: 80, scale: 1.15, ease: 'none', scrollTrigger: { trigger: '.manifesto', start: 'top bottom', end: 'bottom top', scrub: true } });
-gsap.from('.quote__light', { scale: .4, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.quote', start: 'top bottom', end: 'center center', scrub: true } });
+gsap.from('.manifesto__hero', { clipPath: 'inset(12% 12% 12% 12%)', ease: 'none', scrollTrigger: { trigger: '.manifesto', start: 'top 85%', end: 'top 15%', scrub: true } });
+$$('.pattern-bg').forEach((el) => gsap.fromTo(el, { backgroundPositionY: '0px' }, { backgroundPositionY: '-260px', ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
 
-/* ---------------- História horizontal ---------------- */
-ScrollTrigger.matchMedia({
-  '(min-width: 861px)': () => {
-    const track = $('.history__track');
-    const dist = () => track.scrollWidth - innerWidth;
-    const tl = gsap.timeline({ scrollTrigger: { trigger: '.history', start: 'top top', end: () => `+=${dist() * 1.1}`, pin: '.history__pin', scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 } });
-    tl.to(track, { x: () => -dist(), ease: 'none' }, 0)
-      .to('.history__line span', { scaleX: 1, ease: 'none' }, 0)
-      .fromTo('.history__comet', { left: '0%' }, { left: '100%', ease: 'none' }, 0)
-      .to('.history__head', { opacity: 0, x: -80, ease: 'none', duration: .15 }, 0.05);
-    $$('.tcard').forEach((c, i) => gsap.from(c.querySelector('.tcard__img img'), { scale: 1.35, ease: 'none', scrollTrigger: { trigger: c, containerAnimation: tl, start: 'left right', end: 'right left', scrub: true } }));
-  },
-  '(max-width: 860px)': () => {
-    $$('.tcard').forEach((c) => gsap.from(c, { y: 80, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: c, start: 'top 85%' } }));
-  },
-});
+/* ---------------- História: o cometa do Japão ao Brasil ---------------- */
+(function journey() {
+  const j = initJourney({ mapEl: $('#journey-map'), canvas: $('#journey-trail') });
+  const steps = $$('.jstep'), bar = $('#journey-bar');
+  let active = -1;
+  ScrollTrigger.create({
+    trigger: '.journey', start: 'top top', end: 'bottom bottom', scrub: true,
+    onUpdate: (st) => {
+      const p = st.progress; j.setProgress(p);
+      bar.style.transform = `scaleX(${Math.min(1, p / .4)})`;
+      let i = 0; steps.forEach((s, k) => { if (p >= +s.dataset.at) i = k; });
+      if (i !== active) { steps.forEach((s, k) => s.classList.toggle('is-active', k === i)); active = i; }
+    },
+  });
+})();
 
-/* ---------------- Conceito (paralaxe) ---------------- */
+/* ---------------- Conceito: paisagem em paralaxe ---------------- */
 (function concept() {
-  const sec = $('.concept'), sticky = $('.concept__sticky');
-  const stars = $('#stars'), ctx = stars.getContext('2d');
-  let W = 0, H = 0, pts = [];
-  const resize = () => {
-    const pr = Math.min(devicePixelRatio, 2); W = stars.clientWidth; H = stars.clientHeight;
-    stars.width = W * pr; stars.height = H * pr; ctx.setTransform(pr, 0, 0, pr, 0, 0);
-    pts = Array.from({ length: Math.round(W * H / 2600) }, () => ({ x: Math.random() * W, y: Math.random() * H * .8, r: Math.random() * 1.4 + .2, p: Math.random() * 6, s: Math.random() < .04 }));
-  };
-  new ResizeObserver(resize).observe(stars); resize();
-  let on = false;
-  ScrollTrigger.create({ trigger: sec, start: 'top bottom', end: 'bottom top', onToggle: (s) => { on = s.isActive; } });
-  const drawStar = (x, y, r) => { ctx.beginPath(); for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4, rr = i % 2 ? r * .25 : r; ctx.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); } ctx.closePath(); ctx.fill(); };
-  gsap.ticker.add((t) => {
-    if (!on) return;
-    ctx.clearRect(0, 0, W, H);
-    for (const s of pts) {
-      const a = .35 + .65 * Math.abs(Math.sin(t * .9 + s.p));
-      ctx.fillStyle = `rgba(255,${190 + (s.p * 10 | 0)},${180},${a * .8})`;
-      if (s.s) drawStar(s.x, s.y, s.r * 7); else { ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 7); ctx.fill(); }
-    }
-  });
-  // camadas de profundidade com o mouse
-  const layers = $$('.concept__layer', sticky).map((el) => ({ el, d: +el.dataset.depth, x: gsap.quickTo(el, 'x', { duration: 1.2, ease: 'power3.out' }), y: gsap.quickTo(el, 'y', { duration: 1.2, ease: 'power3.out' }) }));
-  sticky.addEventListener('pointermove', (e) => {
-    const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
-    layers.forEach((l) => { l.x(-x * 40 * l.d); l.y(-y * 24 * l.d); });
-    sticky.style.setProperty('--mx', `${(x + .5) * 100}%`);
-  });
-  // scroll: cometa cruza o céu, paisagem sobe, foreground desfocado passa
-  const tl = gsap.timeline({ scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom bottom', scrub: 1 } });
-  tl.fromTo('.concept__comet', { x: () => -innerWidth * .9, y: () => -innerHeight * .2, rotate: 28 }, { x: () => innerWidth * .55, y: () => innerHeight * .55, ease: 'none', duration: 1 }, 0)
-    .fromTo('.concept__sky canvas', { yPercent: 0 }, { yPercent: 12, ease: 'none', duration: 1 }, 0)
-    .fromTo('.concept__land', { yPercent: 28, scale: 1.15 }, { yPercent: 0, scale: 1, ease: 'none', duration: 1 }, 0)
-    .fromTo('.concept__fg .koi-mask', { yPercent: 40, rotate: -20 }, { yPercent: -60, rotate: 30, ease: 'none', duration: 1 }, 0)
-    .fromTo('.concept__frame', { opacity: 0, scale: .85, letterSpacing: '.3em' }, { opacity: 1, scale: 1, ease: 'expo.out', duration: .3 }, .18)
-    .from('.concept__line--a', { clipPath: 'inset(0 100% 0 0)', duration: .2, ease: 'none' }, .3)
-    .from('.concept__line--b', { clipPath: 'inset(0 0 0 100%)', duration: .2, ease: 'none' }, .42)
-    .to('.concept__frame', { opacity: 0, y: -60, duration: .15 }, .88);
+  const root = $('#concept-scene'), lines = $$('.concept__line');
+  const scene = initConcept(root);
+  root.addEventListener('scene', (e) => lines.forEach((l) => l.classList.toggle('is-on', +l.dataset.at === e.detail.line)));
+  ScrollTrigger.create({ trigger: '.concept', start: 'top top', end: 'bottom bottom', scrub: true, onUpdate: (st) => scene.setProgress(st.progress) });
 })();
 
 /* ---------------- Carpas ---------------- */
@@ -245,30 +229,39 @@ ScrollTrigger.matchMedia({
 /* ---------------- Construção da marca ---------------- */
 (function build() {
   const sec = $('.build'); const items = $$('.build__list li'); const num = $('#build-num');
-  gsap.set('.build__word .letter', { yPercent: -90, opacity: 0, filter: 'blur(12px)' });
-  gsap.set('.build__kanji svg', { opacity: 0, y: 14 });
-  gsap.set('.build__casa', { clipPath: 'inset(0 100% 0 0)' });
-  gsap.set(['.build__koi--l', '.build__koi--r'], { '--a': '-30deg' });
+  const koi = new KoiPainter($('#build-koi'), { color: '#bc1621' });
+  // o círculo do cometa: um ensō traçado num único gesto
+  const enso = $('#build-enso'), ectx = enso.getContext('2d');
+  let ensoStroke = null, E = 0;
+  const ensoResize = () => {
+    const pr = Math.min(devicePixelRatio || 1, 2); E = enso.clientWidth; enso.width = enso.height = E * pr; ectx.setTransform(pr, 0, 0, pr, 0, 0);
+    const r = E * .4, c = E / 2;
+    ensoStroke = makeStroke(sample((t) => { const a = (-100 + t * 335) * Math.PI / 180; return { x: c + Math.cos(a) * r * (1 + t * .02), y: c + Math.sin(a) * r }; }, (t) => E * .05 * taper(t, .04, .35), 360), { bristles: 30, seed: 77, dry: .9, thin: .09 });
+  };
+  new ResizeObserver(() => { ensoResize(); drawEnso(state.enso); }).observe(enso); ensoResize();
+  const state = { enso: 0, ensoA: 1, koi: 0 };
+  function drawEnso(p) { ectx.clearRect(0, 0, E, E); if (p > 0) drawStroke(ectx, ensoStroke, p, `rgba(233,233,233,${.55 * state.ensoA})`); }
+  gsap.set('.build__logo .lc__word', { clipPath: 'inset(0 100% 0 0)' });
+  gsap.set('.build__logo .lc__kanji svg', { opacity: 0, filter: 'blur(6px)' });
+  gsap.set('.build__logo .lc__casa', { opacity: 0, letterSpacing: '.4em' });
   const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: {
     trigger: sec, start: 'top top', end: 'bottom bottom', scrub: 1,
     onUpdate: (s) => {
-      const p = s.progress; const step = p < .2 ? 0 : p < .5 ? 1 : p < .72 ? 2 : 3;
+      const p = s.progress; const step = p < .18 ? 0 : p < .55 ? 1 : p < .74 ? 2 : 3;
       items.forEach((li, i) => li.classList.toggle('is-active', i === step));
       num.textContent = String(step).padStart(2, '0');
-      sec.classList.toggle('is-red', p > .93);
+      sec.classList.toggle('is-red', p > .94);
     },
   } });
-  tl.to('.build__circle circle:first-child', { strokeDashoffset: 0, duration: 1.2 }, 0)
-    .fromTo('.build__circle-dot', { rotate: 0 }, { rotate: 360, duration: 1.4 }, 0)
-    .to('.build__koi--l', { '--a': '370deg', duration: 1.4 }, 1.1)
-    .to('.build__koi--r', { '--a': '370deg', duration: 1.4 }, 1.5)
-    .to('.build__circle', { opacity: .25, duration: .4 }, 2.6)
-    .to('.build__word .letter', { yPercent: 0, opacity: 1, filter: 'blur(0px)', stagger: .14, duration: .6 }, 3.1)
-    .to('.build__kanji svg', { opacity: 1, y: 0, stagger: .14, duration: .4 }, 4.3)
-    .to('.build__casa', { clipPath: 'inset(0 0% 0 0)', duration: .7 }, 4.9)
-    .fromTo('.build__ink', { opacity: 0, scale: .6 }, { opacity: 1, scale: 1.2, duration: .5 }, 5.6)
-    .to('.build__circle', { opacity: 0, duration: .3 }, 5.7)
-    .to('.build__stage', { scale: 1.05, duration: .6 }, 5.6);
+  tl.to(state, { enso: 1, duration: 1.2, onUpdate: () => drawEnso(state.enso) }, 0)
+    .to(state, { koi: 1, duration: 2.4, onUpdate: () => koi.render(state.koi) }, 1.2)
+    .to(state, { ensoA: 0, duration: .6, onUpdate: () => drawEnso(state.enso) }, 3.2)
+    .to('.build__logo .lc__word', { clipPath: 'inset(0 0% 0 0)', duration: .9 }, 3.8)
+    .to('.build__logo .lc__kanji svg', { opacity: 1, filter: 'blur(0px)', stagger: .12, duration: .4 }, 4.8)
+    .to('.build__logo .lc__casa', { opacity: 1, letterSpacing: '0em', duration: .6 }, 5.3)
+    .to('.build__stage', { scale: 1.04, duration: .6 }, 5.9);
+  // fundo vermelho no fim: o símbolo vira branco (versão negativa)
+  ScrollTrigger.create({ trigger: sec, start: 'top top', end: 'bottom bottom', onUpdate: (s) => { const red = s.progress > .94; if (red !== koi._red) { koi._red = red; koi.setColor(red ? '#ffffff' : '#bc1621'); } } });
 })();
 
 /* ---------------- Versões ---------------- */
@@ -322,6 +315,26 @@ ScrollTrigger.create({
     } catch (err) { console.warn('Estúdio 3D indisponível', err); }
   }),
 });
+
+/* ---------------- Padronagem ---------------- */
+(function patternLab() {
+  const stage = $('#pattern-stage'), label = $('#pattern-label'), scale = $('#pattern-scale');
+  const apply = (b) => {
+    for (const k of ['bg', 'fg', 'ink', 'koi']) stage.style.setProperty(`--p-${k}`, b.dataset[k]);
+    label.textContent = b.dataset.name;
+    $$('.pswatch').forEach((x) => { const on = x === b; x.classList.toggle('is-active', on); x.setAttribute('aria-pressed', on); });
+  };
+  $$('.pswatch').forEach((b) => b.addEventListener('click', () => apply(b)));
+  apply($('.pswatch.is-active'));
+  const setScale = () => stage.style.setProperty('--p-size', `${scale.value}px`);
+  scale.addEventListener('input', setScale); setScale();
+  // a correnteza corre devagar; o cursor ilumina o pattern por onde passa
+  let t = 0;
+  gsap.ticker.add((_, dt) => { t += dt / 1000; stage.style.setProperty('--p-x', `${t * 14}px`); stage.style.setProperty('--p-y', `${Math.sin(t * .3) * 20}px`); });
+  stage.addEventListener('pointermove', (e) => { const r = stage.getBoundingClientRect(); stage.style.setProperty('--lx', `${e.clientX - r.left}px`); stage.style.setProperty('--ly', `${e.clientY - r.top}px`); stage.classList.add('is-lit'); });
+  stage.addEventListener('pointerleave', () => stage.classList.remove('is-lit'));
+  gsap.from('.patternsec__apps figure', { y: 80, opacity: 0, stagger: .12, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.patternsec__apps', start: 'top 88%' } });
+})();
 
 /* ---------------- Galeria: filtros + lightbox ---------------- */
 const grid = $('#gallery-grid');
