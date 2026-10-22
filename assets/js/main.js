@@ -2,8 +2,7 @@ import { mountBrand } from './brand.js';
 import { KoiPainter } from './koi-painter.js';
 import { initInk } from './hero-ink.js';
 import { initJourney } from './journey.js';
-import { initConcept } from './concept-scene.js';
-import { makeStroke, drawStroke, sample, taper } from './sumi.js';
+import { initLegend } from './legend.js';
 
 const { gsap, ScrollTrigger, Lenis } = window;
 gsap.registerPlugin(ScrollTrigger);
@@ -77,7 +76,7 @@ const minTime = new Promise((r) => setTimeout(r, 1200));
 
 /* ---------------- Abertura: a marca pintada em sumi-ê ---------------- */
 const heroKoi = new KoiPainter($('#hero-koi'), { color: '#bc1621' });
-initInk($('#hero-ink'));
+initInk($('#hero-ink'), { color: '233,229,222' });
 const heroState = { p: 0 };
 const heroLetters = $('.hero__logo .lc__word'), heroKanji = $$('.hero__logo .lc__kanji svg');
 function paintHero() {
@@ -176,92 +175,45 @@ $$('[data-parallax]').forEach((el) => {
   gsap.fromTo(el, { yPercent: -v }, { yPercent: v, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
 });
 
-/* ---------------- Abertura no scroll: a tinta toma o papel ---------------- */
-gsap.to('#hero-logo', { scale: .78, yPercent: -6, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom bottom', scrub: true } });
-gsap.to('.credit, .hero__bottom, .hero__top', { opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: '15% top', end: '40% top', scrub: true } });
-gsap.fromTo('.hero__flood', { yPercent: 100 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: '30% top', end: 'bottom bottom', scrub: true } });
-
-/* ---------------- Manifesto ---------------- */
-gsap.from('.manifesto__hero', { clipPath: 'inset(12% 12% 12% 12%)', ease: 'none', scrollTrigger: { trigger: '.manifesto', start: 'top 85%', end: 'top 15%', scrub: true } });
+/* ---------------- Abertura no scroll ---------------- */
+gsap.to('#hero-logo', { scale: .8, yPercent: -8, opacity: .15, ease: 'none', scrollTrigger: { trigger: '.hero', start: '20% top', end: 'bottom bottom', scrub: true } });
+gsap.to('.credit, .hero__bottom, .hero__top', { opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: '10% top', end: '35% top', scrub: true } });
 $$('.pattern-bg').forEach((el) => gsap.fromTo(el, { backgroundPositionY: '0px' }, { backgroundPositionY: '-260px', ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
 
-/* ---------------- História: o cometa do Japão ao Brasil ---------------- */
+/* ---------------- A lenda: manifesto + conceito constroem o logotipo ---------------- */
+(function legend() {
+  const root = $('#lenda'), L = initLegend(root);
+  ScrollTrigger.create({ trigger: root, start: 'top top', end: 'bottom bottom', onUpdate: (st) => L.update(st.progress) });
+})();
+
+/* ---------------- Travessia: o cometa do Japão ao Brasil, depois a linha do tempo ---------------- */
 (function journey() {
-  const j = initJourney({ mapEl: $('#journey-map'), canvas: $('#journey-trail') });
+  const sec = $('.journey'), j = initJourney({ mapEl: $('#journey-map'), canvas: $('#journey-trail') });
   const steps = $$('.jstep'), bar = $('#journey-bar');
-  let active = -1;
+  const track = $('#tl-track'), items = $$('.tl__item'), line = $('#tl-line');
+  let active = -1, tlActive = -1;
+  const T0 = .5; // a linha do tempo entra depois do pouso
+  function place(i) {
+    // centraliza o card ativo
+    const it = items[i], vw = innerWidth;
+    const x = Math.min(0, vw / 2 - (it.offsetLeft + it.offsetWidth / 2));
+    gsap.to(track, { x, duration: .9, ease: 'expo.out' });
+  }
   ScrollTrigger.create({
-    trigger: '.journey', start: 'top top', end: 'bottom bottom', scrub: true,
+    trigger: sec, start: 'top top', end: 'bottom bottom', scrub: true,
     onUpdate: (st) => {
       const p = st.progress; j.setProgress(p);
       bar.style.transform = `scaleX(${Math.min(1, p / .4)})`;
       let i = 0; steps.forEach((s, k) => { if (p >= +s.dataset.at) i = k; });
       if (i !== active) { steps.forEach((s, k) => s.classList.toggle('is-active', k === i)); active = i; }
+      sec.classList.toggle('is-timeline', p >= T0);
+      const q = Math.max(0, (p - T0) / (1 - T0 - .03));
+      line.style.transform = `scaleX(${Math.min(1, q)})`;
+      const ti = Math.min(items.length - 1, Math.floor(q * items.length));
+      if (p >= T0 && ti !== tlActive) { tlActive = ti; items.forEach((it, k) => { it.classList.toggle('is-active', k === ti); it.classList.toggle('is-past', k < ti); }); place(ti); }
     },
   });
-})();
-
-/* ---------------- Conceito: paisagem em paralaxe ---------------- */
-(function concept() {
-  const root = $('#concept-scene'), lines = $$('.concept__line');
-  const scene = initConcept(root);
-  root.addEventListener('scene', (e) => lines.forEach((l) => l.classList.toggle('is-on', +l.dataset.at === e.detail.line)));
-  ScrollTrigger.create({ trigger: '.concept', start: 'top top', end: 'bottom bottom', scrub: true, onUpdate: (st) => scene.setProgress(st.progress) });
-})();
-
-/* ---------------- Carpas ---------------- */
-(function koi() {
-  const sec = $('.koi'), stage = $('.koi__stage');
-  const set = (f) => { sec.classList.toggle('focus-sobe', f === 'sobe'); sec.classList.toggle('focus-desce', f === 'desce'); };
-  $$('[data-fish-trigger]').forEach((el) => { el.addEventListener('pointerenter', () => set(el.dataset.fishTrigger)); el.addEventListener('pointerleave', () => set(null)); el.addEventListener('click', () => set(el.dataset.fishTrigger)); });
-  const rx = gsap.quickTo(stage, 'rotationY', { duration: 1, ease: 'power3.out' }), ry = gsap.quickTo(stage, 'rotationX', { duration: 1, ease: 'power3.out' });
-  gsap.set(stage, { transformPerspective: 1000 });
-  stage.addEventListener('pointermove', (e) => {
-    const r = stage.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-    set(x > .5 ? 'sobe' : 'desce'); rx((x - .5) * 18); ry(-(y - .5) * 18);
-  });
-  stage.addEventListener('pointerleave', () => { set(null); rx(0); ry(0); });
-  gsap.fromTo('.koi__fish--desce', { xPercent: -30, yPercent: 20, rotate: -40, opacity: 0 }, { xPercent: 0, yPercent: 0, rotate: 0, opacity: 1, ease: 'none', scrollTrigger: { trigger: sec, start: 'top 85%', end: 'center center', scrub: 1 } });
-  gsap.fromTo('.koi__fish--sobe', { xPercent: 30, yPercent: -20, rotate: -40, opacity: 0 }, { xPercent: 0, yPercent: 0, rotate: 0, opacity: 1, ease: 'none', scrollTrigger: { trigger: sec, start: 'top 85%', end: 'center center', scrub: 1 } });
-  gsap.from('.koi__side', { opacity: 0, y: 60, stagger: .2, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: sec, start: 'top 55%' } });
-})();
-
-/* ---------------- Construção da marca ---------------- */
-(function build() {
-  const sec = $('.build'); const items = $$('.build__list li'); const num = $('#build-num');
-  const koi = new KoiPainter($('#build-koi'), { color: '#bc1621' });
-  // o círculo do cometa: um ensō traçado num único gesto
-  const enso = $('#build-enso'), ectx = enso.getContext('2d');
-  let ensoStroke = null, E = 0;
-  const ensoResize = () => {
-    const pr = Math.min(devicePixelRatio || 1, 2); E = enso.clientWidth; enso.width = enso.height = E * pr; ectx.setTransform(pr, 0, 0, pr, 0, 0);
-    const r = E * .4, c = E / 2;
-    ensoStroke = makeStroke(sample((t) => { const a = (-100 + t * 335) * Math.PI / 180; return { x: c + Math.cos(a) * r * (1 + t * .02), y: c + Math.sin(a) * r }; }, (t) => E * .05 * taper(t, .04, .35), 360), { bristles: 30, seed: 77, dry: .9, thin: .09 });
-  };
-  new ResizeObserver(() => { ensoResize(); drawEnso(state.enso); }).observe(enso); ensoResize();
-  const state = { enso: 0, ensoA: 1, koi: 0 };
-  function drawEnso(p) { ectx.clearRect(0, 0, E, E); if (p > 0) drawStroke(ectx, ensoStroke, p, `rgba(233,233,233,${.55 * state.ensoA})`); }
-  gsap.set('.build__logo .lc__word', { clipPath: 'inset(0 100% 0 0)' });
-  gsap.set('.build__logo .lc__kanji svg', { opacity: 0, filter: 'blur(6px)' });
-  gsap.set('.build__logo .lc__casa', { opacity: 0, letterSpacing: '.4em' });
-  const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: {
-    trigger: sec, start: 'top top', end: 'bottom bottom', scrub: 1,
-    onUpdate: (s) => {
-      const p = s.progress; const step = p < .18 ? 0 : p < .55 ? 1 : p < .74 ? 2 : 3;
-      items.forEach((li, i) => li.classList.toggle('is-active', i === step));
-      num.textContent = String(step).padStart(2, '0');
-      sec.classList.toggle('is-red', p > .94);
-    },
-  } });
-  tl.to(state, { enso: 1, duration: 1.2, onUpdate: () => drawEnso(state.enso) }, 0)
-    .to(state, { koi: 1, duration: 2.4, onUpdate: () => koi.render(state.koi) }, 1.2)
-    .to(state, { ensoA: 0, duration: .6, onUpdate: () => drawEnso(state.enso) }, 3.2)
-    .to('.build__logo .lc__word', { clipPath: 'inset(0 0% 0 0)', duration: .9 }, 3.8)
-    .to('.build__logo .lc__kanji svg', { opacity: 1, filter: 'blur(0px)', stagger: .12, duration: .4 }, 4.8)
-    .to('.build__logo .lc__casa', { opacity: 1, letterSpacing: '0em', duration: .6 }, 5.3)
-    .to('.build__stage', { scale: 1.04, duration: .6 }, 5.9);
-  // fundo vermelho no fim: o símbolo vira branco (versão negativa)
-  ScrollTrigger.create({ trigger: sec, start: 'top top', end: 'bottom bottom', onUpdate: (s) => { const red = s.progress > .94; if (red !== koi._red) { koi._red = red; koi.setColor(red ? '#ffffff' : '#bc1621'); } } });
+  addEventListener('resize', () => { if (tlActive >= 0) place(tlActive); });
 })();
 
 /* ---------------- Versões ---------------- */
@@ -302,19 +254,47 @@ $$('.swatch').forEach((s) => s.addEventListener('click', async () => {
 gsap.from('.swatch', { yPercent: 40, opacity: 0, stagger: .1, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.colors__row', start: 'top 85%' } });
 gsap.from('.pillar', { y: 100, opacity: 0, stagger: .12, duration: 1.3, ease: 'expo.out', scrollTrigger: { trigger: '.pillars__grid', start: 'top 85%' } });
 
-/* ---------------- Estúdio 3D (lazy) ---------------- */
-ScrollTrigger.create({
-  trigger: '.studio', start: 'top 150%', once: true,
-  onEnter: () => import('./studio3d.js').then(async ({ initStudio }) => {
-    try {
-      const studio = await initStudio($('#studio-gl'), { tip: $('#studio-tip') });
-      $$('[data-object]').forEach((b) => b.addEventListener('click', () => {
-        $$('[data-object]').forEach((x) => x.classList.toggle('is-active', x === b));
-        studio.show(b.dataset.object);
-      }));
-    } catch (err) { console.warn('Estúdio 3D indisponível', err); }
-  }),
+/* ---------------- Aplicações: um palco 3D por categoria (carregado perto da tela) ---------------- */
+$$('.appcat').forEach((sec) => {
+  const canvas = $('canvas[data-stage]', sec), tip = $('.appcat__tip', sec), btns = $$('.aobj', sec);
+  ScrollTrigger.create({
+    trigger: sec, start: 'top 160%', once: true,
+    onEnter: () => import('./studio3d.js').then(async ({ createStage }) => {
+      try {
+        const st = await createStage(canvas, canvas.dataset.stage.split(','), { tip });
+        btns.forEach((b) => b.addEventListener('click', () => {
+          btns.forEach((x) => { const on = x === b; x.classList.toggle('is-active', on); x.setAttribute('aria-pressed', on); });
+          st.show(+b.dataset.obj);
+        }));
+      } catch (err) { console.warn('3D indisponível', err); tip.textContent = 'Visualização 3D indisponível neste navegador'; }
+    }),
+  });
+  gsap.from($$('.aphoto', sec), { y: 80, opacity: 0, stagger: .08, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: $('.appcat__photos', sec), start: 'top 85%' } });
+  gsap.from($('.appcat__head', sec).children, { y: 50, opacity: 0, stagger: .1, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: sec, start: 'top 80%' } });
 });
+
+/* ---------------- Tipografia: teste de hierarquia ---------------- */
+(function typetester() {
+  const input = $('#tt-text'), out = $('#tt-out'), size = $('#tt-size'), spec = $('#tt-spec');
+  const styles = {
+    display: { size: 72, info: [['Fonte', 'Kalnia Bold'], ['Caixa', 'Alta'], ['Entrelinha', '1,05'], ['Uso', 'Títulos e aberturas']] },
+    sub: { size: 28, info: [['Fonte', 'Barlow Bold'], ['Caixa', 'Alta'], ['Espaçamento', '+10%'], ['Uso', 'Subtítulos']] },
+    label: { size: 18, info: [['Fonte', 'Barlow Medium'], ['Caixa', 'Alta'], ['Espaçamento', '+32%'], ['Uso', 'Assinaturas e rótulos']] },
+    body: { size: 18, info: [['Fonte', 'Barlow Medium'], ['Caixa', 'Mista'], ['Entrelinha', '1,6'], ['Uso', 'Texto corrido']] },
+  };
+  const render = () => { out.textContent = input.value || ' '; out.style.fontSize = `${size.value}px`; };
+  const pick = (k) => {
+    out.dataset.tt = k; size.value = styles[k].size;
+    spec.innerHTML = styles[k].info.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('') + `<div><dt>Tamanho</dt><dd id="tt-px">${size.value}px</dd></div>`;
+    $$('.ttopt').forEach((b) => { const on = b.dataset.tt === k; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on); });
+    render();
+  };
+  $$('.ttopt').forEach((b) => b.addEventListener('click', () => pick(b.dataset.tt)));
+  input.addEventListener('input', render);
+  size.addEventListener('input', () => { render(); const px = $('#tt-px'); if (px) px.textContent = `${size.value}px`; });
+  pick('display');
+  gsap.from('.tcardx', { y: 70, opacity: 0, stagger: .1, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.typo__grid', start: 'top 85%' } });
+})();
 
 /* ---------------- Padronagem ---------------- */
 (function patternLab() {
@@ -336,22 +316,7 @@ ScrollTrigger.create({
   gsap.from('.patternsec__apps figure', { y: 80, opacity: 0, stagger: .12, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.patternsec__apps', start: 'top 88%' } });
 })();
 
-/* ---------------- Galeria: filtros + lightbox ---------------- */
-const grid = $('#gallery-grid');
-const gitems = $$('.gitem', grid);
-gitems.forEach((g, i) => gsap.from(g, { y: 100, opacity: 0, duration: 1.3, ease: 'expo.out', delay: (i % 3) * .08, scrollTrigger: { trigger: g, start: 'top 92%', once: true } }));
-$$('.gfilter').forEach((b) => b.addEventListener('click', () => {
-  const cat = b.dataset.filter;
-  $$('.gfilter').forEach((x) => { const on = x === b; x.classList.toggle('is-active', on); x.setAttribute('aria-pressed', on); });
-  gsap.to(grid, { opacity: 0, y: 20, duration: .3, ease: 'power2.in', onComplete: () => {
-    gitems.forEach((g) => { g.hidden = cat !== 'todos' && g.dataset.cat !== cat; gsap.set(g, { clearProps: 'opacity,transform' }); });
-    grid.classList.toggle('is-filtered', cat !== 'todos');
-    ScrollTrigger.refresh();
-    gsap.to(grid, { opacity: 1, y: 0, duration: .6, ease: 'expo.out' });
-    gsap.from(gitems.filter((g) => !g.hidden), { scale: .94, opacity: 0, duration: .8, stagger: .04, ease: 'expo.out' });
-  } });
-}));
-
+/* ---------------- Lightbox: navega entre as imagens da mesma seção ---------------- */
 const lb = $('#lightbox'), lbImg = $('img', lb), lbCap = $('.lightbox__cap', lb);
 let lbList = [], lbIndex = 0;
 const showLb = (i) => {
@@ -362,7 +327,7 @@ const showLb = (i) => {
   gsap.fromTo(lbImg, { opacity: 0, scale: .97 }, { opacity: 1, scale: 1, duration: .5, ease: 'expo.out' });
 };
 const openLb = (f) => {
-  lbList = $$('[data-lightbox]').filter((x) => !x.hidden);
+  lbList = $$('[data-lightbox]', f.closest('section') || document);
   showLb(lbList.indexOf(f));
   lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false'); lenis?.stop();
 };

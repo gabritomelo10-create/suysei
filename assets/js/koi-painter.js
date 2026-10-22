@@ -36,8 +36,8 @@ export class KoiPainter {
       { s: arc(84, -112, .30, .40, .02, 7), from: .3, to: .82 },
       { s: arc(78, -104, .35, .22, .015, 11), from: .4, to: .88 },
     ];
-    this.ready = loadAssets().then(([mask, inkImg]) => { this.tinted = this.tint(mask, inkImg); this.resize(); this.render(this.p < 0 ? 0 : this.p, true); });
-    new ResizeObserver(() => { this.resize(); this.render(this.p, true); }).observe(canvas);
+    this.ready = loadAssets().then(([mask, inkImg]) => { this.tinted = this.tint(mask, inkImg); this.resize(); if (this._last) { this._k = null; this.paint(...this._last); } else this.render(this.p < 0 ? 0 : this.p, true); });
+    new ResizeObserver(() => { this.resize(); if (this._last) { this._k = null; this.paint(...this._last); } else this.render(this.p, true); }).observe(canvas);
   }
   tint(mask, inkImg) {
     const c = mk(), x = c.getContext('2d');
@@ -65,6 +65,20 @@ export class KoiPainter {
     }
     // no fim a tinta assenta e o símbolo fica completo, exatamente como o original
     const fill = clamp01((p - .84) / .16);
+    if (fill > 0) { m.globalAlpha = fill * fill; m.fillRect(0, 0, N, N); m.globalAlpha = 1; }
+    const c = this.ctx, S = this.canvas.width;
+    c.globalCompositeOperation = 'copy'; c.drawImage(this.mask, 0, 0, S, S);
+    c.globalCompositeOperation = 'source-in'; c.drawImage(this.tinted, 0, 0, S, S);
+    c.globalCompositeOperation = 'source-over';
+  }
+  // controle por carpa (narrativa da lenda): l = carpa que desce, r = carpa que sobe, fill = tinta assentada
+  paint(l, r, fill = 0) {
+    this._last = [l, r, fill];
+    if (!this.tinted) return;
+    const key = `${l.toFixed(3)}|${r.toFixed(3)}|${fill.toFixed(3)}`; if (key === this._k) return; this._k = key;
+    const m = this.mctx; m.clearRect(0, 0, N, N);
+    const k = [l, Math.max(0, l * 1.15 - .15), r, Math.max(0, r * 1.15 - .15)];
+    this.strokes.forEach((st, i) => { const v = ease(clamp01(k[i])); if (v > 0) drawStroke(m, st.s, v, '#000'); });
     if (fill > 0) { m.globalAlpha = fill * fill; m.fillRect(0, 0, N, N); m.globalAlpha = 1; }
     const c = this.ctx, S = this.canvas.width;
     c.globalCompositeOperation = 'copy'; c.drawImage(this.mask, 0, 0, S, S);

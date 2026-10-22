@@ -41,11 +41,11 @@
       <span class="nav__word" data-wordmark></span>
     </a>
     <nav class="nav__links" aria-label="Seções">
-      <a href="#manifesto" data-magnetic>Manifesto</a>
-      <a href="#historia" data-magnetic>História</a>
-      <a href="#conceito" data-magnetic>Conceito</a>
-      <a href="#construcao" data-magnetic>Logotipo</a>
+      <a href="#lenda" data-magnetic>A lenda</a>
+      <a href="#historia" data-magnetic>Travessia</a>
+      <a href="#versoes" data-magnetic>Logotipo</a>
       <a href="#cores" data-magnetic>Cores</a>
+      <a href="#tipografia" data-magnetic>Tipografia</a>
       <a href="#padronagem" data-magnetic>Pattern</a>
       <a href="#aplicacoes" data-magnetic>Aplicações</a>
     </nav>
@@ -54,7 +54,7 @@
 
   <main id="smooth">
 
-    <!-- ============ 1. ABERTURA — pintura sumi-ê ============ -->
+    <!-- ============ 1. ABERTURA — pintura sumi-ê sobre o escuro ============ -->
     <section class="hero" id="hero">
       <div class="hero__sticky">
         <canvas class="hero__ink" id="hero-ink" aria-hidden="true"></canvas>
@@ -81,46 +81,47 @@
           <p class="hero__hint">Mova o cursor para pintar · clique para respingar tinta</p>
           <div class="scroll-hint" aria-hidden="true"><span></span>Role para descobrir</div>
         </div>
-        <div class="hero__flood" aria-hidden="true"></div>
       </div>
     </section>
 
-    <!-- ============ 2. FRASE ============ -->
-    <section class="quote" id="intro">
-      <div class="quote__pattern pattern-bg" aria-hidden="true"></div>
-      <h2 class="quote__text" data-word-reveal>
-        <span class="r">Algumas</span> histórias <span class="r">parecem</span> <span class="r">ter sido</span> escritas <span class="r">muito antes de acontecerem.</span>
-      </h2>
-      <p class="quote__sign">— Manifesto Suysei</p>
-    </section>
-
-    <!-- ============ 3. MANIFESTO ============ -->
-    <section class="manifesto" id="manifesto">
-      <div class="manifesto__pattern pattern-bg" aria-hidden="true"></div>
-      <figure class="manifesto__hero">
-        <div class="manifesto__hero-img" data-parallax="-8"><img src="assets/img/story/tetsuo-retrato.webp" alt="Tetsuo Takeno de dólmã branco, braços cruzados e sorrindo no salão do Suysei" width="1300" height="1823"></div>
-        <figcaption><b>Tetsuo Takeno</b>À frente da casa</figcaption>
-      </figure>
-      <div class="manifesto__body">
-        <span class="eyebrow">02 — Manifesto</span>
-        <h2 class="manifesto__title" data-split-chars>Manifesto</h2>
-        <p class="manifesto__lead" data-reveal>Há histórias que parecem ter sido escritas muito antes de acontecerem.</p>
-        <div class="manifesto__cols">
-          <p data-reveal>A de Suysei começa numa feira, em São Paulo, em 1974, muito antes de existir um restaurante, uma placa dourada ou um cardápio. Começa com duas mãos que cozinhavam em casa, e que aos poucos, prato a prato, foram transformando um hábito familiar em um destino.</p>
-          <p data-reveal>O nome que herdamos dessa história (<b>Suysei, cometa</b>) não é um adorno. É uma declaração. Foi assim que uma família saiu do Japão e chegou ao Brasil: sem mapa pronto, mas com a certeza de que valia a pena percorrer a distância.</p>
-          <p data-reveal>E toda travessia difícil exige a mesma coragem de outra criatura sagrada da cultura japonesa: a <b>carpa</b> que nada contra a correnteza, sobe a cachoeira mais alta e, só então, se torna dragão. Suysei é o encontro dessas duas forças, reunidas numa única marca, num único traço.</p>
-          <p data-reveal>Este guia não existe para engessar essa história. Existe para que ela nunca se perca, em cada aplicação, em cada peça, em cada prato que sai da cozinha.</p>
+    <!-- ============ 2. A LENDA — manifesto + conceito, o logotipo construído pela narrativa ============ -->
+    <section class="legend" id="lenda">
+      <div class="legend__pin">
+        <div class="legend__pattern pattern-bg" aria-hidden="true"></div>
+        <div class="legend__glow" aria-hidden="true"></div>
+        <div class="legend__copy">
+          <span class="eyebrow">02 — Manifesto e conceito</span>
+          <ol class="legend__chapters">
+            <li class="lchap is-active"><span class="lchap__k">Manifesto</span><h2>Há histórias que parecem ter sido escritas muito antes de acontecerem.</h2><p>Este guia não existe para engessar essa história. Existe para que ela nunca se perca, em cada aplicação, em cada peça, em cada prato que sai da cozinha.</p></li>
+            <li class="lchap"><span class="lchap__k">1974 · São Paulo</span><h2>Duas mãos que cozinhavam em casa.</h2><p>A de Suysei começa numa feira, em São Paulo, muito antes de existir um restaurante, uma placa dourada ou um cardápio. Prato a prato, um hábito familiar virou destino.</p></li>
+            <li class="lchap"><span class="lchap__k">彗星 · Suysei significa cometa</span><h2>A força que cruza o universo.</h2><p>Um cometa não pede licença para atravessar o céu: ele cruza o escuro com uma trajetória própria, e onde pousa, deixa luz. Foi assim que uma família saiu do Japão e chegou ao Brasil.</p></li>
+            <li class="lchap"><span class="lchap__k">A lenda da carpa</span><h2>A perseverança que vence as correntezas.</h2><p>Conta a lenda que apenas as carpas mais destemidas conseguem nadar contra as correntezas mais fortes. E a que sobe a mais alta cachoeira se transforma em um imponente e celestial dragão.</p></li>
+            <li class="lchap"><span class="lchap__k">A carpa que sobe</span><h2>A perseverança e a prosperidade.</h2><p>O calor e a força do cometa: o trabalho duro, as dificuldades vencidas no Brasil, a coragem de nunca desistir. Ela diz que todo o esforço valeu a pena.</p></li>
+            <li class="lchap"><span class="lchap__k">A carpa que desce</span><h2>O legado e as raízes.</h2><p>A essência do cometa, o núcleo de onde tudo se originou. Volta-se para baixo como lembrete de honra e gratidão aos antepassados, ao Japão e à família.</p></li>
+            <li class="lchap"><span class="lchap__k">O símbolo</span><h2>Duas carpas desenham o cometa.</h2><p>Em movimento contínuo, as formas fluidas das carpas desenham, juntas, a cauda luminosa do próprio cometa. A ilustração é feita em traço sumi-ê.</p></li>
+            <li class="lchap"><span class="lchap__k">O wordmark</span><h2>Suysei, a assinatura da família.</h2><p>Tipografia sólida, em caixa alta, com peso forte e cortes retos que transmitem disciplina e presença. As letras atravessam o desenho das carpas.</p></li>
+            <li class="lchap"><span class="lchap__k">A assinatura bilíngue</span><h2>O cometa que encontrou seu lugar.</h2><p>“Casa de Refeição Japonesa” e os caracteres 日本料理店 completam a marca: a raiz que nunca se traduz por completo.</p></li>
+          </ol>
         </div>
-        <blockquote class="manifesto__quote" data-reveal>Um cometa não pede licença para atravessar o céu: ele cruza o escuro com uma trajetória própria, e onde pousa, deixa luz.</blockquote>
-      </div>
-      <div class="manifesto__strip">
-        <figure class="manifesto__photo manifesto__photo--bw" data-tilt><div data-parallax="-6"><img src="assets/img/story/tetsuo-bw.webp" alt="Tetsuo Takeno finalizando um prato, em preto e branco" loading="lazy"></div><figcaption>O ofício</figcaption></figure>
-        <figure class="manifesto__photo" data-tilt><div data-parallax="-6"><img src="assets/img/story/salmao.webp" alt="Fatias de salmão empilhadas em uma travessa escura" loading="lazy"></div><figcaption>O pescado, carro-chefe da casa</figcaption></figure>
-        <p class="manifesto__sign" data-reveal>Uma história que atravessou gerações.<br>Uma marca preparada para atravessar o tempo.</p>
+        <div class="legend__stage" aria-hidden="true">
+          <figure class="legend__photo" id="legend-photo"><img src="assets/img/story/tetsuo-retrato.webp" alt="" width="1300" height="1823"><figcaption>Tetsuo Takeno · à frente da casa</figcaption></figure>
+          <div class="legend__logo lc">
+            <div class="legend__fall" id="legend-fall"><canvas></canvas></div>
+            <div class="lc__koi legend__orbit"><canvas id="legend-orbit"></canvas><span class="legend__comet" id="legend-comet"></span></div>
+            <canvas class="lc__koi" id="legend-koi"></canvas>
+            <span class="lc__koi legend__climber" id="legend-climber"></span>
+            <span class="lc__word" data-wordmark></span>
+            <span class="lc__kanji" data-kanji-chars></span>
+            <span class="lc__casa" data-casa></span>
+          </div>
+        </div>
+        <nav class="legend__nav" aria-label="Capítulos da lenda">
+          <button>Manifesto</button><button>1974</button><button>Cometa</button><button>A lenda</button><button>Sobe</button><button>Desce</button><button>Símbolo</button><button>Wordmark</button><button>Assinatura</button>
+        </nav>
       </div>
     </section>
 
-    <!-- ============ 4. HISTÓRIA — o cometa do Japão ao Brasil ============ -->
+    <!-- ============ 3. A TRAVESSIA — o cometa do Japão ao Brasil, depois a linha do tempo ============ -->
     <section class="journey" id="historia">
       <div class="journey__pin">
         <div class="journey__map" id="journey-map" aria-hidden="true"></div>
@@ -145,113 +146,18 @@
             <h3>Onde pousa, deixa luz</h3>
             <p>A chegada a um novo mundo exige coragem. É aqui que o cometa encontra seu lugar.</p>
           </li>
-          <li class="jstep jstep--photo" data-at=".52">
-            <span class="jstep__k">1974</span>
-            <img src="assets/img/story/h-1974.webp" alt="Feira livre em São Paulo, em 1974" loading="lazy">
-            <h3>Uma feira em São Paulo</h3>
-            <p>Tudo começa longe de um restaurante: numa feira, com um casal que cozinha em casa, com as próprias mãos, para a própria família.</p>
-          </li>
-          <li class="jstep jstep--photo" data-at=".62">
-            <span class="jstep__k">Os primeiros passos</span>
-            <img src="assets/img/story/h-primeiros.webp" alt="O casal fundador vestido com quimonos, sob cerejeiras" loading="lazy">
-            <h3>A virada para o japonês</h3>
-            <p>A cozinha da família encontra suas raízes: a culinária japonesa, feita com a disciplina e o cuidado de quem a aprendeu em casa.</p>
-          </li>
-          <li class="jstep jstep--photo" data-at=".72">
-            <span class="jstep__k">Take away</span>
-            <img src="assets/img/story/h-takeaway.webp" alt="Balcão de sushi para viagem com a placa “Sushi de qualidade para todos! 1974”" loading="lazy">
-            <h3>O nascimento do take away</h3>
-            <p>Para popularizar o sushi, a mãe cria o hábito do take away. A procura cresce, e o que era um hábito familiar vira um negócio.</p>
-          </li>
-          <li class="jstep jstep--photo" data-at=".82">
-            <span class="jstep__k">O nome</span>
-            <img src="assets/img/story/h-nome.webp" alt="Duas crianças da família em foto antiga em sépia" loading="lazy">
-            <h3>Suysei, o cometa</h3>
-            <p>O pai escolhe o nome. Suysei significa cometa: uma homenagem à própria travessia da família, com direção, luz e determinação.</p>
-          </li>
-          <li class="jstep jstep--photo" data-at=".91">
-            <span class="jstep__k">Hoje</span>
-            <img src="assets/img/story/h-hoje.webp" alt="Tetsuo segurando bandejas de sushi e sashimi no salão do Suysei" loading="lazy">
-            <h3>Original, não gourmet</h3>
-            <p>O pescado é o carro-chefe da casa. A cozinha não busca ser gourmet: busca ser original, feita por um japonês de verdade, com raízes na tradição.</p>
-          </li>
         </ol>
-        <div class="journey__progress" aria-hidden="true"><span class="journey__from">Tóquio</span><i><b id="journey-bar"></b></i><span class="journey__to">São Paulo</span></div>
-      </div>
-    </section>
-
-    <!-- ============ 5. CONCEITO — paisagem sumi-ê em paralaxe ============ -->
-    <section class="concept" id="conceito">
-      <div class="concept__sticky">
-        <div class="concept__scene" id="concept-scene" aria-hidden="true"></div>
-        <div class="concept__copy">
-          <span class="eyebrow">04 — Conceito central</span>
-          <p class="concept__line" data-at="0">A força que cruza o universo.</p>
-          <p class="concept__line" data-at="1">A perseverança que vence as correntezas.</p>
-          <p class="concept__line concept__line--end" data-at="2">O cometa que encontrou seu lugar.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="concept-text">
-      <div class="concept-text__grid">
-        <div>
-          <span class="eyebrow">O cometa que encontrou seu lugar</span>
-          <h2 class="display" data-split-chars>Conceito</h2>
-        </div>
-        <div class="concept-text__cols">
-          <p data-reveal>O nome Suysei carrega a força e a luz de um cometa, e essa não é uma escolha decorativa, é a metáfora exata da história desta família. Ao deixar o Japão, eles iniciaram uma travessia que rompeu fronteiras, cruzando o mundo como um cometa que atravessa o céu escuro em busca de um novo destino.</p>
-          <p data-reveal>Mas chegar a um novo mundo exige coragem. E é aqui que o cometa Suysei se funde a um dos símbolos mais sagrados da cultura japonesa: a lenda da carpa dourada. Conta a lenda que apenas as carpas mais destemidas conseguem nadar contra as correntezas mais fortes — e a que sobe a mais alta cachoeira se transforma em um imponente e celestial dragão.</p>
-          <p data-reveal class="lead">Por isso, o coração da marca é formado por duas carpas em movimento contínuo, cujas formas fluidas desenham, juntas, a cauda luminosa do próprio cometa.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ 6. AS DUAS CARPAS ============ -->
-    <section class="koi" id="carpas">
-      <div class="koi__stage" data-cursor="Explore">
-        <div class="koi__glow" aria-hidden="true"></div>
-        <div class="koi__fish koi__fish--desce" data-fish="desce"><i></i></div>
-        <div class="koi__fish koi__fish--sobe" data-fish="sobe"><i></i></div>
-        <div class="koi__ring" aria-hidden="true"></div>
-      </div>
-      <div class="koi__side koi__side--left" data-fish-trigger="desce">
-        <span class="eyebrow">O legado e as raízes</span>
-        <h3>A carpa que desce</h3>
-        <p>Representa a essência do cometa, o núcleo de onde tudo se originou. Volta-se para baixo não como recuo, mas como lembrete eterno de honra e gratidão. Ancora o sucesso no respeito aos antepassados, às origens deixadas no Japão e à família — lembrando que a árvore só cresce forte em direção ao céu porque tem raízes profundas na terra.</p>
-      </div>
-      <div class="koi__side koi__side--right" data-fish-trigger="sobe">
-        <span class="eyebrow">A perseverança e a prosperidade</span>
-        <h3>A carpa que sobe</h3>
-        <p>Representa o calor e a força do cometa: o trabalho duro, as dificuldades vencidas no Brasil, a coragem de nunca desistir. É a carpa subindo a cachoeira em direção ao sucesso absoluto, prestes a se transformar em dragão. Ela diz que todo o esforço valeu a pena, e que o futuro é de vitórias.</p>
-      </div>
-      <p class="koi__summary" data-reveal><b>O Suysei é isso:</b> energia vital de um cometa que encontrou seu lugar e a persistência de carpas que viraram dragões. Cada prato servido, cada sorriso no atendimento e cada detalhe deste espaço carrega essa poeira de estrelas e essa herança de superação.</p>
-    </section>
-
-    <!-- ============ 7. CONSTRUÇÃO DA MARCA ============ -->
-    <section class="build" id="construcao">
-      <div class="build__pin">
-        <div class="build__bg" aria-hidden="true"></div>
-        <div class="build__steps">
-          <span class="eyebrow">05 — Logotipo</span>
-          <h2 class="display">A marca em construção</h2>
-          <ol class="build__list">
-            <li data-step="0"><b>00</b><span><strong>O círculo do cometa</strong>A trajetória, traçada num único gesto de pincel. É o espaço que as carpas vão ocupar.</span></li>
-            <li data-step="1"><b>01</b><span><strong>O símbolo das carpas</strong>A ilustração central, em traço sumi-ê, formando o círculo do cometa. É a travessia representada em movimento.</span></li>
-            <li data-step="2"><b>02</b><span><strong>O wordmark “Suysei”</strong>Tipografia sólida, em caixa alta, com peso forte e cortes retos que transmitem disciplina e presença. É a assinatura da família.</span></li>
-            <li data-step="3"><b>03</b><span><strong>A assinatura bilíngue</strong>“Casa de Refeição Japonesa” acompanhada dos caracteres 日本料理店, reforçando a autenticidade e a origem da casa.</span></li>
+        <div class="tl" id="journey-tl">
+          <span class="tl__line" aria-hidden="true"><b id="tl-line"></b></span>
+          <ol class="tl__track" id="tl-track">
+          <li class="tl__item"><span class="tl__dot" aria-hidden="true"></span><span class="tl__k">1974</span><div class="tl__card"><img src="assets/img/story/h-1974.webp" alt="Feira livre em São Paulo, em 1974" loading="lazy"><h3>Uma feira em São Paulo</h3><p>Tudo começa longe de um restaurante: numa feira, com um casal que cozinha em casa, com as próprias mãos, para a própria família.</p></div></li>
+          <li class="tl__item"><span class="tl__dot" aria-hidden="true"></span><span class="tl__k">Os primeiros passos</span><div class="tl__card"><img src="assets/img/story/h-primeiros.webp" alt="O casal fundador vestido com quimonos, sob cerejeiras" loading="lazy"><h3>A virada para o japonês</h3><p>A cozinha da família encontra suas raízes: a culinária japonesa, feita com a disciplina e o cuidado de quem a aprendeu em casa.</p></div></li>
+          <li class="tl__item"><span class="tl__dot" aria-hidden="true"></span><span class="tl__k">Take away</span><div class="tl__card"><img src="assets/img/story/h-takeaway.webp" alt="Balcão de sushi para viagem com a placa “Sushi de qualidade para todos! 1974”" loading="lazy"><h3>O nascimento do take away</h3><p>Para popularizar o sushi, a mãe cria o hábito do take away. A procura cresce, e o que era um hábito familiar vira um negócio.</p></div></li>
+          <li class="tl__item"><span class="tl__dot" aria-hidden="true"></span><span class="tl__k">O nome</span><div class="tl__card"><img src="assets/img/story/h-nome.webp" alt="Duas crianças da família em foto antiga em sépia" loading="lazy"><h3>Suysei, o cometa</h3><p>O pai escolhe o nome. Suysei significa cometa: uma homenagem à própria travessia da família, com direção, luz e determinação.</p></div></li>
+          <li class="tl__item"><span class="tl__dot" aria-hidden="true"></span><span class="tl__k">Hoje</span><div class="tl__card"><img src="assets/img/story/h-hoje.webp" alt="Tetsuo segurando bandejas de sushi e sashimi no salão do Suysei" loading="lazy"><h3>Original, não gourmet</h3><p>O pescado é o carro-chefe da casa. A cozinha não busca ser gourmet: busca ser original, feita por um japonês de verdade, com raízes na tradição.</p></div></li>
           </ol>
         </div>
-        <div class="build__stage">
-          <canvas class="build__enso" id="build-enso" aria-hidden="true"></canvas>
-          <div class="build__logo lc" aria-label="Assinatura centralizada Suysei">
-            <canvas class="lc__koi" id="build-koi" aria-hidden="true"></canvas>
-            <span class="lc__word" data-wordmark data-split-letters></span>
-            <span class="lc__kanji" data-kanji-chars></span>
-            <span class="lc__casa" data-casa></span>
-          </div>
-        </div>
-        <div class="build__counter" aria-hidden="true"><span id="build-num">00</span>/03</div>
+        <div class="journey__progress" aria-hidden="true"><span class="journey__from">Tóquio</span><i><b id="journey-bar"></b></i><span class="journey__to">São Paulo</span></div>
       </div>
     </section>
 
@@ -259,7 +165,7 @@
     <section class="versions" id="versoes">
       <div class="versions__head">
         <div>
-          <span class="eyebrow">06 — Versões</span>
+          <span class="eyebrow">04 — Logotipo</span>
           <h2 class="display" data-split-chars>Variações</h2>
         </div>
         <p data-reveal>A Suysei possui quatro construções de logotipo, pensadas para situações diferentes de espaço, suporte e leitura. Todas compartilham os mesmos três elementos — símbolo, wordmark e assinatura bilíngue — apenas reorganizados. E todas existem em duas cores de fundo: positiva e negativa.</p>
@@ -315,7 +221,7 @@
     <!-- ============ 9. USO CORRETO ============ -->
     <section class="usage" id="uso">
       <div class="usage__head">
-        <span class="eyebrow">07 — Uso correto × incorreto</span>
+        <span class="eyebrow">05 — Uso correto × incorreto</span>
         <h2 class="display">Respeite o traço</h2>
         <p class="usage__hint">Passe o mouse (ou toque) para ver o que <b>não</b> fazer.</p>
       </div>
@@ -350,7 +256,7 @@
     <!-- ============ 10. CORES ============ -->
     <section class="colors" id="cores">
       <div class="colors__head">
-        <span class="eyebrow">08 — Paleta oficial</span>
+        <span class="eyebrow">06 — Paleta oficial</span>
         <h2 class="display" data-split-chars>Cores</h2>
         <p data-reveal>Quatro cores, nenhuma aproximação. Clique em uma cor para copiar o código.</p>
       </div>
@@ -383,15 +289,69 @@
       <div class="toast" id="toast" role="status"></div>
     </section>
 
+    <!-- ============ 7. TIPOGRAFIA ============ -->
+    <section class="typo" id="tipografia">
+      <div class="typo__head">
+        <div>
+          <span class="eyebrow">07 — Tipografia</span>
+          <h2 class="display" data-split-chars>Tipografia</h2>
+        </div>
+        <p data-reveal>Três vozes que nunca se misturam: o wordmark desenhado para a marca, uma display de impacto para títulos e uma sem serifa disciplinada para tudo que acompanha. O japonês aparece sempre como assinatura, nunca como enfeite.</p>
+      </div>
+      <div class="typo__grid">
+        <article class="tcardx tcardx--word">
+          <span class="tcardx__k">Wordmark</span>
+          <div class="tcardx__specimen" data-wordmark></div>
+          <h3>Lettering exclusivo</h3>
+          <p>Desenhado para a Suysei, com cortes retos e terminações firmes. Não é uma fonte: use sempre o arquivo oficial do logotipo.</p>
+        </article>
+        <article class="tcardx tcardx--display">
+          <span class="tcardx__k">Títulos</span>
+          <div class="tcardx__big" aria-hidden="true">Aa</div>
+          <h3>Kalnia</h3>
+          <p>Display de alto contraste com terminações em cunha, sempre em caixa alta. Para títulos, aberturas e frases de destaque.</p>
+          <p class="tcardx__glyphs" aria-hidden="true">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z<br>0 1 2 3 4 5 6 7 8 9 · Ç Ã É Õ</p>
+        </article>
+        <article class="tcardx tcardx--text">
+          <span class="tcardx__k">Textos e assinatura</span>
+          <div class="tcardx__big" aria-hidden="true">Aa</div>
+          <h3>Barlow</h3>
+          <p>Sem serifa de desenho técnico e leitura limpa. Em caixa alta com espaçamento largo nas assinaturas; em peso médio no texto corrido.</p>
+          <p class="tcardx__glyphs" aria-hidden="true">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z<br>a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+        </article>
+        <article class="tcardx tcardx--jp">
+          <span class="tcardx__k">Japonês</span>
+          <div class="tcardx__specimen tcardx__specimen--jp" data-kanji></div>
+          <h3>日本料理店</h3>
+          <p>“Casa de refeição japonesa”. Acompanha a assinatura, espaçado e em peso leve. Não se traduz e não se recria em outra fonte.</p>
+        </article>
+      </div>
+      <div class="typetester">
+        <div class="typetester__ui">
+          <label for="tt-text">Teste a hierarquia</label>
+          <input id="tt-text" type="text" value="A força que cruza o universo" maxlength="60" autocomplete="off">
+          <div class="typetester__opts" role="group" aria-label="Estilo">
+            <button class="ttopt is-active" data-tt="display" aria-pressed="true">Título</button>
+            <button class="ttopt" data-tt="sub" aria-pressed="false">Subtítulo</button>
+            <button class="ttopt" data-tt="label" aria-pressed="false">Assinatura</button>
+            <button class="ttopt" data-tt="body" aria-pressed="false">Texto</button>
+          </div>
+          <label for="tt-size">Tamanho<input id="tt-size" type="range" min="16" max="120" value="72"></label>
+        </div>
+        <p class="typetester__out" id="tt-out" data-tt="display">A força que cruza o universo</p>
+        <dl class="typetester__spec" id="tt-spec"></dl>
+      </div>
+    </section>
+
     <!-- ============ 10b. PADRONAGEM ============ -->
     <section class="patternsec" id="padronagem">
       <div class="patternsec__head">
         <div>
-          <span class="eyebrow">09 — Padronagem</span>
+          <span class="eyebrow">08 — Padronagem</span>
           <h2 class="display" data-split-chars>Pattern</h2>
         </div>
         <div class="patternsec__text">
-          <p data-reveal>O pattern da Suysei nasce do mesmo pincel que desenha as carpas: pinceladas cheias no meio e secas nas pontas, girando em redemoinhos. É a correnteza que a carpa enfrenta, transformada em textura.</p>
+          <p data-reveal>O pattern oficial da Suysei nasce do mesmo pincel que desenha as carpas: pinceladas cheias no meio e secas nas pontas, girando em redemoinhos. É a correnteza que a carpa enfrenta, transformada em textura.</p>
           <p data-reveal>Funciona como pano de fundo, nunca como protagonista. Aparece tom sobre tom em uniformes, embalagens e superfícies, e em vermelho sobre off-white nas peças de destaque.</p>
         </div>
       </div>
@@ -409,7 +369,7 @@
             <button class="pswatch" data-bg="#e9e6e0" data-fg="#bc1621" data-ink="#111111" data-koi="#bc1621" data-name="Destaque · vermelho sobre off-white" aria-pressed="false"><i style="--a:#e9e6e0;--b:#bc1621"></i>Off-white</button>
             <button class="pswatch" data-bg="#e9e6e0" data-fg="#d2cdc4" data-ink="#111111" data-koi="#bc1621" data-name="Tom sobre tom · off-white" aria-pressed="false"><i style="--a:#e9e6e0;--b:#c9c3b8"></i>Papel</button>
           </div>
-          <label class="patternlab__range" for="pattern-scale">Escala<input type="range" id="pattern-scale" min="160" max="640" value="340"></label>
+          <label class="patternlab__range" for="pattern-scale">Escala<input type="range" id="pattern-scale" min="360" max="1500" value="760"></label>
           <ul class="patternlab__rules">
             <li>Sempre em uma cor sólida, sem degradê.</li>
             <li>Nunca passa por cima do logotipo: o símbolo pede área livre.</li>
@@ -419,7 +379,7 @@
       </div>
       <div class="patternsec__apps">
         <figure data-lightbox tabindex="0"><img src="assets/img/mockups/dolma-black.webp" alt="Dólmã preto com o pattern na manga e carpa vermelha" loading="lazy"><figcaption>Dólmã · tom sobre tom</figcaption></figure>
-        <figure data-lightbox tabindex="0"><img src="assets/img/mockups/avental-off-white.webp" alt="Avental off-white com bolso estampado com o pattern em vermelho" loading="lazy"><figcaption>Avental · bolso em vermelho</figcaption></figure>
+        <figure data-lightbox tabindex="0"><img src="assets/img/mockups/papel-seda.webp" alt="Arte do papel seda de bandeja: pattern cinza sobre branco com selos vermelhos da Suysei" loading="lazy"><figcaption>Papel seda de bandeja · arte oficial</figcaption></figure>
         <figure data-lightbox tabindex="0"><img src="assets/img/mockups/caixa-delivery.webp" alt="Caixa de delivery preta com o pattern tom sobre tom" loading="lazy"><figcaption>Embalagem · fundo</figcaption></figure>
       </div>
     </section>
@@ -428,7 +388,7 @@
     <section class="persona" id="personalidade">
       <div class="persona__brush" aria-hidden="true" data-parallax="20"></div>
       <div class="persona__intro">
-        <span class="eyebrow">10 — Atmosfera e personalidade</span>
+        <span class="eyebrow">09 — Atmosfera e personalidade</span>
         <h2 class="display display--xl" data-split-chars>Persona|lidade</h2>
         <h3 class="persona__claim" data-reveal>Tradição, disciplina e hospitalidade.</h3>
         <p data-reveal>A marca não busca ser contemporânea por moda, busca ser atemporal por história. É a união entre a força imparável de um cometa e a estabilidade de uma mesa farta em família. Não há pressa em ser a última tendência; há orgulho em ser a mesma verdade, servida geração após geração.</p>
@@ -454,70 +414,133 @@
       </div>
     </section>
 
-    <!-- ============ 12. APLICAÇÕES 3D ============ -->
-    <section class="studio" id="aplicacoes">
-      <div class="studio__head">
-        <span class="eyebrow">11 — Aplicações</span>
-        <h2 class="display" data-split-chars>Mockups</h2>
-        <p data-reveal>As peças da marca recriadas em 3D. Arraste para girar, clique no objeto para interagir.</p>
+    <!-- ============ 10. APLICAÇÕES — por categoria ============ -->
+    <section class="apps" id="aplicacoes">
+      <div class="apps__head">
+        <span class="eyebrow">10 — Aplicações</span>
+        <h2 class="display" data-split-chars>A marca no dia a dia</h2>
+        <p data-reveal>Cinco frentes, cada uma com seus pontos de contato. Em cada categoria, uma peça recriada em 3D para você girar e tocar.</p>
       </div>
-      <div class="studio__wrap">
-        <div class="studio__stage">
-          <canvas id="studio-gl" data-cursor="Arraste"></canvas>
-          <div class="studio__floor" aria-hidden="true"></div>
-          <p class="studio__tip" id="studio-tip">Clique na caixa para abrir a tampa</p>
+      <nav class="apps__nav" aria-label="Categorias de aplicação">
+        <a href="#ap-ambiente" data-magnetic><b>10.1</b>Ambiente</a>
+        <a href="#ap-mesa" data-magnetic><b>10.2</b>Mesa e cardápios</a>
+        <a href="#ap-embalagens" data-magnetic><b>10.3</b>Embalagens</a>
+        <a href="#ap-uniformes" data-magnetic><b>10.4</b>Uniformes</a>
+        <a href="#ap-papelaria" data-magnetic><b>10.5</b>Papelaria</a>
+      </nav>
+    </section>
+
+    <section class="appcat appcat--ambiente" id="ap-ambiente">
+      <header class="appcat__head">
+        <span class="appcat__n">10.1</span>
+        <h2 class="appcat__title">Ambiente</h2>
+        <p class="appcat__desc">A casa veste a marca: fachada iluminada à noite, recepção em pedra escura, o noren na entrada e os quadros que contam a travessia do Japão ao Brasil.</p>
+      </header>
+      <div class="appcat__body">
+        <div class="appcat__stage">
+          <canvas data-stage="noren" data-cursor="Arraste"></canvas>
+          <span class="appcat__badge">3D</span>
+          <div class="appcat__objs" role="group" aria-label="Peças em 3D"></div>
+          <p class="appcat__tip"></p>
         </div>
-        <div class="studio__menu" role="tablist" aria-label="Mockups 3D">
-          <button class="smenu is-active" data-object="caixa" data-magnetic><b>01</b><span>Caixa presente<small>Gift box · 2 andares</small></span></button>
-          <button class="smenu" data-object="sacola" data-magnetic><b>02</b><span>Sacola<small>Take away · papel kraft preto</small></span></button>
-          <button class="smenu" data-object="carta" data-magnetic><b>03</b><span>Carta de drinks<small>Frente e verso</small></span></button>
-          <button class="smenu" data-object="bowl" data-magnetic><b>04</b><span>Bowl<small>Yakisoba · poke</small></span></button>
+        <div class="appcat__photos appcat__photos--4">
+          <figure class="aphoto aphoto--lead" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/fachada.webp" alt="Fachada do Suysei à noite com o letreiro da assinatura centralizada" loading="lazy" width="1536" height="1024"></div><figcaption><span>Ambiente</span><b>Fachada</b>Letreiro iluminado</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/quadros-salao.webp" alt="Três quadros no salão: paisagem japonesa, o logotipo e o mapa da travessia do Japão ao Brasil" loading="lazy" width="1536" height="1024"></div><figcaption><span>Ambiente</span><b>Salão</b>Quadros da travessia</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/balcao-recepcao.webp" alt="Balcão de recepção em pedra escura com o logotipo Suysei" loading="lazy" width="1536" height="1024"></div><figcaption><span>Ambiente</span><b>Recepção</b>Balcão em pedra</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/noren.webp" alt="Noren de tecido off-white com uma carpa preta e uma vermelha" loading="lazy" width="1536" height="1024"></div><figcaption><span>Ambiente</span><b>Noren</b>Cortina da entrada</figcaption></figure>
         </div>
       </div>
     </section>
 
-    <!-- ============ 13. GALERIA ============ -->
-    <section class="gallery" id="galeria">
-      <div class="gallery__head">
-        <div>
-          <span class="eyebrow">12 — Pontos de contato</span>
-          <h2 class="display">A marca no dia a dia</h2>
+    <section class="appcat appcat--mesa" id="ap-mesa">
+      <header class="appcat__head">
+        <span class="appcat__n">10.2</span>
+        <h2 class="appcat__title">Mesa e cardápios</h2>
+        <p class="appcat__desc">Onde a marca encontra o cliente: cardápio encadernado à mão, carta de drinks, porta-copos, jogo americano, louça com as carpas e o cardápio digital.</p>
+      </header>
+      <div class="appcat__body">
+        <div class="appcat__stage">
+          <canvas data-stage="carta,portacopos" data-cursor="Arraste"></canvas>
+          <span class="appcat__badge">3D</span>
+          <div class="appcat__objs" role="group" aria-label="Peças em 3D"><button class="aobj is-active" data-obj="0" aria-pressed="true">Carta de drinks</button><button class="aobj" data-obj="1" aria-pressed="false">Porta-copos</button></div>
+          <p class="appcat__tip"></p>
         </div>
-        <p class="gallery__lead">24 aplicações, da fachada ao vale-presente. Filtre por categoria e clique em uma imagem para ampliar.</p>
+        <div class="appcat__photos appcat__photos--8">
+          <figure class="aphoto aphoto--lead" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/menu-capa-guardanapo.webp" alt="Cardápio preto com costura japonesa vermelha e guardanapo com o logotipo" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Cardápio</b>Encadernação japonesa</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/carta-drinks-capa.webp" alt="Capa da carta de drinks ao lado de um coquetel" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Carta de drinks</b>Capa</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/pratos.webp" alt="Pratos de cerâmica com carpas vermelhas e ondas em nanquim" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Louça</b>Carpas e ondas</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/jogo-americano.webp" alt="Jogo americano off-white com o logotipo e prato de sushi" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Jogo americano</b>Mesa posta</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/porta-copos.webp" alt="Porta-copos claro e escuro com o logotipo" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Porta-copos</b>Claro e escuro</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/cardapio-display.webp" alt="Cardápio preto e display de mesa com ilustração de nigiri" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Display de mesa</b>Cardápio e sugestão</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/menu-app.webp" alt="Celular com o app do Suysei ao lado do cardápio impresso" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Cardápio digital</b>App e capa</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/drinks-1.webp" alt="Carta de drinks Suysei, fundo preto com moldura vermelha" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Carta de drinks</b>Página interna</figcaption></figure>
+        </div>
       </div>
-      <div class="gallery__filters" role="group" aria-label="Filtrar aplicações">
-          <button class="gfilter is-active" data-filter="todos" aria-pressed="true" data-magnetic>Todos<sup>24</sup></button>
-          <button class="gfilter" data-filter="ambiente" aria-pressed="false" data-magnetic>Ambiente<sup>4</sup></button>
-          <button class="gfilter" data-filter="mesa" aria-pressed="false" data-magnetic>Mesa e cardápios<sup>8</sup></button>
-          <button class="gfilter" data-filter="embalagens" aria-pressed="false" data-magnetic>Embalagens<sup>4</sup></button>
-          <button class="gfilter" data-filter="uniformes" aria-pressed="false" data-magnetic>Uniformes<sup>6</sup></button>
-          <button class="gfilter" data-filter="papelaria" aria-pressed="false" data-magnetic>Papelaria<sup>2</sup></button>
+    </section>
+
+    <section class="appcat appcat--embalagens" id="ap-embalagens">
+      <header class="appcat__head">
+        <span class="appcat__n">10.3</span>
+        <h2 class="appcat__title">Embalagens</h2>
+        <p class="appcat__desc">Take away e delivery com o mesmo cuidado do salão. O preto domina, o vermelho aparece como selo e o pattern assina em tom sobre tom.</p>
+      </header>
+      <div class="appcat__body">
+        <div class="appcat__stage">
+          <canvas data-stage="sacola,caixa,bowl" data-cursor="Arraste"></canvas>
+          <span class="appcat__badge">3D</span>
+          <div class="appcat__objs" role="group" aria-label="Peças em 3D"><button class="aobj is-active" data-obj="0" aria-pressed="true">Sacola preta</button><button class="aobj" data-obj="1" aria-pressed="false">Caixa presente</button><button class="aobj" data-obj="2" aria-pressed="false">Bowl</button></div>
+          <p class="appcat__tip"></p>
+        </div>
+        <div class="appcat__photos appcat__photos--4">
+          <figure class="aphoto aphoto--lead" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/sacola-preta.webp" alt="Sacola preta com a assinatura centralizada sobre a mesa" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Sacola take away</b>Preta · alça de papel</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/caixa-delivery.webp" alt="Caixa de delivery preta com a assinatura centralizada e cinta vermelha" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Caixa delivery</b>Cinta vermelha</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/sacolas-off-white.webp" alt="Duas sacolas off-white com carpas em nanquim e ondas vermelhas" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Sacolas</b>Off-white · alça vermelha</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/caixas-andares.webp" alt="Caixas presente Suysei pretas, de um e dois andares, sobre mármore" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Gift box</b>1 e 2 andares</figcaption></figure>
+        </div>
       </div>
-      <div class="gallery__grid" id="gallery-grid">
-        <figure class="gitem gitem--feat" data-cat="ambiente" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/fachada.webp" alt="Fachada do Suysei à noite com o letreiro da assinatura centralizada" loading="lazy" width="1536" height="1024"></div><figcaption><span>Ambiente</span><b>Fachada</b>Letreiro iluminado</figcaption></figure>
-        <figure class="gitem" data-cat="ambiente" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/balcao-recepcao.webp" alt="Balcão de recepção em pedra escura com o logotipo Suysei" loading="lazy" width="1536" height="1024"></div><figcaption><span>Ambiente</span><b>Recepção</b>Balcão em pedra</figcaption></figure>
-        <figure class="gitem" data-cat="ambiente" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/noren.webp" alt="Noren de tecido off-white com uma carpa preta e uma vermelha" loading="lazy" width="1536" height="1024"></div><figcaption><span>Ambiente</span><b>Noren</b>Cortina da entrada</figcaption></figure>
-        <figure class="gitem" data-cat="embalagens" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/caixa-delivery.webp" alt="Caixa de delivery preta com a assinatura centralizada e cinta vermelha" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Caixa delivery</b>Cinta vermelha</figcaption></figure>
-        <figure class="gitem" data-cat="embalagens" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/sacolas-off-white.webp" alt="Duas sacolas off-white com carpas em nanquim e ondas vermelhas" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Sacolas</b>Off-white · alça vermelha</figcaption></figure>
-        <figure class="gitem gitem--feat" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/menu-capa-guardanapo.webp" alt="Cardápio preto com costura japonesa vermelha e guardanapo com o logotipo" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Cardápio</b>Encadernação japonesa</figcaption></figure>
-        <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/avental-off-white.webp" alt="Avental off-white com carpa em nanquim e bolso estampado com ondas vermelhas" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Avental</b>Off-white · bolso de ondas</figcaption></figure>
-        <figure class="gitem" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/pratos.webp" alt="Pratos de cerâmica com carpas vermelhas e ondas em nanquim" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Louça</b>Carpas e ondas</figcaption></figure>
-        <figure class="gitem gitem--feat" data-cat="ambiente" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/quadros-salao.webp" alt="Três quadros no salão: paisagem japonesa, o logotipo e o mapa da travessia do Japão ao Brasil" loading="lazy" width="1536" height="1024"></div><figcaption><span>Ambiente</span><b>Salão</b>Quadros da travessia</figcaption></figure>
-        <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/dolma-black.webp" alt="Dólmã preto com estampa de ondas e carpa vermelha" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Dólmã black</b>Ondas e carpa</figcaption></figure>
-        <figure class="gitem" data-cat="embalagens" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/sacola-preta.webp" alt="Sacola preta com a assinatura centralizada sobre a mesa" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Sacola take away</b>Preta · alça de papel</figcaption></figure>
-        <figure class="gitem gitem--tall" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/drinks-1.webp" alt="Carta de drinks Suysei, fundo preto com moldura vermelha" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Carta de drinks</b>Página interna</figcaption></figure>
-        <figure class="gitem" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/carta-drinks-capa.webp" alt="Capa da carta de drinks ao lado de um coquetel" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Carta de drinks</b>Capa</figcaption></figure>
-        <figure class="gitem" data-cat="papelaria" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/envelope-cartao.webp" alt="Envelope preto com o símbolo e cartão off-white com a assinatura" loading="lazy" width="1536" height="1024"></div><figcaption><span>Papelaria</span><b>Cartão</b>Envelope preto</figcaption></figure>
-        <figure class="gitem gitem--feat" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/menu-app.webp" alt="Celular com o app do Suysei ao lado do cardápio impresso" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Cardápio digital</b>App e capa</figcaption></figure>
-        <figure class="gitem" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/jogo-americano.webp" alt="Jogo americano off-white com o logotipo e prato de sushi" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Jogo americano</b>Mesa posta</figcaption></figure>
-        <figure class="gitem" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/porta-copos.webp" alt="Porta-copos claro e escuro com o logotipo" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Porta-copos</b>Claro e escuro</figcaption></figure>
-        <figure class="gitem" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/cardapio-display.webp" alt="Cardápio preto e display de mesa com ilustração de nigiri" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Display de mesa</b>Cardápio e sugestão</figcaption></figure>
-        <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/avental-banner.webp" alt="Avental preto com a assinatura e banner preto com o logotipo" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Avental black</b>Com banner do salão</figcaption></figure>
-        <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/camiseta-black.webp" alt="Camiseta preta com o logotipo no peito e carpa na manga" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Camiseta</b>Atendimento</figcaption></figure>
-        <figure class="gitem" data-cat="papelaria" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/vale-presente.webp" alt="Vale-presente off-white com envelope preto" loading="lazy" width="1536" height="1024"></div><figcaption><span>Papelaria</span><b>Vale-presente</b>Cartão e envelope</figcaption></figure>
-        <figure class="gitem" data-cat="embalagens" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/caixas-andares.webp" alt="Caixas presente Suysei pretas, de um e dois andares, sobre mármore" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Gift box</b>1 e 2 andares</figcaption></figure>
-        <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/uniforme-black.webp" alt="Garçom com camiseta e avental pretos Suysei, com carpa branca estampada" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Uniforme black</b>Garçons e atendentes</figcaption></figure>
-        <figure class="gitem gitem--pano" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/uniforme-cozinha.webp" alt="Cozinheiro cortando salmão usando avental Suysei" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Cozinha</b>Avental grafite</figcaption></figure>
+    </section>
+
+    <section class="appcat appcat--uniformes" id="ap-uniformes">
+      <header class="appcat__head">
+        <span class="appcat__n">10.4</span>
+        <h2 class="appcat__title">Uniformes</h2>
+        <p class="appcat__desc">Da cozinha ao salão, a equipe carrega o traço da marca: dólmãs com as correntezas na manga, aventais e camisetas.</p>
+      </header>
+      <div class="appcat__body">
+        <div class="appcat__stage">
+          <canvas data-stage="avental" data-cursor="Arraste"></canvas>
+          <span class="appcat__badge">3D</span>
+          <div class="appcat__objs" role="group" aria-label="Peças em 3D"></div>
+          <p class="appcat__tip"></p>
+        </div>
+        <div class="appcat__photos appcat__photos--6">
+          <figure class="aphoto aphoto--lead" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/dolma-black.webp" alt="Dólmã preto com estampa de ondas e carpa vermelha" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Dólmã black</b>Ondas e carpa</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/avental-off-white.webp" alt="Avental off-white com carpa em nanquim e bolso estampado com ondas vermelhas" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Avental</b>Off-white · bolso de ondas</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/avental-banner.webp" alt="Avental preto com a assinatura e banner preto com o logotipo" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Avental black</b>Com banner do salão</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/camiseta-black.webp" alt="Camiseta preta com o logotipo no peito e carpa na manga" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Camiseta</b>Atendimento</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/uniforme-black.webp" alt="Garçom com camiseta e avental pretos Suysei, com carpa branca estampada" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Uniforme black</b>Garçons e atendentes</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/uniforme-cozinha.webp" alt="Cozinheiro cortando salmão usando avental Suysei" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Cozinha</b>Avental grafite</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="appcat appcat--papelaria" id="ap-papelaria">
+      <header class="appcat__head">
+        <span class="appcat__n">10.5</span>
+        <h2 class="appcat__title">Papelaria e presentes</h2>
+        <p class="appcat__desc">Cartões, envelopes e vale-presente: o preto do envelope guarda o off-white do cartão, como um presente que se abre.</p>
+      </header>
+      <div class="appcat__body">
+        <div class="appcat__stage">
+          <canvas data-stage="envelope" data-cursor="Arraste"></canvas>
+          <span class="appcat__badge">3D</span>
+          <div class="appcat__objs" role="group" aria-label="Peças em 3D"></div>
+          <p class="appcat__tip"></p>
+        </div>
+        <div class="appcat__photos appcat__photos--2">
+          <figure class="aphoto aphoto--lead" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/envelope-cartao.webp" alt="Envelope preto com o símbolo e cartão off-white com a assinatura" loading="lazy" width="1536" height="1024"></div><figcaption><span>Papelaria</span><b>Cartão</b>Envelope preto</figcaption></figure>
+          <figure class="aphoto" data-lightbox tabindex="0"><div class="aphoto__img" data-parallax="-5"><img src="assets/img/mockups/vale-presente.webp" alt="Vale-presente off-white com envelope preto" loading="lazy" width="1536" height="1024"></div><figcaption><span>Papelaria</span><b>Vale-presente</b>Cartão e envelope</figcaption></figure>
+        </div>
       </div>
     </section>
 
