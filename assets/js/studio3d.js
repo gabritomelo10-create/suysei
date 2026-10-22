@@ -104,43 +104,13 @@ export const OBJECTS = {
     return g;
   },
 
-  // ---------- Embalagens: bowl yakisoba / poke ----------
-  bowl(A) {
-    const g = new THREE.Group();
-    const pts = []; for (let i = 0; i <= 24; i++) { const t = i / 24; pts.push(new THREE.Vector2(.55 + Math.sin(t * Math.PI / 2) * .85, t * .95)); }
-    const outer = new THREE.Mesh(new THREE.LatheGeometry(pts, 96), new THREE.MeshPhysicalMaterial({ color: '#0f0f0f', roughness: .3, clearcoat: 1, clearcoatRoughness: .1 }));
-    const innerM = new THREE.Mesh(new THREE.LatheGeometry(pts.map((p) => new THREE.Vector2(p.x - .04, p.y + .02)), 96), new THREE.MeshPhysicalMaterial({ color: RED, roughness: .25, clearcoat: 1, side: THREE.BackSide }));
-    const band = canvasTex(2048, 220, (x, w, h) => {
-      x.fillStyle = '#111'; x.fillRect(0, 0, w, h); drawPattern(A, x, w, h, '#262626', .35);
-      for (let k = 0; k < 3; k++) drawCentral(A, x, k * w / 3 + w / 6, h / 2, h * .95, '#f1ede6');
-    });
-    const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(1.33, 1.06, .34, 96, 1, true), new THREE.MeshStandardMaterial({ map: band, roughness: .8, side: THREE.DoubleSide }));
-    sleeve.position.y = .42;
-    const rice = new THREE.Mesh(new THREE.CircleGeometry(1.25, 64), new THREE.MeshStandardMaterial({ color: '#f1ede4', roughness: .95 }));
-    rice.rotation.x = -Math.PI / 2; rice.position.y = .78;
-    const food = new THREE.Group();
-    const salmon = new THREE.MeshPhysicalMaterial({ color: '#f07a4c', roughness: .35, clearcoat: .6, sheen: .5 }), green = new THREE.MeshStandardMaterial({ color: '#4b7b2f', roughness: .6 });
-    for (let i = 0; i < 16; i++) {
-      const m = new THREE.Mesh(new RoundedBoxGeometry(.24, .17, .2, 3, .05), i % 5 === 0 ? green : salmon);
-      const a = (i / 16) * Math.PI * 2, r = .35 + (i % 3) * .26;
-      m.position.set(Math.cos(a) * r, .86 + (i % 4) * .01, Math.sin(a) * r); m.rotation.set(i * .7, i * 1.3, i * .4); food.add(m);
-    }
-    const lidG = new THREE.Group();
-    const lid = new THREE.Mesh(new THREE.SphereGeometry(1.42, 64, 24, 0, Math.PI * 2, 0, Math.PI * .32), new THREE.MeshPhysicalMaterial({ color: '#fff', transmission: 1, roughness: .04, thickness: .2, ior: 1.4, transparent: true }));
-    lid.position.y = -.35; lid.scale.y = .85; lidG.add(lid); lidG.position.y = .55;
-    g.add(outer, innerM, sleeve, rice, food, lidG);
-    g.userData = { name: 'Bowl delivery', tip: 'Clique para abrir a tampa', target: .6, open: false,
-      action() { this.open = !this.open; gsap.to(lidG.position, { y: this.open ? 1.9 : .55, x: this.open ? -1 : 0, duration: 1, ease: 'expo.inOut' }); gsap.to(lidG.rotation, { z: this.open ? .6 : 0, duration: 1, ease: 'expo.inOut' }); } };
-    return g;
-  },
-
   // ---------- Mesa: carta de drinks (frente e verso) ----------
   carta(A) {
     const g = new THREE.Group();
     const tl = new THREE.TextureLoader();
     const f = tl.load('assets/img/mockups/drinks-1.webp'), b = tl.load('assets/img/mockups/drinks-2.webp');
     [f, b].forEach((t) => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; });
-    const W = 1.36, H = W * 2637 / 1191, edge = new THREE.MeshStandardMaterial({ color: '#0e0e0e', roughness: .6 });
+    const W = 1.3, H = W * 2489 / 1400, edge = new THREE.MeshStandardMaterial({ color: '#0e0e0e', roughness: .6 });
     const card = new THREE.Mesh(new THREE.BoxGeometry(W, H, .025), [edge, edge, edge, edge, texMat(f, .35), texMat(b, .35)]);
     card.position.y = H / 2 + .25; card.rotation.x = -.06;
     const stand = new THREE.Mesh(new THREE.CylinderGeometry(.55, .62, .14, 48), new THREE.MeshPhysicalMaterial({ color: '#2a1a12', roughness: .4, clearcoat: .6 }));
@@ -171,6 +141,76 @@ export const OBJECTS = {
     g.add(light, dark, glass, whisky);
     g.userData = { name: 'Porta-copos', tip: 'Clique para girar os porta-copos', target: .4, cam: [0, 3.6, 4.4],
       action() { gsap.to(light.rotation, { x: light.rotation.x + Math.PI * 2, duration: 1.2, ease: 'expo.inOut' }); gsap.to(light.position, { keyframes: [{ y: 1.2 }, { y: .03 }], duration: 1.2, ease: 'power2.inOut' }); } };
+    return g;
+  },
+
+  // ---------- Ambiente: fachada com letreiro iluminado ----------
+  fachada(A) {
+    const g = new THREE.Group();
+    const FW = 6.4, FH = 4.2;
+    const wood = new THREE.MeshStandardMaterial({ color: '#6b4428', roughness: .55 });
+    const woodDark = new THREE.MeshStandardMaterial({ color: '#2a1a10', roughness: .7 });
+    const stoneT = canvasTex(1024, 680, (x, w, h) => { x.fillStyle = '#1a1a1a'; x.fillRect(0, 0, w, h); drawPattern(A, x, w, h, '#232323', .5); });
+    // parede de pedra escura
+    const wall = new THREE.Mesh(new THREE.BoxGeometry(FW, FH, .4), new THREE.MeshStandardMaterial({ map: stoneT, roughness: .9 }));
+    wall.position.set(0, FH / 2, -.2); g.add(wall);
+    // calçada e degrau
+    const walk = new THREE.Mesh(new THREE.BoxGeometry(FW + 1.6, .12, 2.6), new THREE.MeshStandardMaterial({ color: '#2b2b2b', roughness: .85 }));
+    walk.position.set(0, .06, .9); g.add(walk);
+    const step = new THREE.Mesh(new THREE.BoxGeometry(1.9, .14, .5), new THREE.MeshStandardMaterial({ color: '#3a3632', roughness: .7 }));
+    step.position.set(0, .19, .05); g.add(step);
+    // ripas de madeira (painéis laterais)
+    for (const side of [-1, 1]) {
+      for (let i = 0; i < 11; i++) {
+        const slat = new THREE.Mesh(new THREE.BoxGeometry(.07, 2.6, .1), wood);
+        slat.position.set(side * (1.25 + i * .17), 1.5, .05); g.add(slat);
+      }
+      const beam = new THREE.Mesh(new THREE.BoxGeometry(2.05, .1, .16), woodDark); beam.position.set(side * 2.1, 2.85, .05); g.add(beam);
+      const sill = beam.clone(); sill.position.y = .22; g.add(sill);
+    }
+    // porta: interior iluminado em tom âmbar
+    const glowT = canvasTex(256, 512, (x, w, h) => { const gr = x.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#ffcf8a'); gr.addColorStop(1, '#b8601e'); x.fillStyle = gr; x.fillRect(0, 0, w, h); x.fillStyle = 'rgba(40,20,8,.55)'; for (let i = 1; i < 6; i++) x.fillRect(i * w / 6 - 3, 0, 6, h); });
+    const doorGlow = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 2.6), new THREE.MeshBasicMaterial({ map: glowT }));
+    doorGlow.position.set(0, 1.56, -.01); g.add(doorGlow);
+    const frame = new THREE.Mesh(new THREE.BoxGeometry(1.84, 2.84, .14), woodDark); frame.position.set(0, 1.58, -.04); g.add(frame);
+    // noren curto na porta
+    const norenT = canvasTex(900, 360, (x, w, h) => { x.fillStyle = '#141414'; x.fillRect(0, 0, w, h); x.drawImage(A.koiRed, w / 2 - h * .42, h * .08, h * .84, h * .84); });
+    for (let i = 0; i < 3; i++) {
+      const c = document.createElement('canvas'); c.width = 300; c.height = 360; c.getContext('2d').drawImage(norenT.image, i * 300, 0, 300, 360, 0, 0, 300, 360);
+      const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+      const p = new THREE.Mesh(new THREE.PlaneGeometry(.52, .62), new THREE.MeshStandardMaterial({ map: t, roughness: .95, side: THREE.DoubleSide }));
+      p.position.set((i - 1) * .54, 2.55, .06); g.add(p);
+    }
+    // letreiro com a assinatura (retroiluminado)
+    const signT = canvasTex(1600, 560, (x, w, h) => { x.fillStyle = '#0d0d0d'; x.fillRect(0, 0, w, h); drawCentral(A, x, w / 2, h * .5, h * 1.0, '#f6efe2'); });
+    const signMat = new THREE.MeshStandardMaterial({ map: signT, emissiveMap: signT, emissive: new THREE.Color('#ffffff'), emissiveIntensity: 1.1, roughness: .6 });
+    const sign = new THREE.Mesh(new THREE.BoxGeometry(3.4, 1.19, .12), [woodDark, woodDark, woodDark, woodDark, signMat, woodDark]);
+    sign.position.set(0, 3.55, .12); g.add(sign);
+    const signLight = new THREE.PointLight('#ffe2b8', 6, 4, 2); signLight.position.set(0, 3.5, 1); g.add(signLight);
+    // lanternas de papel
+    const lantMat = new THREE.MeshStandardMaterial({ color: '#f3e3c8', emissive: new THREE.Color('#ff9a3c'), emissiveIntensity: 1.4, roughness: .9 });
+    const lights = [signLight];
+    for (const side of [-1, 1]) {
+      const l = new THREE.Mesh(new THREE.SphereGeometry(.26, 32, 16), lantMat); l.scale.y = 1.35; l.position.set(side * 1.15, 2.2, .3); g.add(l);
+      const capT = new THREE.Mesh(new THREE.CylinderGeometry(.12, .12, .06, 16), woodDark); capT.position.set(side * 1.15, 2.57, .3); g.add(capT);
+      const cord = new THREE.Mesh(new THREE.CylinderGeometry(.008, .008, .5, 6), woodDark); cord.position.set(side * 1.15, 2.83, .3); g.add(cord);
+      const pl = new THREE.PointLight('#ffa64d', 5, 3.5, 2); pl.position.set(side * 1.15, 2.2, .55); g.add(pl); lights.push(pl);
+    }
+    // bambus e arbustos
+    const leaf = new THREE.MeshStandardMaterial({ color: '#2d4a24', roughness: .8 });
+    const stem = new THREE.MeshStandardMaterial({ color: '#4f6b2d', roughness: .6 });
+    for (const side of [-1, 1]) {
+      for (let i = 0; i < 4; i++) { const b = new THREE.Mesh(new THREE.CylinderGeometry(.035, .04, 3 + i * .3, 8), stem); b.position.set(side * (3.15 + i * .12), 1.6 + i * .15, .4 + (i % 2) * .25); b.rotation.z = side * -.05 * i; g.add(b); }
+      for (let i = 0; i < 5; i++) { const s2 = new THREE.Mesh(new THREE.IcosahedronGeometry(.32 + (i % 2) * .1, 1), leaf); s2.position.set(side * (2.4 + i * .22), .3, .5 + (i % 3) * .2); g.add(s2); }
+    }
+    g.userData = { name: 'Fachada', tip: 'Clique para apagar e acender o letreiro', target: 2, cam: [1.4, 2.8, 13.5], on: true,
+      action() {
+        this.on = !this.on;
+        gsap.to(signMat, { emissiveIntensity: this.on ? 1.1 : .02, duration: .8 });
+        gsap.to(lantMat, { emissiveIntensity: this.on ? 1.4 : .05, duration: .8, delay: .15 });
+        lights.forEach((l, i) => gsap.to(l, { intensity: this.on ? (i ? 5 : 6) : 0, duration: .8, delay: .1 * i }));
+        gsap.to(doorGlow.material.color, { r: this.on ? 1 : .25, g: this.on ? 1 : .25, b: this.on ? 1 : .25, duration: .8 });
+      } };
     return g;
   },
 
@@ -210,49 +250,6 @@ export const OBJECTS = {
         }
       },
       action() { this.open = !this.open; panels.forEach((p) => { if (p.i === 1) return; gsap.to(p.pivot.rotation, { y: this.open ? (p.i - 1) * -1.1 : 0, duration: 1.2, ease: 'expo.inOut' }); }); gsap.to(panels[1].pivot.rotation, { x: this.open ? -.9 : 0, duration: 1.2, ease: 'expo.inOut' }); },
-    };
-    return g;
-  },
-
-  // ---------- Uniformes: avental preto no cabide ----------
-  avental(A) {
-    const g = new THREE.Group();
-    const s = new THREE.Shape();
-    s.moveTo(-.55, 2.6); s.lineTo(.55, 2.6); s.quadraticCurveTo(.62, 1.85, 1.2, 1.55); s.lineTo(1.25, -.9); s.quadraticCurveTo(0, -1.02, -1.25, -.9); s.lineTo(-1.2, 1.55); s.quadraticCurveTo(-.62, 1.85, -.55, 2.6);
-    const geo = new THREE.ShapeGeometry(s, 48);
-    // UV a partir do retângulo envolvente
-    geo.computeBoundingBox(); const bb = geo.boundingBox, uv = geo.attributes.uv, pos = geo.attributes.position;
-    for (let i = 0; i < uv.count; i++) uv.setXY(i, (pos.getX(i) - bb.min.x) / (bb.max.x - bb.min.x), (pos.getY(i) - bb.min.y) / (bb.max.y - bb.min.y));
-    const tex = canvasTex(1000, 1400, (x, w, h) => {
-      x.fillStyle = '#151515'; x.fillRect(0, 0, w, h);
-      // barra com o pattern, como no mockup
-      x.save(); x.beginPath(); x.rect(0, h * .78, w, h * .22); x.clip(); drawPattern(A, x, w, h, '#4a4a4a', .45); x.restore();
-      // assinatura tipográfica no peito
-      const cw = w * .34, cx = w / 2, y = h * .12;
-      drawPath(x, P.casa.d, P.casa.w, cx - cw / 2, y, cw, '#cfcac2');
-      drawWord(x, cx - cw * .52, y + cw * .07, cw * 1.04, '#e9e5de');
-      drawPath(x, P.kanji.d, P.kanji.w, cx - cw * .47, y + cw * .36, cw * .94, '#cfcac2');
-      x.drawImage(A.koiRed, w * .6, h * .5, w * .2, w * .2);
-    });
-    const cloth = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ map: tex, roughness: .95, side: THREE.DoubleSide }));
-    const base = Float32Array.from(pos.array);
-    cloth.position.y = .4; g.add(cloth);
-    const strap = new THREE.MeshStandardMaterial({ color: '#151515', roughness: .9 });
-    const neck = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(-.52, 3, 0), new THREE.Vector3(-.3, 3.55, -.05), new THREE.Vector3(.3, 3.55, -.05), new THREE.Vector3(.52, 3, 0)]), 40, .035, 8), strap);
-    const ties = [-1, 1].map((sg) => new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(sg * 1.2, 1.95, 0), new THREE.Vector3(sg * 1.45, 1.4, .1), new THREE.Vector3(sg * 1.38, .7, .05)]), 30, .03, 8), strap));
-    const hanger = new THREE.Mesh(new THREE.TorusGeometry(.7, .04, 12, 60, Math.PI), new THREE.MeshStandardMaterial({ color: '#7a5434', roughness: .5 }));
-    hanger.position.y = 3.55; hanger.scale.y = .35;
-    const hook = new THREE.Mesh(new THREE.TorusGeometry(.12, .015, 8, 30, Math.PI * 1.4), new THREE.MeshStandardMaterial({ color: '#999', metalness: 1, roughness: .3 }));
-    hook.position.y = 3.85;
-    g.add(neck, ...ties, hanger, hook);
-    let t = 0, swing = 0;
-    g.userData = { name: 'Avental', tip: 'Clique para balançar o avental', target: 1.6, cam: [0, 2.2, 7.6],
-      tick(dt) {
-        t += dt;
-        for (let i = 0; i < pos.count; i++) { const y = base[i * 3 + 1], x = base[i * 3], d = Math.max(0, (2.6 - y) / 3.5); pos.array[i * 3 + 2] = Math.sin(t * 1.6 + x * 1.8 + y) * .05 * d + Math.sin(swing) * .25 * d * d; }
-        pos.needsUpdate = true; geo.computeVertexNormals();
-      },
-      action() { const st = { v: 0 }; gsap.to(st, { v: 1, duration: 1.8, ease: 'none', onUpdate: () => { swing = Math.sin(st.v * Math.PI * 3) * (1 - st.v) * 1.4; } }); },
     };
     return g;
   },

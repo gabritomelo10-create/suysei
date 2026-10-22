@@ -2,7 +2,7 @@ import { mountBrand } from './brand.js';
 import { KoiPainter } from './koi-painter.js';
 import { initInk } from './hero-ink.js';
 import { initJourney } from './journey.js';
-import { initLegend } from './legend.js';
+import { initLegendScene, CHAPTERS as LEGEND_CHAPTERS } from './legend-scene.js';
 
 const { gsap, ScrollTrigger, Lenis } = window;
 gsap.registerPlugin(ScrollTrigger);
@@ -180,11 +180,24 @@ gsap.to('#hero-logo', { scale: .8, yPercent: -8, opacity: .15, ease: 'none', scr
 gsap.to('.credit, .hero__bottom, .hero__top', { opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: '10% top', end: '35% top', scrub: true } });
 $$('.pattern-bg').forEach((el) => gsap.fromTo(el, { backgroundPositionY: '0px' }, { backgroundPositionY: '-260px', ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
 
-/* ---------------- A lenda: manifesto + conceito constroem o logotipo ---------------- */
+/* ---------------- A lenda: cena imersiva em paralaxe ---------------- */
 (function legend() {
-  const root = $('#lenda'), L = initLegend(root);
-  ScrollTrigger.create({ trigger: root, start: 'top top', end: 'bottom bottom', onUpdate: (st) => L.update(st.progress) });
+  const root = $('#lenda'), scene = initLegendScene(root);
+  const chapters = $$('.lchap', root), dots = $$('.legend__nav button', root);
+  let cur = -1;
+  root.addEventListener('chapter', (e) => {
+    const ch = e.detail; if (ch === cur) return; cur = ch;
+    chapters.forEach((c, i) => c.classList.toggle('is-active', i === ch));
+    dots.forEach((d, i) => { d.classList.toggle('is-active', i === ch); d.classList.toggle('is-done', i < ch); });
+  });
+  dots.forEach((d, i) => d.addEventListener('click', () => {
+    const r = root.getBoundingClientRect(), y = r.top + scrollY + (r.height - innerHeight) * (LEGEND_CHAPTERS[i] + .03);
+    lenis ? lenis.scrollTo(y, { duration: 1.8 }) : scrollTo({ top: y, behavior: 'smooth' });
+  }));
+  ScrollTrigger.create({ trigger: root, start: 'top top', end: 'bottom bottom', onUpdate: (st) => scene.update(st.progress) });
 })();
+gsap.fromTo('.mani__koi', { rotate: -30, yPercent: 10 }, { rotate: 40, yPercent: -10, ease: 'none', scrollTrigger: { trigger: '.mani', start: 'top bottom', end: 'bottom top', scrub: true } });
+gsap.from('.mani__portrait', { clipPath: 'inset(14% 10% 14% 10%)', ease: 'none', scrollTrigger: { trigger: '.mani', start: 'top 85%', end: 'top 20%', scrub: true } });
 
 /* ---------------- Travessia: o cometa do Japão ao Brasil, depois a linha do tempo ---------------- */
 (function journey() {
@@ -257,7 +270,7 @@ gsap.from('.pillar', { y: 100, opacity: 0, stagger: .12, duration: 1.3, ease: 'e
 /* ---------------- Aplicações: um palco 3D por categoria (carregado perto da tela) ---------------- */
 $$('.appcat').forEach((sec) => {
   const canvas = $('canvas[data-stage]', sec), tip = $('.appcat__tip', sec), btns = $$('.aobj', sec);
-  ScrollTrigger.create({
+  if (canvas) ScrollTrigger.create({
     trigger: sec, start: 'top 160%', once: true,
     onEnter: () => import('./studio3d.js').then(async ({ createStage }) => {
       try {

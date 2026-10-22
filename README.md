@@ -3,7 +3,9 @@
 Site estático (HTML + CSS + JS) que apresenta a marca Suysei — Casa de Refeição Japonesa, a partir do Guia de Marca 2026.
 
 ## Seções
-1. **Abertura** — o símbolo das carpas surge como uma pintura sumi-ê sendo feita (canvas 2D): o pincel traça o círculo do cometa, pinta cada carpa e o cometa passa a orbitar. Ao fundo, luz que segue o mouse e bokeh em WebGL. Box de destaque com o crédito da BRITTO* GROUP.
+1. **Abertura** — fundo escuro com o pattern oficial; o símbolo das carpas é pintado a pincel sumi-ê. Box de destaque da BRITTO* GROUP.
+2. **Manifesto** — editorial com o retrato do Tetsuo e fotos em paralaxe.
+3. **A lenda** — cena noturna em sumi-ê com camadas de paralaxe: a carpa sobe a cachoeira, o cometa cruza o céu e o símbolo nasce na lua.
 2. **Frase / Manifesto / História** — revelação palavra a palavra, paralaxe e linha do tempo horizontal (1974 → hoje).
 3. **Conceito** — cena em paralaxe com céu estrelado, cometa cruzando o céu no scroll, paisagem e camada desfocada em primeiro plano.
 4. **As duas carpas** — a que sobe e a que desce, com hover interativo.
