@@ -426,15 +426,45 @@
     <!-- ============ 13. GALERIA ============ -->
     <section class="gallery" id="galeria">
       <div class="gallery__head">
-        <span class="eyebrow">11 — Pontos de contato</span>
-        <h2 class="display">A marca no dia a dia</h2>
+        <div>
+          <span class="eyebrow">11 — Pontos de contato</span>
+          <h2 class="display">A marca no dia a dia</h2>
+        </div>
+        <p class="gallery__lead">24 aplicações, da fachada ao vale-presente. Filtre por categoria e clique em uma imagem para ampliar.</p>
       </div>
-      <div class="gallery__grid">
-        <figure class="gitem gitem--wide" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/caixas-andares.webp" alt="Caixas presente Suysei pretas, de um e dois andares, sobre mármore" loading="lazy"></div><figcaption><b>Gift box</b>Embalagens · 1 e 2 andares</figcaption></figure>
-        <figure class="gitem gitem--tall" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/drinks-1.webp" alt="Carta de drinks Suysei, fundo preto com moldura vermelha" loading="lazy"></div><figcaption><b>Carta de drinks</b>Cardápios</figcaption></figure>
-        <figure class="gitem" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/uniforme-black.webp" alt="Garçom com camiseta e avental pretos Suysei, com carpa branca estampada" loading="lazy"></div><figcaption><b>Uniforme black</b>Garçons e atendentes</figcaption></figure>
-        <figure class="gitem gitem--wide" data-lightbox><div class="gitem__img" data-parallax="-8"><img src="assets/img/mockups/uniforme-cozinha.webp" alt="Cozinheiro cortando salmão usando avental Suysei" loading="lazy"></div><figcaption><b>Cozinha</b>Uniforme · avental</figcaption></figure>
-        <figure class="gitem" data-lightbox><div class="gitem__img gitem__img--contain" data-parallax="-4"><img src="assets/img/mockups/camiseta.webp" alt="Camiseta preta com assinatura Suysei, frente e costas" loading="lazy"></div><figcaption><b>Camiseta</b>Garçons e atendentes</figcaption></figure>
+      <div class="gallery__filters" role="group" aria-label="Filtrar aplicações">
+          <button class="gfilter is-active" data-filter="todos" aria-pressed="true" data-magnetic>Todos<sup>24</sup></button>
+          <button class="gfilter" data-filter="ambiente" aria-pressed="false" data-magnetic>Ambiente<sup>4</sup></button>
+          <button class="gfilter" data-filter="mesa" aria-pressed="false" data-magnetic>Mesa e cardápios<sup>8</sup></button>
+          <button class="gfilter" data-filter="embalagens" aria-pressed="false" data-magnetic>Embalagens<sup>4</sup></button>
+          <button class="gfilter" data-filter="uniformes" aria-pressed="false" data-magnetic>Uniformes<sup>6</sup></button>
+          <button class="gfilter" data-filter="papelaria" aria-pressed="false" data-magnetic>Papelaria<sup>2</sup></button>
+      </div>
+      <div class="gallery__grid" id="gallery-grid">
+        <figure class="gitem gitem--feat" data-cat="ambiente" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/fachada.webp" alt="Fachada do Suysei à noite com o letreiro da assinatura centralizada" loading="lazy" width="1536" height="1024"></div><figcaption><span>Ambiente</span><b>Fachada</b>Letreiro iluminado</figcaption></figure>
+        <figure class="gitem" data-cat="ambiente" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/balcao-recepcao.webp" alt="Balcão de recepção em pedra escura com o logotipo Suysei" loading="lazy" width="1536" height="1024"></div><figcaption><span>Ambiente</span><b>Recepção</b>Balcão em pedra</figcaption></figure>
+        <figure class="gitem" data-cat="ambiente" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/noren.webp" alt="Noren de tecido off-white com uma carpa preta e uma vermelha" loading="lazy" width="1536" height="1024"></div><figcaption><span>Ambiente</span><b>Noren</b>Cortina da entrada</figcaption></figure>
+        <figure class="gitem" data-cat="embalagens" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/caixa-delivery.webp" alt="Caixa de delivery preta com a assinatura centralizada e cinta vermelha" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Caixa delivery</b>Cinta vermelha</figcaption></figure>
+        <figure class="gitem" data-cat="embalagens" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/sacolas-off-white.webp" alt="Duas sacolas off-white com carpas em nanquim e ondas vermelhas" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Sacolas</b>Off-white · alça vermelha</figcaption></figure>
+        <figure class="gitem gitem--feat" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/menu-capa-guardanapo.webp" alt="Cardápio preto com costura japonesa vermelha e guardanapo com o logotipo" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Cardápio</b>Encadernação japonesa</figcaption></figure>
+        <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/avental-off-white.webp" alt="Avental off-white com carpa em nanquim e bolso estampado com ondas vermelhas" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Avental</b>Off-white · bolso de ondas</figcaption></figure>
+        <figure class="gitem" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/pratos.webp" alt="Pratos de cerâmica com carpas vermelhas e ondas em nanquim" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Louça</b>Carpas e ondas</figcaption></figure>
+        <figure class="gitem gitem--feat" data-cat="ambiente" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/quadros-salao.webp" alt="Três quadros no salão: paisagem japonesa, o logotipo e o mapa da travessia do Japão ao Brasil" loading="lazy" width="1536" height="1024"></div><figcaption><span>Ambiente</span><b>Salão</b>Quadros da travessia</figcaption></figure>
+        <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/dolma-black.webp" alt="Dólmã preto com estampa de ondas e carpa vermelha" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Dólmã black</b>Ondas e carpa</figcaption></figure>
+        <figure class="gitem" data-cat="embalagens" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/sacola-preta.webp" alt="Sacola preta com a assinatura centralizada sobre a mesa" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Sacola take away</b>Preta · alça de papel</figcaption></figure>
+        <figure class="gitem gitem--tall" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/drinks-1.webp" alt="Carta de drinks Suysei, fundo preto com moldura vermelha" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Carta de drinks</b>Página interna</figcaption></figure>
+        <figure class="gitem" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/carta-drinks-capa.webp" alt="Capa da carta de drinks ao lado de um coquetel" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Carta de drinks</b>Capa</figcaption></figure>
+        <figure class="gitem" data-cat="papelaria" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/envelope-cartao.webp" alt="Envelope preto com o símbolo e cartão off-white com a assinatura" loading="lazy" width="1536" height="1024"></div><figcaption><span>Papelaria</span><b>Cartão</b>Envelope preto</figcaption></figure>
+        <figure class="gitem gitem--feat" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/menu-app.webp" alt="Celular com o app do Suysei ao lado do cardápio impresso" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Cardápio digital</b>App e capa</figcaption></figure>
+        <figure class="gitem" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/jogo-americano.webp" alt="Jogo americano off-white com o logotipo e prato de sushi" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Jogo americano</b>Mesa posta</figcaption></figure>
+        <figure class="gitem" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/porta-copos.webp" alt="Porta-copos claro e escuro com o logotipo" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Porta-copos</b>Claro e escuro</figcaption></figure>
+        <figure class="gitem" data-cat="mesa" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/cardapio-display.webp" alt="Cardápio preto e display de mesa com ilustração de nigiri" loading="lazy" width="1536" height="1024"></div><figcaption><span>Mesa e cardápios</span><b>Display de mesa</b>Cardápio e sugestão</figcaption></figure>
+        <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/avental-banner.webp" alt="Avental preto com a assinatura e banner preto com o logotipo" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Avental black</b>Com banner do salão</figcaption></figure>
+        <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/camiseta-black.webp" alt="Camiseta preta com o logotipo no peito e carpa na manga" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Camiseta</b>Atendimento</figcaption></figure>
+        <figure class="gitem" data-cat="papelaria" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/vale-presente.webp" alt="Vale-presente off-white com envelope preto" loading="lazy" width="1536" height="1024"></div><figcaption><span>Papelaria</span><b>Vale-presente</b>Cartão e envelope</figcaption></figure>
+        <figure class="gitem" data-cat="embalagens" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/caixas-andares.webp" alt="Caixas presente Suysei pretas, de um e dois andares, sobre mármore" loading="lazy" width="1536" height="1024"></div><figcaption><span>Embalagens</span><b>Gift box</b>1 e 2 andares</figcaption></figure>
+        <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/uniforme-black.webp" alt="Garçom com camiseta e avental pretos Suysei, com carpa branca estampada" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Uniforme black</b>Garçons e atendentes</figcaption></figure>
+        <figure class="gitem" data-cat="uniformes" data-lightbox tabindex="0"><div class="gitem__img" data-parallax="-5"><img src="assets/img/mockups/uniforme-cozinha.webp" alt="Cozinheiro cortando salmão usando avental Suysei" loading="lazy" width="1536" height="1024"></div><figcaption><span>Uniformes</span><b>Cozinha</b>Avental grafite</figcaption></figure>
       </div>
     </section>
 
@@ -466,6 +496,8 @@
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button class="lightbox__close" aria-label="Fechar">✕</button>
+    <button class="lightbox__nav lightbox__nav--prev" aria-label="Imagem anterior">←</button>
+    <button class="lightbox__nav lightbox__nav--next" aria-label="Próxima imagem">→</button>
     <img alt="">
     <p class="lightbox__cap"></p>
   </div>

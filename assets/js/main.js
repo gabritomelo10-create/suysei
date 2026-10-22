@@ -323,16 +323,50 @@ ScrollTrigger.create({
   }),
 });
 
-/* ---------------- Galeria + lightbox ---------------- */
-gsap.utils.toArray('.gitem').forEach((g, i) => gsap.from(g, { y: 100, opacity: 0, duration: 1.3, ease: 'expo.out', delay: (i % 4) * .08, scrollTrigger: { trigger: g, start: 'top 92%' } }));
-const lb = $('#lightbox'), lbImg = $('img', lb), lbCap = $('.lightbox__cap', lb);
-$$('[data-lightbox]').forEach((f) => f.addEventListener('click', () => {
-  const img = $('img', f); lbImg.src = img.src; lbImg.alt = img.alt; lbCap.textContent = img.alt;
-  lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false'); lenis?.stop();
+/* ---------------- Galeria: filtros + lightbox ---------------- */
+const grid = $('#gallery-grid');
+const gitems = $$('.gitem', grid);
+gitems.forEach((g, i) => gsap.from(g, { y: 100, opacity: 0, duration: 1.3, ease: 'expo.out', delay: (i % 3) * .08, scrollTrigger: { trigger: g, start: 'top 92%', once: true } }));
+$$('.gfilter').forEach((b) => b.addEventListener('click', () => {
+  const cat = b.dataset.filter;
+  $$('.gfilter').forEach((x) => { const on = x === b; x.classList.toggle('is-active', on); x.setAttribute('aria-pressed', on); });
+  gsap.to(grid, { opacity: 0, y: 20, duration: .3, ease: 'power2.in', onComplete: () => {
+    gitems.forEach((g) => { g.hidden = cat !== 'todos' && g.dataset.cat !== cat; gsap.set(g, { clearProps: 'opacity,transform' }); });
+    grid.classList.toggle('is-filtered', cat !== 'todos');
+    ScrollTrigger.refresh();
+    gsap.to(grid, { opacity: 1, y: 0, duration: .6, ease: 'expo.out' });
+    gsap.from(gitems.filter((g) => !g.hidden), { scale: .94, opacity: 0, duration: .8, stagger: .04, ease: 'expo.out' });
+  } });
 }));
+
+const lb = $('#lightbox'), lbImg = $('img', lb), lbCap = $('.lightbox__cap', lb);
+let lbList = [], lbIndex = 0;
+const showLb = (i) => {
+  lbIndex = (i + lbList.length) % lbList.length;
+  const f = lbList[lbIndex], img = $('img', f);
+  lbImg.src = img.src; lbImg.alt = img.alt;
+  lbCap.textContent = `${$('b', f)?.textContent ?? ''} — ${img.alt}  ·  ${lbIndex + 1}/${lbList.length}`;
+  gsap.fromTo(lbImg, { opacity: 0, scale: .97 }, { opacity: 1, scale: 1, duration: .5, ease: 'expo.out' });
+};
+const openLb = (f) => {
+  lbList = $$('[data-lightbox]').filter((x) => !x.hidden);
+  showLb(lbList.indexOf(f));
+  lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false'); lenis?.stop();
+};
+$$('[data-lightbox]').forEach((f) => {
+  f.addEventListener('click', () => openLb(f));
+  f.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(f); } });
+});
 const closeLb = () => { lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true'); lenis?.start(); };
-lb.addEventListener('click', closeLb);
-addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
+lb.addEventListener('click', (e) => { if (e.target === lb || e.target.closest('.lightbox__close')) closeLb(); });
+$('.lightbox__nav--prev', lb).addEventListener('click', () => showLb(lbIndex - 1));
+$('.lightbox__nav--next', lb).addEventListener('click', () => showLb(lbIndex + 1));
+addEventListener('keydown', (e) => {
+  if (!lb.classList.contains('is-open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') showLb(lbIndex - 1);
+  if (e.key === 'ArrowRight') showLb(lbIndex + 1);
+});
 
 /* ---------------- Outro ---------------- */
 const outro = $('.outro');
