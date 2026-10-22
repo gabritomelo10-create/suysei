@@ -1,7 +1,8 @@
 // A lenda da carpa: paisagem noturna em sumi-ê, em camadas de paralaxe, pintada em canvas no carregamento.
-// O scroll conduz a carpa vermelha do lago, pela cachoeira, até o céu; a câmera a acompanha.
-// No alto, o cometa cruza o céu e a carpa salta para a lua, onde nasce o símbolo das duas carpas.
+// O scroll conduz a carpa vermelha: ela nada no lago, sobe a cachoeira contra a correnteza e, no alto,
+// salta e se contorce até virar a carpa do logotipo; a segunda carpa completa o símbolo e o cometa o circunda.
 import { makeStroke, drawStroke, sample, taper, rng } from './sumi.js';
+import { KoiSwim } from './koi-swim.js';
 
 const clamp01 = (x) => Math.max(0, Math.min(1, x));
 const seg = (p, a, b) => clamp01((p - a) / (b - a));
@@ -91,8 +92,9 @@ export function initLegendScene(root) {
   L.main.el.insertAdjacentHTML('beforeend', '<div class="ls__fall"></div><div class="ls__foam"></div><div class="ls__pool"><i></i><i></i><i></i><i></i></div><div class="ls__ripples"><b></b><b></b><b></b></div>');
   L.mist.el.insertAdjacentHTML('beforeend', '<i></i><i></i><i></i><i></i>');
   const fx = document.createElement('div'); fx.className = 'ls__fx'; scene.appendChild(fx);
-  fx.innerHTML = '<span class="ls__koi"></span><span class="ls__comet"><i></i></span><div class="ls__symbol"><span class="ls__halo"></span><span class="ls__mark"></span><canvas class="ls__orbit"></canvas></div>';
-  const koi = fx.querySelector('.ls__koi'), comet = fx.querySelector('.ls__comet'), symbol = fx.querySelector('.ls__symbol'), orbit = fx.querySelector('.ls__orbit');
+  fx.innerHTML = '<span class="ls__comet"><i></i></span><div class="ls__symbol"><span class="ls__halo"></span><span class="ls__left"></span><canvas class="ls__orbit"></canvas></div><canvas class="ls__fish"></canvas>';
+  const fish = new KoiSwim(fx.querySelector('.ls__fish'));
+  const comet = fx.querySelector('.ls__comet'), symbol = fx.querySelector('.ls__symbol'), orbit = fx.querySelector('.ls__orbit');
   const fall = L.main.el.querySelector('.ls__fall'), foam = L.main.el.querySelector('.ls__foam'), pool = L.main.el.querySelector('.ls__pool'), ripples = L.main.el.querySelector('.ls__ripples');
 
   let W = 0, H = 0, geo = {}, orbitStroke = null, octx = orbit.getContext('2d');
@@ -164,7 +166,8 @@ export function initLegendScene(root) {
       drawStroke(x, makeStroke(sample((t) => ({ x: bx + Math.cos(a) * t * Lw, y: by + Math.sin(a) * t * Lw + Math.sin(t * 3) * 10 }), (t) => 26 * taper(t, .25, .6), 40), { bristles: 14, seed: 300 + i, dry: .4, thin: .25 }), 1, 'rgba(4,4,5,.92)');
     }
     // órbita do cometa ao redor do símbolo
-    const os = symbol.getBoundingClientRect().width || moon.r * 2.6, pr = Math.min(devicePixelRatio || 1, 2);
+    fish.resize(W, H);
+    const os = symbol.offsetWidth || moon.r * 2.6, pr = Math.min(devicePixelRatio || 1, 2);
     orbit.width = orbit.height = os * pr; octx.setTransform(pr, 0, 0, pr, 0, 0);
     orbitStroke = makeStroke(sample((t) => { const a = (-90 + t * 360) * Math.PI / 180; return { x: os / 2 + Math.cos(a) * os * .46, y: os / 2 + Math.sin(a) * os * .46 }; }, (t) => os * .012 * (.4 + .6 * taper(t, .02, .1)), 360), { bristles: 12, seed: 5, dry: .5, thin: .18 });
     update(state.p, true);
@@ -188,35 +191,50 @@ export function initLegendScene(root) {
       ly.el.style.transform = `translate3d(${-state.mx * 26 * ly.depth}px, ${off - state.my * 14 * ly.depth}px, 0)`;
     }
     const mainOff = -(Lh - H) * (1 - c);
-    // posição da carpa na tela
-    const swim = p < .2 ? (1 - seg(p, .1, .2)) : 0;
-    const t = performance.now() / 1000;
-    let kx = cx + Math.sin(p * 120) * W * .006 * (1 - swim), ky = koiY + mainOff, rot = -8 + Math.sin(p * 90) * 6;
-    if (swim > 0) { const a = t * .9; kx = cx + Math.cos(a) * W * .1 * swim; ky += Math.sin(a) * H * .03 * swim; rot = lerp(rot, a * 57.3 + 90, swim); }
-    // salto para a lua
-    const leap = smooth(seg(p, .74, .84));
-    const m = geo.moon;
-    kx = lerp(kx, m.x, leap); ky = lerp(ky, m.y, leap) - Math.sin(leap * Math.PI) * H * .12;
-    const ks = lerp(1, .55, leap);
-    koi.style.transform = `translate(${kx - state.mx * 26}px, ${ky - state.my * 14}px) translate(-50%, -50%) rotate(${rot - leap * 40}deg) scale(${ks})`;
-    koi.style.opacity = 1 - seg(p, .82, .86);
+    const t = performance.now() / 1000, px = -state.mx * 26, py = -state.my * 14;
+    const k0 = Math.min(Math.max(W * .15, 130), 230) / 1200;
+    // 1. nadando em círculos no lago
+    const A = fish.A, B = fish.B;
+    const pcx = cx + px, pcy = poolY + H * .1 + mainOff + py, Rx = W * (W < 760 ? .2 : .11), Ry = H * .045;
+    const swim = 1 - smooth(seg(p, .12, .22));
+    if (swim > 0) fish.wave(fish.follow(A, (u) => ({ x: pcx + Math.cos(u) * Rx, y: pcy + Math.sin(u) * Ry }), t * .75, k0), t, .05, 1.2, 6);
+    // 2. subindo a cachoeira: a cauda bate forte, a correnteza a empurra de volta
+    const fight = Math.sin(t * 2.7) * .5 + Math.sin(t * 4.3) * .3;
+    const hx = cx + px + Math.sin(t * 1.3) * W * .01, hy = koiY + mainOff + py + fight * H * .012 * (climb > 0 && climb < 1 ? 1 : .4);
+    fish.wave(fish.line(B, hx, hy, -Math.PI / 2 + Math.sin(t * 1.9) * .08, k0), t, climb > 0 && climb < 1 ? .085 : .06, 1.25, 11);
+    let pose = swim >= 1 ? A : swim > 0 ? fish.mix(B, A, swim) : B;
+    // 3. no alto, salta e se contorce até a pose exata do logotipo (a cabeça chega primeiro)
+    const m = geo.moon, skyOff = (L.sky.Lh - H) * -(1 - c);
+    const sx = m.x + px * .18, sy = m.y + py * .18 + skyOff, ss = symbol.offsetWidth;
+    Object.assign(symbol.style, { left: sx + 'px', top: sy + 'px' });
+    const q = seg(p, .72, .86);
+    if (q > 0) {
+      const Lg = fish.logo(fish.C ||= fish.mk(), sx, sy, ss * .88 / 1200);
+      const O = fish.mix(pose, Lg, (s) => smooth(clamp01(q * 1.6 - (1 - s) * .6)));
+      const lift = Math.sin(smooth(q) * Math.PI) * H * .14;
+      if (q < 1) for (let i = 0; i < O.y.length; i++) O.y[i] -= lift * (.4 + .6 * i / (O.y.length - 1));
+      pose = O;
+    }
+    fish.draw(pose, 1);
+    fx.style.setProperty('--glow', .5 + q * .5);
     // cometa cruza o céu
     const cp = seg(p, .6, .78);
     comet.style.opacity = cp > 0 && cp < 1 ? 1 : 0;
     comet.style.transform = `translate(${lerp(-W * .15, W * 1.1, cp)}px, ${lerp(H * .02, H * .34, cp)}px) rotate(14deg)`;
-    // o símbolo nasce na lua
-    const sym = seg(p, .82, .9);
-    Object.assign(symbol.style, { left: m.x - state.mx * 26 * .18 + 'px', top: m.y - state.my * 14 * .18 + (L.sky.Lh - H) * -(1 - c) + 'px' });
-    symbol.style.opacity = sym;
+    // a carpa que desce surge, pintada de cima para baixo, e completa o símbolo
+    const sym = seg(p, .84, .92);
+    symbol.style.opacity = 1;
     symbol.style.setProperty('--sym', sym);
-    L.sky.el.style.setProperty('--moon', 1 - sym * .85);
+    L.sky.el.style.setProperty('--moon', 1 - seg(p, .7, .86) * .85);
     const ob = seg(p, .88, .98);
     const os = orbit.clientWidth; octx.clearRect(0, 0, os, os);
     if (ob > 0 && orbitStroke) drawStroke(octx, orbitStroke, ob, 'rgba(233,233,233,.55)');
     root.dispatchEvent(new CustomEvent('chapter', { detail: CHAPTERS.reduce((a, b, i) => (p >= b ? i : a), 0) }));
   }
-  // o lago anima mesmo parado (a carpa nada em círculos)
-  (function idle() { requestAnimationFrame(idle); if (state.p < .2 && W) { last = -1; update(state.p); } })();
+  // a carpa está sempre viva enquanto a cena está na tela
+  let onScreen = false;
+  new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; }).observe(root);
+  (function idle() { requestAnimationFrame(idle); if (onScreen && state.p < .86 && W) { last = -1; update(state.p); } })();
   new ResizeObserver(() => paint()).observe(scene);
   root.addEventListener('pointermove', (e) => { state.mx = e.clientX / innerWidth - .5; state.my = e.clientY / innerHeight - .5; last = -1; update(state.p); });
   return { update };

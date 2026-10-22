@@ -244,25 +244,39 @@ canvas.lc__koi { height: auto; }
 .mani__portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
 .mani__portrait figcaption { position: absolute; inset: auto 0 0; padding: 80px 24px 22px; display: grid; gap: 4px; background: linear-gradient(transparent, rgba(0, 0, 0, .8)); font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(255, 255, 255, .8); }
 .mani__portrait figcaption b { font-size: 19px; letter-spacing: .12em; color: #fff; }
-.mani__text { min-width: 0; max-width: 620px; }
+.mani__text { min-width: 0; max-width: 640px; }
 .mani__text .eyebrow { color: var(--red-glow); }
-.mani__title { margin: .15em 0 .35em; font-family: var(--ff-display); font-weight: 700; text-transform: uppercase; font-size: clamp(52px, 7vw, 120px); line-height: .9; }
-.mani__lead { font-family: var(--ff-display); font-size: clamp(24px, 2.4vw, 38px); line-height: 1.15; color: #fff; margin: 0 0 1.2em; text-wrap: balance; }
-.mani__text p { font-size: clamp(17px, 1.15vw, 19px); line-height: 1.7; color: rgba(240, 236, 230, .88); }
-.mani__quote { margin: 1.6em 0; padding: 4px 0 4px 26px; border-left: 3px solid var(--red-glow); font-size: clamp(20px, 1.7vw, 27px); line-height: 1.4; font-weight: 500; color: #fff; }
-.mani__strip { position: relative; display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: clamp(16px, 2vw, 28px); align-items: end; max-width: 1400px; margin: 12vh auto 0; }
+.mani__title { position: relative; margin: .5em 0 .55em; font-family: var(--ff-display); font-weight: 300; font-size: clamp(56px, 7.4vw, 128px); line-height: .9; letter-spacing: -.02em; color: #fff; }
+.mani__jp { position: absolute; right: 0; top: -.15em; writing-mode: vertical-rl; font-family: var(--ff-body); font-size: .2em; font-weight: 500; letter-spacing: .5em; color: var(--red-glow); opacity: .85; }
+.mani__lead { font-family: var(--ff-display); font-weight: 400; font-size: clamp(26px, 2.5vw, 40px); line-height: 1.2; letter-spacing: -.01em; color: #fff; margin: 0 0 1.4em; max-width: 18em; text-wrap: balance; }
+.mani__cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 2.6vw, 44px); padding-top: 28px; border-top: 1px solid rgba(255, 255, 255, .14); }
+.mani__text p:not(.mani__lead) { margin: 0; font-size: clamp(16px, 1.08vw, 18px); line-height: 1.75; color: rgba(240, 236, 230, .86); text-wrap: pretty; }
+.mani__first::first-letter { float: left; margin: .08em .1em 0 0; font-family: var(--ff-display); font-weight: 600; font-size: 3.6em; line-height: .78; color: var(--red-glow); }
+.mani__text b { color: #fff; font-weight: 600; }
+.mani__quote { position: relative; max-width: 1100px; margin: clamp(80px, 14vh, 150px) auto 0; padding: 0 var(--gutter); text-align: center; }
+.mani__quote::before { content: "“"; display: block; height: .5em; font-family: var(--ff-display); font-size: clamp(110px, 12vw, 200px); line-height: 1; color: var(--red-glow); }
+.mani__quote p { margin: 0; font-family: var(--ff-display); font-weight: 300; font-size: clamp(28px, 3.4vw, 56px); line-height: 1.18; letter-spacing: -.015em; color: #fff; text-wrap: balance; }
+.mani__quote em { font-style: normal; font-weight: 600; color: var(--red-glow); }
+.mani__strip { position: relative; display: grid; grid-template-columns: 1fr 1.5fr 1.1fr; gap: clamp(16px, 2vw, 28px); align-items: end; max-width: 1400px; margin: clamp(80px, 14vh, 150px) auto 0; }
 .mani__photo { position: relative; margin: 0; overflow: hidden; border-radius: 4px; aspect-ratio: 4 / 5; max-width: 100%; box-shadow: 0 30px 70px rgba(0, 0, 0, .5); }
 .mani__photo--wide { aspect-ratio: 5 / 4; }
 .mani__photo > div { position: absolute; inset: -8% 0; }
 .mani__photo img { width: 100%; height: 100%; object-fit: cover; }
 .mani__photo:first-child img { filter: grayscale(1) contrast(1.06); object-position: 50% 25%; }
 .mani__photo figcaption { position: absolute; left: 16px; bottom: 14px; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; text-shadow: 0 1px 10px rgba(0, 0, 0, .8); }
-.mani__sign { margin: 0; align-self: center; font-family: var(--ff-display); font-size: clamp(20px, 1.8vw, 28px); line-height: 1.3; color: #fff; }
+.mani__close { align-self: stretch; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; padding-left: clamp(0px, 1.5vw, 24px); }
+.mani__close > p:first-child { margin: 0; font-size: clamp(16px, 1.08vw, 18px); line-height: 1.75; color: rgba(240, 236, 230, .78); }
+.mani__sign { margin: 0; padding-top: 22px; border-top: 1px solid var(--red-glow); font-family: var(--ff-display); font-weight: 400; font-size: clamp(22px, 1.9vw, 30px); line-height: 1.25; color: rgba(255, 255, 255, .7); }
+.mani__sign span { display: block; color: #fff; font-weight: 600; }
 @media (max-width: 900px) {
   .mani__grid { grid-template-columns: 1fr; }
   .mani__portrait { width: min(100%, 460px); }
   .mani__strip { grid-template-columns: 1fr 1fr; }
-  .mani__sign { grid-column: 1 / -1; }
+  .mani__close { grid-column: 1 / -1; padding: 0; }
+}
+@media (max-width: 760px) {
+  .mani__cols { grid-template-columns: 1fr; }
+  .mani__jp { display: none; }
 }
 
 /* =========================================================
@@ -301,13 +315,13 @@ canvas.lc__koi { height: auto; }
 .ls--mist i:nth-child(4) { top: 290vh; animation-duration: 33s; }
 @keyframes lsMist { to { transform: translateX(14%); } }
 .ls__fx { position: absolute; inset: 0; z-index: 7; pointer-events: none; }
-.ls__koi { position: absolute; left: 0; top: 0; width: clamp(90px, 11vw, 170px); aspect-ratio: 1; background: var(--red-glow); -webkit-mask: url(../img/brand/koi-right.png) center / contain no-repeat; mask: url(../img/brand/koi-right.png) center / contain no-repeat; filter: drop-shadow(0 0 18px rgba(255, 59, 71, .65)); }
 .ls__comet { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity .3s; }
 .ls__comet::before { content: ""; position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 0 18px 6px rgba(255, 225, 210, .8), 0 0 60px 20px rgba(255, 59, 71, .5); }
 .ls__comet i { position: absolute; right: 0; top: -1.5px; width: 34vw; height: 3px; border-radius: 3px; background: linear-gradient(90deg, transparent, rgba(255, 150, 150, .35) 50%, rgba(255, 235, 225, .9)); }
-.ls__symbol { position: absolute; width: clamp(240px, 36vmin, 420px); aspect-ratio: 1; transform: translate(-50%, -50%) scale(calc(.85 + var(--sym, 0) * .15)); opacity: 0; }
-.ls__halo { position: absolute; inset: -30%; border-radius: 50%; background: radial-gradient(closest-side, rgba(188, 22, 33, .45), transparent); }
-.ls__mark { position: absolute; inset: 6%; background: var(--red-glow); -webkit-mask: url(../img/brand/koi-mask.png) center / contain no-repeat; mask: url(../img/brand/koi-mask.png) center / contain no-repeat; filter: drop-shadow(0 0 24px rgba(255, 59, 71, .6)); }
+.ls__symbol { position: absolute; width: clamp(240px, 36vmin, 420px); aspect-ratio: 1; transform: translate(-50%, -50%); opacity: 0; }
+.ls__halo { position: absolute; inset: -30%; border-radius: 50%; background: radial-gradient(closest-side, rgba(188, 22, 33, .45), transparent); opacity: var(--sym, 0); }
+.ls__fish { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 0 calc(10px + var(--glow, .5) * 16px) rgba(255, 59, 71, .6)); }
+.ls__left { position: absolute; inset: 6%; background: var(--red-glow); -webkit-mask: url(../img/brand/koi-left.png) center / contain no-repeat; mask: url(../img/brand/koi-left.png) center / contain no-repeat; filter: drop-shadow(0 0 24px rgba(255, 59, 71, .6)); clip-path: inset(0 0 calc((1 - var(--sym, 0)) * 100%) 0); opacity: min(1, calc(var(--sym, 0) * 3)); }
 .ls__orbit { position: absolute; inset: 0; width: 100%; height: 100%; }
 .legend__shade { position: absolute; inset: 0; z-index: 9; pointer-events: none; background: linear-gradient(90deg, rgba(4, 4, 6, .92) 0%, rgba(4, 4, 6, .75) 30%, rgba(4, 4, 6, 0) 52%); }
 .legend__copy { position: absolute; z-index: 10; left: var(--gutter); top: 50%; translate: 0 -50%; width: min(540px, 44vw); display: grid; gap: 18px; }
