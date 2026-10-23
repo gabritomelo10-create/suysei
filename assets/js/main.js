@@ -148,6 +148,31 @@ if (finePointer) $$('[data-tilt]').forEach((el) => {
   el.addEventListener('pointerleave', () => { rx(0); ry(0); });
 });
 
+/* ---------------- Toque: os efeitos de cursor ganham equivalentes ---------------- */
+if (!finePointer && !reduced) {
+  // o símbolo do hero flutua como papel ao vento e responde à inclinação do aparelho, quando disponível
+  const logo = $('#hero-logo');
+  gsap.set(logo, { transformPerspective: 1200 });
+  const float = gsap.timeline({ repeat: -1, yoyo: true, defaults: { ease: 'sine.inOut', duration: 3.2 } })
+    .to(logo, { rotationY: 7, rotationX: -4, y: -8 }).to(logo, { rotationY: -6, rotationX: 3, y: 6 });
+  const rx = gsap.quickTo(logo, 'rotationX', { duration: 1, ease: 'power3.out' }), ry = gsap.quickTo(logo, 'rotationY', { duration: 1, ease: 'power3.out' });
+  addEventListener('deviceorientation', (e) => {
+    if (e.gamma == null) return;
+    float.kill();
+    const g = Math.max(-30, Math.min(30, e.gamma)) / 30, b = Math.max(-30, Math.min(30, (e.beta || 45) - 45)) / 30;
+    ry(g * 12); rx(-b * 9);
+    window.dispatchEvent(new CustomEvent('tilt', { detail: { x: g * .5, y: b * .5 } }));
+  });
+  // cards com tilt: giram em 3D conforme passam pela tela
+  $$('[data-tilt]').forEach((el) => {
+    const amt = el.dataset.tilt === 'soft' ? 5 : 8;
+    gsap.fromTo(el, { transformPerspective: 900, rotationX: amt, rotationY: -amt * .25 }, {
+      rotationX: -amt * .5, rotationY: amt * .2, ease: 'none',
+      scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: .6 },
+    });
+  });
+}
+
 /* ---------------- Progress + nav ---------------- */
 gsap.to('.progress span', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
 let lastY = 0;
@@ -229,6 +254,23 @@ gsap.from('.mani__portrait', { clipPath: 'inset(14% 10% 14% 10%)', ease: 'none',
   addEventListener('resize', () => { if (tlActive >= 0) place(tlActive); });
 })();
 
+/* ---------------- Galerias deslizantes (celular) ---------------- */
+$$('.appcat__photos').forEach((g) => {
+  const bar = document.createElement('p'); bar.className = 'appcat__swipe'; bar.setAttribute('aria-hidden', 'true');
+  bar.innerHTML = `<span>Deslize</span><i><b></b></i><span class="appcat__count">1/${g.children.length}</span>`;
+  g.after(bar);
+  const count = bar.querySelector('.appcat__count'), kids = [...g.children];
+  const upd = () => {
+    const max = g.scrollWidth - g.clientWidth; if (max <= 0) return;
+    bar.style.setProperty('--sp', Math.max(.08, g.scrollLeft / max));
+    const i = kids.reduce((a, k, n) => (Math.abs(k.offsetLeft - g.scrollLeft - g.offsetLeft) < Math.abs(kids[a].offsetLeft - g.scrollLeft - g.offsetLeft) ? n : a), 0);
+    count.textContent = `${i + 1}/${kids.length}`;
+    // a foto que entra ganha profundidade, as vizinhas recuam
+    kids.forEach((k) => { const d = (k.getBoundingClientRect().left + k.offsetWidth / 2 - innerWidth / 2) / innerWidth; const m = innerWidth < 761; k.style.scale = m ? 1 - Math.min(.08, Math.abs(d) * .1) : ''; k.style.filter = m ? `brightness(${1 - Math.min(.5, Math.abs(d) * .55)})` : ''; });
+  };
+  g.addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); requestAnimationFrame(upd);
+});
+
 /* ---------------- Versões ---------------- */
 (function versions() {
   const info = {
@@ -295,7 +337,7 @@ $$('.appcat').forEach((sec) => {
     label: { size: 18, info: [['Fonte', 'Barlow Medium'], ['Caixa', 'Alta'], ['Espaçamento', '+32%'], ['Uso', 'Assinaturas e rótulos']] },
     body: { size: 18, info: [['Fonte', 'Barlow Medium'], ['Caixa', 'Mista'], ['Entrelinha', '1,6'], ['Uso', 'Texto corrido']] },
   };
-  const render = () => { out.textContent = input.value || ' '; out.style.fontSize = `${size.value}px`; };
+  const render = () => { out.textContent = input.value || ' '; out.style.fontSize = `min(${size.value}px, ${out.dataset.tt === 'body' ? 6 : 11.5}vw)`; };
   const pick = (k) => {
     out.dataset.tt = k; size.value = styles[k].size;
     spec.innerHTML = styles[k].info.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('') + `<div><dt>Tamanho</dt><dd id="tt-px">${size.value}px</dd></div>`;

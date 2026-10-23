@@ -101,7 +101,7 @@ export function initLegendScene(root) {
   function paint() {
     W = scene.clientWidth; H = scene.clientHeight; if (!W || !H) return;
     const narrow = W < 760;
-    const fx0 = narrow ? .6 : .64; // centro da cachoeira (fração da largura)
+    const fx0 = narrow ? .56 : .64; // centro da cachoeira (fração da largura)
     // --- céu ---
     let [x, Lh] = paintCanvas(L.sky, W, H);
     let g = x.createLinearGradient(0, 0, 0, Lh); g.addColorStop(0, '#060609'); g.addColorStop(.55, '#0d0a0c'); g.addColorStop(1, '#170a0d');
@@ -126,7 +126,7 @@ export function initLegendScene(root) {
     for (let i = 0; i < 7; i++) pine(x, W * (.06 + i * .14 + (i % 2) * .03), H * (.86 + (i % 3) * .05), .5 + (i % 2) * .2, 50 + i, 'rgba(10,10,12,.85)');
     // --- mundo principal: penhascos, cachoeira e lago ---
     [x, Lh] = paintCanvas(L.main, W, H);
-    const top = H * .66, poolY = Lh - H * .3, gapL = W * (fx0 - .1), gapR = W * (fx0 + .1);
+    const top = H * (narrow ? .5 : .66), poolY = Lh - H * (narrow ? .7 : .3), gw = narrow ? .15 : .1, gapL = W * (fx0 - gw), gapR = W * (fx0 + gw);
     const nz = (y, k) => Math.sin(y * .006 + k) * W * .022 + Math.sin(y * .017 + k * 2) * W * .01 + Math.sin(y * .041 + k) * W * .004;
     // parede de pedra atrás da água (esconde as camadas do fundo no vão)
     const bw = x.createLinearGradient(0, top, 0, poolY); bw.addColorStop(0, '#0c0c0f'); bw.addColorStop(1, '#08080a');
@@ -157,7 +157,7 @@ export function initLegendScene(root) {
     Object.assign(foam.style, { left: gapL - W * .06 + 'px', width: gapR - gapL + W * .12 + 'px', top: poolY - H * .08 + 'px', height: H * .18 + 'px' });
     Object.assign(pool.style, { left: W * (fx0 - .2) + 'px', top: poolY + H * .02 + 'px', width: W * .4 + 'px', height: H * .26 + 'px' });
     Object.assign(ripples.style, { left: W * fx0 + 'px', top: poolY + H * .03 + 'px' });
-    geo.main = { Lh, top, poolY, cx: W * fx0 };
+    geo.main = { Lh, top, poolY, cx: W * fx0, narrow };
     // --- primeiro plano: folhas de bambu desfocadas nas bordas ---
     [x, Lh] = paintCanvas(L.fg, W, H);
     const RF = rng(9);
@@ -178,12 +178,14 @@ export function initLegendScene(root) {
   function update(p, force) {
     state.p = p;
     if (!W || !geo.main || (!force && Math.abs(p - last) < .0003)) return; last = p;
-    const { Lh, top, poolY, cx } = geo.main;
+    const { Lh, top, poolY, cx, narrow } = geo.main;
+    // no celular o texto ocupa a metade de baixo: a carpa fica no terço de cima
+    const dive = narrow ? .07 : .1, aim = narrow ? .3 : .58;
     // carpa: nada em círculo no lago, sobe a cachoeira, chega ao topo
     const climb = smooth(seg(p, .2, .64));
-    const koiY = lerp(poolY + H * .1, top - H * .02, climb);
+    const koiY = lerp(poolY + H * dive, top - H * .02, climb);
     // câmera acompanha a carpa (ela fica um pouco abaixo do centro da tela)
-    let c = 1 - (koiY - H * .58) / (Lh - H);
+    let c = 1 - (koiY - H * aim) / (Lh - H);
     c = clamp01(lerp(c, 1, seg(p, .62, .72)));
     for (const k in L) {
       const ly = L[k];
@@ -195,7 +197,7 @@ export function initLegendScene(root) {
     const k0 = Math.min(Math.max(W * .15, 130), 230) / 1200;
     // 1. nadando em círculos no lago
     const A = fish.A, B = fish.B;
-    const pcx = cx + px, pcy = poolY + H * .1 + mainOff + py, Rx = W * (W < 760 ? .2 : .11), Ry = H * .045;
+    const pcx = cx + px, pcy = poolY + H * dive + mainOff + py, Rx = W * (narrow ? .24 : .11), Ry = H * (narrow ? .035 : .045);
     const swim = 1 - smooth(seg(p, .12, .22));
     if (swim > 0) fish.wave(fish.follow(A, (u) => ({ x: pcx + Math.cos(u) * Rx, y: pcy + Math.sin(u) * Ry }), t * .75, k0), t, .05, 1.2, 6);
     // 2. subindo a cachoeira: a cauda bate forte, a correnteza a empurra de volta
@@ -236,6 +238,8 @@ export function initLegendScene(root) {
   new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; }).observe(root);
   (function idle() { requestAnimationFrame(idle); if (onScreen && state.p < .86 && W) { last = -1; update(state.p); } })();
   new ResizeObserver(() => paint()).observe(scene);
+  // celular: a inclinação do aparelho move as camadas
+  addEventListener('tilt', (e) => { state.mx = e.detail.x; state.my = e.detail.y; last = -1; });
   root.addEventListener('pointermove', (e) => { state.mx = e.clientX / innerWidth - .5; state.my = e.clientY / innerHeight - .5; last = -1; update(state.p); });
   return { update };
 }
